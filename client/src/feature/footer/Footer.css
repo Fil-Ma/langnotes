@@ -1,0 +1,29 @@
+/*
+  STYLING FOOTER
+*/
+
+footer {
+  display: block;
+  padding: 1rem 6rem;
+  height: 3rem;
+  font-size: 1rem;
+}
+
+.footer-logo-container, .footer-copyright, .footer-social {
+  display: inline-block;
+}
+
+.footer-copyright {
+  padding-left: 2rem;
+}
+
+.footer-social {
+  display: inline-flex;
+  position: absolute;
+  right: 6rem;
+}
+
+.footer-social i {
+  padding-left: 1rem;
+  padding-top: 0.1rem;
+}

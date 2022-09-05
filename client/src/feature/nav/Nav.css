@@ -15,6 +15,6 @@ nav {
   color: #000;
 }
 
-.nav-link:active {
+.nav-link:hover {
   color: gray;
 }
