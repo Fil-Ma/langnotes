@@ -10,12 +10,20 @@ header {
   box-shadow: 0 0.1rem 1rem rgba(0, 0, 0, 0.1);
 }
 
-.logo {
+/*
+  STYLING Logo
+*/
+
+.logo-container {
   display: inline-block;
   height: 3rem;
 }
 
-.auth-buttons {
+/*
+  STYLING LOGIN, SIGNUP AND PROFILE BUTTONS
+*/
+
+.auth-buttons, .dropdown-button {
   display: inline-flex;
   position: absolute;
   right: 3rem;
@@ -37,6 +45,26 @@ header {
   cursor: pointer;
 }
 
+.profile-dropdown, .logout {
+  color: #000;
+  background-color: #FFF;
+  border: 1px solid #000;
+}
+
+.profile-dropdown:hover, .logout:hover {
+  color: gray;
+}
+
+.logout {
+  border-radius: 0.3rem 0 0 0.3rem;
+  border-right: none;
+}
+
+.profile-dropdown {
+  border-radius: 0 0.3rem 0.3rem 0;
+  border-left: 1px solid rgba(0, 0, 0, 0.3);
+}
+
 .login {
   color: blue;
   background-color: #FFF;
@@ -46,4 +74,39 @@ header {
   color: #FFF;
   background-color: blue;
   margin-left: 0.8rem;
+}
+
+/*
+  STYLING DROPDOWN MENU
+*/
+
+#dropdown-content {
+  display: none;
+  position: absolute;
+  top: 3.5rem;
+  right: 1rem;
+  z-index: 1;
+  width: 10rem;
+  font-size: 1.1rem;
+  background-color: #FFF;
+  box-shadow: 0.1rem 0.1rem 1rem rgba(0, 0, 0, 0.1);
+  padding: 0.5rem;
+  border-radius: 0.3rem;
+}
+
+.dropdown-username {
+  padding-bottom: 0.3rem;
+  overflow: hidden;
+}
+
+.dropdown-link {
+  text-decoration: none;
+  color: #000;
+  padding: 0.3rem 0;
+}
+
+.dropdown-divider {
+  border-bottom: 1px solid #000;
+  padding: 0.4rem 0;
+  margin: 0;
 }
