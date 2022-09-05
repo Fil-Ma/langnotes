@@ -1,3 +1,49 @@
+/*
+  STYLING HEADER
+*/
+
 header {
   display: block;
+  padding: 1rem 3rem;
+  height: 3rem;
+  font-size: 1.2rem;
+  box-shadow: 0 0.1rem 1rem rgba(0, 0, 0, 0.1);
+}
+
+.logo {
+  display: inline-block;
+  height: 3rem;
+}
+
+.auth-buttons {
+  display: inline-flex;
+  position: absolute;
+  right: 3rem;
+  height: 3rem;
+  padding: 0 1rem;
+}
+
+.button {
+  display: inline-flex;
+  padding: 0.5rem;
+  font-size: 1.2rem;
+  border: 1px solid blue;
+  border-radius: 0.3rem;
+  text-align: center;
+  align-items: center;
+}
+
+.button:hover {
+  cursor: pointer;
+}
+
+.login {
+  color: blue;
+  background-color: #FFF;
+}
+
+.sign-up {
+  color: #FFF;
+  background-color: blue;
+  margin-left: 0.8rem;
 }
