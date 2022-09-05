@@ -75,7 +75,7 @@ function Header() {
 
   return (
     <header>
-      <div className="logo-container" >Header Logo</div>
+      <div className="logo-container" >LangNotes</div>
       <Nav />
       { isAuthenticated ? profileDropdownMenu : authenticationButtons }
     </header>
