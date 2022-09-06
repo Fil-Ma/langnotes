@@ -4,7 +4,7 @@ import { useState } from "react";
 
 function Nav() {
 
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [isAuthenticated, setIsAuthenticated] = useState(true);
 
   let guestNav = (
     <nav>

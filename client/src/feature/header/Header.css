@@ -35,7 +35,7 @@ header {
   display: inline-flex;
   padding: 0.5rem;
   font-size: 1.2rem;
-  border: 1px solid blue;
+  border: 1px solid #E18700;
   border-radius: 0.3rem;
   text-align: center;
   align-items: center;
@@ -66,13 +66,13 @@ header {
 }
 
 .login {
-  color: blue;
+  color: #E18700;
   background-color: #FFF;
 }
 
 .sign-up {
   color: #FFF;
-  background-color: blue;
+  background-color: #E18700;
   margin-left: 0.8rem;
 }
 

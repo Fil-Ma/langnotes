@@ -6,7 +6,7 @@ import Button from "../../components/Button";
 
 function Header() {
 
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [isAuthenticated, setIsAuthenticated] = useState(true);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const handleLogin = (e) => {
