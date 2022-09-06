@@ -1,5 +1,5 @@
 import "./Header.css";
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useNavigate } from "react";
 import { Link } from "react-router-dom";
 import Nav from "../nav/Nav";
 import Button from "../../components/Button";
@@ -8,13 +8,14 @@ function Header() {
 
   const [isAuthenticated, setIsAuthenticated] = useState(true);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const navigate = useNavigate();
 
   const handleLogin = (e) => {
-
+    navigate("login");
   }
 
   const handleSignUp = (e) => {
-
+    navigate("signup");
   }
 
   const handleLogout = (e) => {

@@ -3,8 +3,10 @@ import Button from "../../components/Button";
 
 function Home() {
 
-  const handleClick = (e) => {
+  const navigate = useNavigate();
 
+  const handleClick = (e) => {
+    navigate("signup");
   }
 
   return (

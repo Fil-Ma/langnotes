@@ -7,6 +7,8 @@ import DashBoard from "./feature/dashboard/DashBoard";
 import NoteBook from "./feature/notebook/NoteBook";
 import NewNoteBookForm from "./feature/notebook/NewNoteBookForm";
 import Support from "./feature/support/Support";
+import LoginForm from "./feature/auth/LoginForm";
+import SignUpForm from "./feature/auth/SignUpForm";
 
 function App() {
   return (
@@ -18,6 +20,14 @@ function App() {
         <Route
           path="/"
           element={<Home />} />
+
+        <Route
+          path="/login"
+          element={<LoginForm />} />
+
+        <Route
+          path="/signup"
+          element={<SignUpForm />} />
 
         <Route
           path="/dashboard"
