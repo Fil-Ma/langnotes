@@ -1,6 +1,6 @@
 import "./Header.css";
-import { useState, useEffect, useRef, useNavigate } from "react";
-import { Link } from "react-router-dom";
+import { useState, useEffect, useRef } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import Nav from "../nav/Nav";
 import Button from "../../components/Button";
 
