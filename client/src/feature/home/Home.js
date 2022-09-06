@@ -1,7 +1,7 @@
-import "./Dashboard.css";
+import "./Home.css";
 import Button from "../../components/Button";
 
-function Dashboard() {
+function Home() {
 
   const handleClick = (e) => {
 
@@ -94,4 +94,4 @@ function Dashboard() {
   );
 }
 
-export default Dashboard;
+export default Home;
