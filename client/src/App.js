@@ -1,4 +1,5 @@
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import { useState } from "react";
 import Header from "./feature/header/Header";
 import Footer from "./feature/footer/Footer";
 
@@ -11,9 +12,12 @@ import LoginForm from "./feature/auth/LoginForm";
 import SignUpForm from "./feature/auth/SignUpForm";
 
 function App() {
+
+  const [isAuthenticated, setIsAuthenticated] = useState(true);
+
   return (
     <Router>
-      <Header />
+      <Header isAuthenticated={isAuthenticated} setIsAuthenticated={setIsAuthenticated}/>
 
       <Routes>
 

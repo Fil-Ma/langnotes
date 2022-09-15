@@ -1,10 +1,7 @@
 import "./Nav.css";
 import { NavLink } from "react-router-dom";
-import { useState } from "react";
 
-function Nav() {
-
-  const [isAuthenticated, setIsAuthenticated] = useState(true);
+function Nav({ isAuthenticated }) {
 
   let guestNav = (
     <nav>

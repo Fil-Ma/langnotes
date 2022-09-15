@@ -4,9 +4,8 @@ import { Link, useNavigate } from "react-router-dom";
 import Nav from "../nav/Nav";
 import Button from "../../components/Button";
 
-function Header() {
+function Header({ isAuthenticated, setIsAuthenticated }) {
 
-  const [isAuthenticated, setIsAuthenticated] = useState(true);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const navigate = useNavigate();
 
@@ -77,7 +76,7 @@ function Header() {
   return (
     <header>
       <div className="logo-container" >LangNotes</div>
-      <Nav />
+      <Nav isAuthenticated={isAuthenticated} />
       { isAuthenticated ? profileDropdownMenu : authenticationButtons }
     </header>
   );
