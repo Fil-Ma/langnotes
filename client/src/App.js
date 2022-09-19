@@ -11,13 +11,15 @@ import Support from "./feature/support/Support";
 import LoginForm from "./feature/auth/LoginForm";
 import SignUpForm from "./feature/auth/SignUpForm";
 
+import { useSelector } from "react-redux";
+
 function App() {
 
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const { isAuthenticated } = useSelector(state => state.login.auth);
 
   return (
     <Router>
-      <Header isAuthenticated={isAuthenticated} setIsAuthenticated={setIsAuthenticated}/>
+      <Header isAuthenticated={isAuthenticated} />
 
       <Routes>
 

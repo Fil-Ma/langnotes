@@ -4,7 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import Nav from "../nav/Nav";
 import Button from "../../components/Button";
 
-function Header({ isAuthenticated, setIsAuthenticated }) {
+function Header({ isAuthenticated }) {
 
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const navigate = useNavigate();
