@@ -13,7 +13,7 @@ import SignUpForm from "./feature/auth/SignUpForm";
 
 function App() {
 
-  const [isAuthenticated, setIsAuthenticated] = useState(true);
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
 
   return (
     <Router>

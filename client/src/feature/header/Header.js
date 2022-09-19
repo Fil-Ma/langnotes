@@ -63,7 +63,7 @@ function Header({ isAuthenticated, setIsAuthenticated }) {
   let profileDropdownMenu = (
     <div className="dropdown-button">
       <Button onClick={handleLogout} className="logout button" >Sign Out</Button>
-      <Button onClick={showDropdownOnClick} className="profile-dropdown"><i className="fa fa-caret-down"></i></Button>
+      <Button onClick={showDropdownOnClick} className="profile-dropdown"><i class="fa-solid fa-caret-down"></i></Button>
       <div id="dropdown-content">
         <div className="dropdown-username">[MyUsername]</div>
         <Link to="profile" className="dropdown-link">Edit Profile</Link>

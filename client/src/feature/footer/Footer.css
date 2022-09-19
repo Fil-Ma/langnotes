@@ -23,7 +23,14 @@ footer {
   right: 6rem;
 }
 
-.footer-social i {
-  padding-left: 1rem;
+.footer-social-link {
+  text-decoration: none;
+  color: #000;
+  padding-left: 1.5rem;
   padding-top: 0.1rem;
+}
+
+.footer-social-link:hover {
+  cursor: pointer;
+  color: gray;
 }

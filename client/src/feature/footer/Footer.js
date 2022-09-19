@@ -1,4 +1,5 @@
 import "./Footer.css";
+import { Link } from "react-router-dom";
 
 function Footer() {
   return (
@@ -6,13 +7,23 @@ function Footer() {
       <hr />
       <div className="footer-content-container">
         <div className="footer-logo-container">LangNotes</div>
+
         <div className="footer-copyright">
-          <i className="fa fa-copyright" aria-hidden="true"></i> 2022 Company, Inc
+          <i className="fa-regular fa-copyright"></i> 2022 MyCompany Inc.
         </div>
+
         <div className="footer-social">
-          <i className="fa fa-twitter fa-lg"></i>
-          <i className="fa fa-instagram fa-lg"></i>
-          <i className="fa fa-facebook-official fa-lg"></i>
+          <Link to="#" className="footer-social-link">
+            <i className="fa-brands fa-twitter fa-lg"></i>
+          </Link>
+
+          <Link to="#" className="footer-social-link">
+            <i className="fa-brands fa-instagram fa-lg"></i>
+          </Link>
+
+          <Link to="#" className="footer-social-link">
+            <i className="fa-brands fa-square-facebook fa-lg"></i>
+          </Link>
         </div>
       </div>
     </footer>
