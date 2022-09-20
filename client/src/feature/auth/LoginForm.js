@@ -9,6 +9,7 @@ function LoginForm() {
   const navigate = useNavigate();
 
   const handleLogin = () => {
+    
     // if login is successfull
     navigate("../dashboard");
   };
