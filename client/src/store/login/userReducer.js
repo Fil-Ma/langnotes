@@ -4,7 +4,13 @@ const userSlice = createSlice({
   name: 'user',
   initialState: {
     email: "",
-    name: ""
+    name: "",
+    notebooks: {
+      id: {
+        name: "",
+        language: ""
+      }
+    }
   },
   reducers: {},
   extraReducers: {}

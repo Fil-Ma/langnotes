@@ -1,9 +1,11 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { combineReducers } from "redux";
 import loginReducer from "./login";
+import notebookReducer from "./notebook";
 
 const rootReducer = combineReducers({
-  login: loginReducer
+  login: loginReducer,
+  notebook: notebookReducer
 });
 
 const store = configureStore({
