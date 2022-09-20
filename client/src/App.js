@@ -1,7 +1,6 @@
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import { useState } from "react";
-import Header from "./feature/header/Header";
-import Footer from "./feature/footer/Footer";
+
+import PageLayout from "./components/PageLayout";
 
 import Home from "./feature/home/Home";
 import DashBoard from "./feature/dashboard/DashBoard";
@@ -19,14 +18,7 @@ function App() {
 
   return (
     <Router>
-      <Header isAuthenticated={isAuthenticated} />
-
       <Routes>
-
-        <Route
-          path="/"
-          element={<Home />} />
-
         <Route
           path="/login"
           element={<LoginForm />} />
@@ -35,24 +27,30 @@ function App() {
           path="/signup"
           element={<SignUpForm />} />
 
-        <Route
-          path="/dashboard"
-          element={<DashBoard />} />
+        <Route element={<PageLayout isAuthenticated={isAuthenticated} />}>
 
-        <Route
-          path="/notebook/new"
-          element={<NewNoteBookForm />} />
-        <Route
-          path="/notebook"
-          element={<NoteBook />} />
+          <Route
+            path="/"
+            element={<Home />} />
 
-        <Route
-          path="/support"
-          element={<Support />} />
+          <Route
+            path="/dashboard"
+            element={<DashBoard />} />
+
+          <Route
+            path="/notebook/new"
+            element={<NewNoteBookForm />} />
+          <Route
+            path="/notebook"
+            element={<NoteBook />} />
+
+          <Route
+            path="/support"
+            element={<Support />} />
+
+        </Route>
 
       </Routes>
-
-      <Footer />
     </Router>
   );
 }
