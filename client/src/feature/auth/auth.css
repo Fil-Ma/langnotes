@@ -3,8 +3,10 @@
 */
 
 .login-main {
+  height: 100%;
   background-image: url("../../images/pexels-tirachard-kumtanom-733857.jpg");
-  background-size: 100vh;
+  background-size: 100% auto;
+  padding: 2rem 0 3rem 0;
 }
 
 /*
@@ -15,8 +17,8 @@
   border: 1px solid #000;
   border-radius: 1rem;
   width: 30%;
-  margin: 1.5rem auto;
-  padding:  2rem 3rem;
+  margin: 0 auto;
+  padding: 2rem 3rem;
   text-align: center;
   background-color: #fff;
 }
@@ -62,6 +64,7 @@ input[type="submit"] {
   border: 1px solid #01d28e;
   /* background: #E18700;
   border: 1px solid #E18700; */
+  border-radius: 0.2rem;
   color: #fff;
   padding: 0.8rem 0;
   width: 25%;
