@@ -2,18 +2,20 @@
   STYLING PAGE
 */
 
+.login-main, .signup-main {
+  padding: 2rem 0 3rem 0;
+}
+
 .login-main {
-  height: 100%;
   background-image: url("../../images/pexels-tirachard-kumtanom-733857.jpg");
   background-size: 100% auto;
-  padding: 2rem 0 3rem 0;
 }
 
 /*
   STYLING LOGIN FORM
 */
 
-.login-form-container {
+.login-form-container, .signup-form-container {
   border: 1px solid #000;
   border-radius: 1rem;
   width: 30%;
@@ -27,7 +29,7 @@
   STYLING TITLE
 */
 
-.login-form-title {
+.login-form-title, .signup-form-title {
   padding-bottom: 0.5rem;
 }
 
@@ -74,7 +76,11 @@ input[type="submit"] {
   STYLING ALTERNATIVE LOGINS
 */
 
-.google-login, .facebook-login {
+.oauth-signup {
+  padding: 1rem 0;
+}
+
+.oauth-button {
   color: #fff;
   padding: 0.7rem;
   width: 45%;
@@ -82,12 +88,12 @@ input[type="submit"] {
   margin: auto;
 }
 
-.google-login {
+.google-login, .google-signup {
   background-color: red;
   border: 1px solid red;
 }
 
-.facebook-login {
+.facebook-login, .facebook-signup {
   background-color: blue;
   border: 1px solid blue;
   margin-top: 0.5rem;

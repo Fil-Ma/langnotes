@@ -6,10 +6,11 @@ function LoginForm() {
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
   const navigate = useNavigate();
 
   const handleLogin = () => {
-    
+
     // if login is successfull
     navigate("../dashboard");
   };
@@ -57,16 +58,16 @@ function LoginForm() {
 
         <div className="oauth-logins">
           <p>Or Login with:</p>
-          <div className="google-login">
+          <div className="google-login oauth-button">
             <i className="fa-brands fa-google"></i> SignIn with Google
           </div>
-          <div className="facebook-login">
+          <div className="facebook-login oauth-button">
             <i className="fa-brands fa-facebook-f"></i> SignIn with Facebook
           </div>
         </div>
 
         <div className="signup-redirect">
-          <p>Not a member? <Link to="signup">Register</Link></p>
+          <p>Not a member? <Link to="../signup">Register</Link></p>
         </div>
 
       </div>
