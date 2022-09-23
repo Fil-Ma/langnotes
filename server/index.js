@@ -4,7 +4,7 @@ const cors = require("cors");
 const session = require("express-session");
 
 const passportLoader = require("./passport");
-const { PORT, SESSION_SECRET } = require("config");
+const { PORT, SESSION_SECRET } = require("./config");
 
 const app = express();
 
