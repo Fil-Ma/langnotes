@@ -1,18 +1,29 @@
 import "./auth.css";
 import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
+
+import { loginUser } from '../../store/login/auth/auth.actions';
 
 function LoginForm() {
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
+  const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const handleLogin = () => {
-
-    // if login is successfull
-    navigate("../dashboard");
+  // manage login when clicked on button
+  const handleLogin = async () => {
+    try {
+      setIsLoading(true);
+      await dispatch(loginUser({ email, password }));
+      setIsLoading(false);
+      navigate("../dashboard");
+    } catch(err) {
+      setIsLoading(false);
+    }
   };
 
   return (

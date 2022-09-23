@@ -1,22 +1,34 @@
 import "./auth.css";
 import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
+
+import { registerUser } from '../../store/login/auth/auth.actions';
 
 function SignUpForm() {
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-  const [passwordError, setPasswordError] = useState(null);
 
-  const handleSignup = () => {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
 
+  // handle registration
+  const handleSignup = async () => {
+    try {
+      await dispatch(registerUser({ id: 1, email, password }));
+      navigate("../login");
+    } catch(err) {
+      console.log(err);
+    }
   };
 
+  // check if confirm password corresponds
   const validatePassword = () => {
     if (confirmPassword !== password) {
-      setPasswordError("Password and Confirm Password does not match.");
+      console.log("Password and Confirm Password does not match.");
     }
-    console.log(passwordError);
   };
 
   return (
@@ -66,12 +78,9 @@ function SignUpForm() {
               placeholder="Confirm Password"
               onChange={(e) =>  {
                 setConfirmPassword(e.tartget.value);
-                validatePassword();
               }}
               required />
-            <p className="confirm-password-error">{passwordError ? passwordError : ""}</p>
           </div>
-
 
           <div className="submit-container">
             <input type="submit" value="Register" />

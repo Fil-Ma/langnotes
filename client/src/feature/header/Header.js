@@ -9,10 +9,12 @@ function Header({ isAuthenticated }) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const navigate = useNavigate();
 
+  // clicking on login button sends user to /login
   const handleLogin = (e) => {
     navigate("login");
   }
 
+  // clicking on sign-up button sends user to /register
   const handleSignUp = (e) => {
     navigate("signup");
   }
