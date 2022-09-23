@@ -6,9 +6,17 @@ function SignUpForm() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+  const [passwordError, setPasswordError] = useState(null);
 
   const handleSignup = () => {
 
+  };
+
+  const validatePassword = () => {
+    if (confirmPassword !== password) {
+      setPasswordError("Password and Confirm Password does not match.");
+    }
+    console.log(passwordError);
   };
 
   return (
@@ -28,7 +36,7 @@ function SignUpForm() {
               name="email"
               placeholder="Email address"
               pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
-              onChange={(e) => setEmail(e.currentTarget.value)}
+              onChange={(e) => setEmail(e.target.value)}
               required />
           </div>
 
@@ -41,9 +49,9 @@ function SignUpForm() {
               minLength="8"
               maxLength="16"
               placeholder="Password"
-              pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*_=+-])$"
-              title="Must be between 8 and 16 characters. Should have at least one special character (!@#$%^&*_=+-), one number, one lowercase letter and one Uppercase letter."
-              onChange={(e) => setPassword(e.currentTarget.value)}
+              pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,16}$"
+              title="Must be between 8 and 16 characters. Should have at least one special character (@$!%*?&), one number, one lowercase letter and one Uppercase letter."
+              onChange={(e) => setPassword(e.target.value)}
               required />
           </div>
 
@@ -56,11 +64,14 @@ function SignUpForm() {
               minLength="8"
               maxLength="16"
               placeholder="Confirm Password"
-              pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*_=+-])$"
-              title="Must be between 8 and 16 characters. Should have at least one special character (!@#$%^&*_=+-), one number, one lowercase letter and one Uppercase letter."
-              onChange={(e) => { setConfirmPassword(e.tartget.value)}}
+              onChange={(e) =>  {
+                setConfirmPassword(e.tartget.value);
+                validatePassword();
+              }}
               required />
+            <p className="confirm-password-error">{passwordError ? passwordError : ""}</p>
           </div>
+
 
           <div className="submit-container">
             <input type="submit" value="Register" />
