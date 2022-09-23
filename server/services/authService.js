@@ -7,6 +7,7 @@ const UserQueriesInstance = new UserQueries();
 
 module.exports = class AuthService {
 
+  // register function
   async register(data) {
     const { email, password } = data;
 
@@ -30,6 +31,7 @@ module.exports = class AuthService {
     }
   }
 
+  // login function
   async login(data) {
     const { email, password } = data;
 
@@ -52,4 +54,9 @@ module.exports = class AuthService {
       throw createError(500, err);
     }
   }
+
+  // for the future
+  // manage login with google
+  //manage login with facebook
+  
 }

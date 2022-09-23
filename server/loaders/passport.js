@@ -1,7 +1,7 @@
 const passport = require("passport");
 const LocalStrategy = require("passport-local");
-const AuthService = require("../services/authService");
 
+const AuthService = require("../services/authService");
 const AuthServiceInstance = new AuthService();
 
 module.exports = (app) => {
@@ -22,10 +22,14 @@ module.exports = (app) => {
 
   // Local login
   passport.use(new LocalStrategy(
-    async (email, password, done) => {
+    async (username, password, done) => {
       try {
-        const user = await AuthServiceInstance.login({ email, password });
+        const user = await AuthServiceInstance.login({
+          username: email, password
+        });
+
         return done(null, user);
+
       } catch(err) {
         return done(err);
       }
@@ -33,6 +37,4 @@ module.exports = (app) => {
   ));
 
   return passport;
-
-
 }
