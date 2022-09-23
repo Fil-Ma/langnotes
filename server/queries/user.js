@@ -5,9 +5,12 @@ module.exports = class UserQueries {
   // add user to db
   async create(userData) {
     try {
-      const result = await db.query('INSERT INTO users (email, password) VALUES ($username, $password) RETURNING *',
+      const id = 1;
+
+      const result = await db.query('INSERT INTO users (id, email, password) VALUES ($id, $username, $password) RETURNING *',
       {
-        $username: userData.username,
+        $id: id,
+        $username: userData.email,
         $password: userData.password
       });
 
