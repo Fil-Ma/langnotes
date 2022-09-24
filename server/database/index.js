@@ -3,7 +3,7 @@
 const { Pool } = require("pg");
 const { DB } = require("../config");
 
-module.exports = new Pool({
+const pool = new Pool({
   user: DB.PGUSERNAME,
   host: DB.PGHOST,
   port: DB.PGPORT,
@@ -11,6 +11,6 @@ module.exports = new Pool({
   database: DB.PGDATABASE
 });
 
-// module.exports = {
-//   pool: pool
-// }
+module.exports = {
+  pool: pool
+}

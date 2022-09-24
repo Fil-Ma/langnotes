@@ -23,7 +23,7 @@ module.exports = (app, passport) => {
       console.log(`Credentials are: email - ${email} and password - ${password}`);
 
       if (validator.isEmail(email)) {
-        const response = await AuthServiceInstance.register({email, password});
+        const response = await AuthServiceInstance.register({ email, password });
 
         console.log("User registered");
 

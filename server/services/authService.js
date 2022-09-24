@@ -9,22 +9,33 @@ module.exports = class AuthService {
 
   // register function
   async register(data) {
+
+    console.log("AuthService --# Called Service");
+
     const { email, password } = data;
 
     try {
+      console.log("AuthService --# Verifying if user already exists...");
       const user = await UserQueriesInstance.findOneByEmail(email);
 
       if (user) {
+        console.log("AuthService --# Error! User already exists");
+        console.log("AuthService --# Terminating service...");
         throw createError(409, "Email already in use");
       }
 
       const hashedPassword = await hashPassword(password);
 
       if (hashedPassword) {
-        data.password = hashPassword;
+        data.password = hashedPassword;
       }
 
-      return await UserQueriesInstance.create(data);
+      console.log("AuthService --# Registering user...");
+
+      const createdUser = await UserQueriesInstance.create(data);
+
+      console.log("AuthService --# Terminating service...");
+      return createdUser;
 
     } catch(err) {
       throw createError(500, err);
@@ -58,5 +69,5 @@ module.exports = class AuthService {
   // for the future
   // manage login with google
   //manage login with facebook
-  
+
 }
