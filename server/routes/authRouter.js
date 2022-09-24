@@ -1,5 +1,5 @@
 const express = require("express");
-const validator = require("validator");
+const { check, validationResult } = require("express-validator");
 const router = express.Router();
 
 const AuthService = require("../services/authService");
@@ -10,57 +10,89 @@ const UserServiceInstanced = new UserService();
 
 module.exports = (app, passport) => {
 
+  // configuring router to manage /api/auth url based route
   app.use('/api/auth', router);
 
-  router.post('/register', async (req, res, next) => {
+  // POST route for user credentials registration
+  router.post('/register',
+    [
+      check('email').isEmail().normalizeEmail(),
+      check('password').isStrongPassword({
+        minLength: 8,
+        maxLength: 16,
+        minLowercase: 1,
+        minUppercase: 1,
+        minNumbers: 1,
+        minSymbols: 1
+      })
+    ],
+    async (req, res, next) => {
 
-    console.log("######################");
-    console.log("Register POST request");
+      console.log("######################");
+      console.log("Register POST request");
 
-    try {
-      const { email, password } = req.body;
+      const errors = validationResult(req);
 
-      console.log(`Credentials are: email - ${email} and password - ${password}`);
+      // Check if the validation threw errors
+      if (!errors.isEmpty()) {
 
-      if (validator.isEmail(email)) {
-        const response = await AuthServiceInstance.register({ email, password });
-
-        console.log("User registered");
-
-        return res.status(201).send(response);
+        console.log("Invalid inputs");
+        next(new Error("Invalid inputs"));
 
       } else {
-        next(new Error("Invalid email format"));
+        try {
+          const { email, password } = req.body;
+
+          const response = await AuthServiceInstance.register({ email, password });
+
+          console.log("User registered");
+          return res.status(201).send(response);
+
+        } catch(err) {
+          next(err);
+        }
       }
 
-    } catch(err) {
-      next(err);
-    }
   });
 
-  router.post('/login', passport.authenticate('local'), async (req, res, next) => {
+  // POST route for user credentials login
+  router.post('/login',
+    passport.authenticate('local'),
+    [
+      check('email').isEmail().normalizeEmail(),
+      check('password').isStrongPassword({
+        minLength: 8,
+        maxLength: 16,
+        minLowercase: 1,
+        minUppercase: 1,
+        minNumbers: 1,
+        minSymbols: 1
+      })
+    ],
+    async (req, res, next) => {
 
-    console.log("######################");
-    console.log("Login POST request");
+      console.log("######################");
+      console.log("Login POST request");
 
-    try {
-      const { email, password } = req.body;
+      // Check if the validation threw errors
+      if (!errors.isEmpty()) {
 
-      console.log(`Credentials are: email - ${email} and password - ${password}`);
+        console.log("Invalid inputs");
+        next(new Error("Invalid inputs"));
 
-      if (validator.isEmail(email)) {
-        const response = await AuthServiceInstance.login({ email, password });
-
-        console.log("Login success");
-
-        res.status(200).send(response);
       } else {
-        next(new Error("Invalid email format"));
-      }
+        try {
+          const { email, password } = req.body;
 
-    } catch(err) {
-      next(err);
-    }
+          const response = await AuthServiceInstance.login({ email, password });
+
+          console.log("Login success");
+          res.status(200).send(response);
+
+        } catch(err) {
+          next(err);
+        }
+      }
   });
 
   router.get('/logged_in', async (req, res, next) => {
