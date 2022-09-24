@@ -24,8 +24,12 @@ export const login = async (credentials) => {
 
 // API request for register
 export const register = async (data) => {
+  console.log("API - Contacting server to register user");
+
   try {
     const urlToFetch = baseAuthURL + '/register';
+
+    console.log(`API - Contacting server at URL ${urlToFetch}`);
 
     const response = await fetch(urlToFetch, {
       method: 'POST',
@@ -35,6 +39,8 @@ export const register = async (data) => {
       body: JSON.stringify(data)
     });
 
+    console.log("API - Received server response");
+    console.log(response);
     const jsonResponse = await response.json();
 
     return jsonResponse;

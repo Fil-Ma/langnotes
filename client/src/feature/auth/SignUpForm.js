@@ -15,9 +15,14 @@ function SignUpForm() {
   const dispatch = useDispatch();
 
   // handle registration
-  const handleSignup = async () => {
+  const handleSignup = async (e) => {
+    console.log("Signing up...");
+
     try {
-      await dispatch(registerUser({ id: 1, email, password }));
+      e.preventDefault();
+      await dispatch(registerUser({ email, password }));
+      
+      console.log("Success! User registered");
       navigate("../login");
     } catch(err) {
       console.log(err);
@@ -77,7 +82,8 @@ function SignUpForm() {
               maxLength="16"
               placeholder="Confirm Password"
               onChange={(e) =>  {
-                setConfirmPassword(e.tartget.value);
+                setConfirmPassword(e.target.value);
+                validatePassword();
               }}
               required />
           </div>
