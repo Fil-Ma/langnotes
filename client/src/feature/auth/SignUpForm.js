@@ -1,5 +1,5 @@
 import "./auth.css";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
@@ -10,6 +10,7 @@ function SignUpForm() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+  const [isPasswordRepeatError, setIsPasswordRepeatError] = useState(false);
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -18,10 +19,14 @@ function SignUpForm() {
   const handleSignup = async (e) => {
     console.log("Signing up...");
 
+    if (confirmPassword !== password) {
+      throw new Error("The passwords do not match");
+    }
+    
     try {
       e.preventDefault();
       await dispatch(registerUser({ email, password }));
-      
+
       console.log("Success! User registered");
       navigate("../login");
     } catch(err) {
@@ -30,11 +35,14 @@ function SignUpForm() {
   };
 
   // check if confirm password corresponds
-  const validatePassword = () => {
+  useEffect(() => {
     if (confirmPassword !== password) {
-      console.log("Password and Confirm Password does not match.");
+      setIsPasswordRepeatError(true);
+    } else {
+      setIsPasswordRepeatError(false);
     }
-  };
+  }, [confirmPassword]);
+
 
   return (
     <main className="signup-main">
@@ -81,11 +89,9 @@ function SignUpForm() {
               minLength="8"
               maxLength="16"
               placeholder="Confirm Password"
-              onChange={(e) =>  {
-                setConfirmPassword(e.target.value);
-                validatePassword();
-              }}
+              onChange={(e) => setConfirmPassword(e.target.value)}
               required />
+              { isPasswordRepeatError && <p className="matching-password-error"><i className="fa-solid fa-triangle-exclamation"></i> The passwords do not match</p> }
           </div>
 
           <div className="submit-container">

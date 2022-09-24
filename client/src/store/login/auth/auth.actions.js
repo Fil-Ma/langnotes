@@ -35,6 +35,19 @@ export const loginUser = createAsyncThunk(
 export const registerUser = createAsyncThunk(
   'auth/registerUser',
   async (credentials) => {
+
+    // check if email satisfies regex format
+    if (!credentials.email.match(/[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/g)) {
+      console.log("Email is not valid");
+      throw new Error("Email format is not valid");
+    }
+
+    // check if password satisfies regex format
+    if (!credentials.password.match(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,16}$/g)) {
+      console.log("Password is not valid");
+      throw new Error("Password format is not valid");
+    }
+
     try {
       await register(credentials);
       return {};

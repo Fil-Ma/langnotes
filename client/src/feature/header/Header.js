@@ -2,7 +2,7 @@ import "./Header.css";
 import { useState, useEffect, useRef } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import Nav from "../nav/Nav";
-import Button from "../../components/Button";
+import Button from "../../components/button/Button";
 
 function Header({ isAuthenticated }) {
 

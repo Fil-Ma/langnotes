@@ -1,6 +1,6 @@
 import "./DashBoard.css";
 import { useNavigate } from "react-router-dom";
-import EmptyDashboard from "../../components/EmptyDashboard";
+import EmptyDashboard from "../../components/emptyDashboard/EmptyDashboard";
 
 function DashBoard() {
 

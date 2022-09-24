@@ -40,7 +40,6 @@ export const register = async (data) => {
     });
 
     console.log("API - Received server response");
-    console.log(response);
     const jsonResponse = await response.json();
 
     return jsonResponse;

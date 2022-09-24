@@ -29,7 +29,7 @@
   STYLING TITLE
 */
 
-.login-form-title, .signup-form-title {
+.login-form-title {
   padding-bottom: 0.5rem;
 }
 
@@ -49,6 +49,12 @@ input[type="password"] {
   width: 100%;
   border: 1px solid rgba(0, 0, 0, 0.2);
   margin-top: 0.8rem;
+}
+
+.matching-password-error {
+  font-size: 0.8rem;
+  color: red;
+  margin: 0.5rem 0;
 }
 
 /*
