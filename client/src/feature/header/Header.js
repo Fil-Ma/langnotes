@@ -1,31 +1,24 @@
 import "./Header.css";
 import { useState, useEffect, useRef } from "react";
+import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
+
 import Nav from "../nav/Nav";
 import Button from "../../components/button/Button";
+import { logoutUser } from '../../store/login/auth/auth.actions';
 
 function Header({ isAuthenticated }) {
 
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const dropdownContent = document.getElementById("dropdown-content");
+
+  const dispatch = useDispatch();
   const navigate = useNavigate();
+  const ref = useRef(null);
 
-  // clicking on login button sends user to /login
-  const handleLogin = (e) => {
-    navigate("login");
-  }
-
-  // clicking on sign-up button sends user to /register
-  const handleSignUp = (e) => {
-    navigate("signup");
-  }
-
-  const handleLogout = (e) => {
-
-  }
-
+  // event handler to manage dropdown menu
   const showDropdownOnClick = (e) => {
     e.preventDefault();
-    const dropdownContent = document.getElementById("dropdown-content");
 
     if (!isMenuOpen) {
       dropdownContent.style.display = "block";
@@ -36,14 +29,23 @@ function Header({ isAuthenticated }) {
     }
   };
 
-  /* // This function should close the dropdown list if the user clicks outside the menu
-  const ref = useRef();
+  // manages logout
+  const logout = async (e) => {
+    console.log("Logging out...");
+    try {
+      e.preventDefault();
+      await dispatch(logoutUser());
+      navigate("/");
+    } catch(err) {
+      console.log(err);
+    }
+  }
+
+  // This function should close the dropdown list if the user clicks outside the menu
   useEffect(() => {
     const checkIfClickedOutside = e => {
-      console.log(ref);
       if (isMenuOpen && ref.current && !ref.current.contains(e.target)) {
-        document.getElementById("dropdown-content").style.display = "none";
-        console.log("set display none");
+        dropdownContent.style.display = "none";
         setIsMenuOpen(false);
       }
     };
@@ -52,21 +54,30 @@ function Header({ isAuthenticated }) {
       // Cleanup the event listener
       document.removeEventListener("mousedown", checkIfClickedOutside)
     };
-  }, [isMenuOpen]);
-  */
+  }, [ref, isMenuOpen]);
+
 
   let authenticationButtons = (
-    <div className="auth-buttons">
-      <Button onClick={handleLogin} className="login button" >Login</Button>
-      <Button onClick={handleSignUp} className="sign-up button" >Sign-up</Button>
+    <div className="auth-buttons-container">
+      <Button className="login button" >
+        <Link to="login" className="login link">Login</Link>
+      </Button>
+
+      <Button className="sign-up button" >
+        <Link to="signup" className="sign-up link">Sign-up</Link>
+      </Button>
     </div>
   );
 
   let profileDropdownMenu = (
-    <div className="dropdown-button">
-      <Button onClick={handleLogout} className="logout button" >Sign Out</Button>
-      <Button onClick={showDropdownOnClick} className="profile-dropdown"><i class="fa-solid fa-caret-down"></i></Button>
-      <div id="dropdown-content">
+    <div className="auth-buttons-container">
+      <Button onClick={logout} className="logout button" >Sign Out</Button>
+
+      <Button onClick={showDropdownOnClick} className="profile-dropdown">
+        <i className="fa-solid fa-caret-down"></i>
+      </Button>
+
+      <div id="dropdown-content" ref={ref}>
         <div className="dropdown-username">[MyUsername]</div>
         <Link to="profile" className="dropdown-link">Edit Profile</Link>
         <div className="dropdown-divider"></div>

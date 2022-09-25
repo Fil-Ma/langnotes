@@ -10,6 +10,12 @@ header {
   box-shadow: 0 0.1rem 1rem rgba(0, 0, 0, 0.1);
 }
 
+.link {
+  text-decoration: none;
+  color: #000;
+  cursor: pointer;
+}
+
 /*
   STYLING Logo
 */
@@ -23,7 +29,7 @@ header {
   STYLING LOGIN, SIGNUP AND PROFILE BUTTONS
 */
 
-.auth-buttons, .dropdown-button {
+.auth-buttons-container {
   display: inline-flex;
   position: absolute;
   right: 3rem;
@@ -39,9 +45,6 @@ header {
   border-radius: 0.3rem;
   text-align: center;
   align-items: center;
-}
-
-.button:hover {
   cursor: pointer;
 }
 
@@ -51,11 +54,11 @@ header {
   border: 1px solid #000;
 }
 
-.profile-dropdown:hover, .logout:hover {
+.profile-dropdown:hover, .logout:hover .link {
   color: gray;
 }
 
-.logout {
+.logout.button {
   border-radius: 0.3rem 0 0 0.3rem;
   border-right: none;
 }
@@ -70,10 +73,13 @@ header {
   background-color: #FFF;
 }
 
+.sign-up.button {
+  margin-left: 0.8rem;
+}
+
 .sign-up {
   color: #FFF;
   background-color: #E18700;
-  margin-left: 0.8rem;
 }
 
 /*

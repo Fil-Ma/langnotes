@@ -1,7 +1,7 @@
 import "./auth.css";
 import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 
 import { loginUser } from '../../store/login/auth/auth.actions';
 
@@ -15,13 +15,18 @@ function LoginForm() {
   const navigate = useNavigate();
 
   // manage login when clicked on button
-  const handleLogin = async () => {
+  const handleLogin = async (e) => {
+    console.log("Logging in...");
     try {
       setIsLoading(true);
+      e.preventDefault();
       await dispatch(loginUser({ email, password }));
       setIsLoading(false);
+
+      console.log("Success! User is now logged in");
       navigate("../dashboard");
     } catch(err) {
+      console.log(err);
       setIsLoading(false);
     }
   };
@@ -56,8 +61,8 @@ function LoginForm() {
               minLength="8"
               maxLength="16"
               placeholder="Password"
-              pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*_=+-])$"
-              title="Must be between 8 and 16 characters. Should have at least one special character (!@#$%^&*_=+-), one number, one lowercase letter and one Uppercase letter."
+              pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,16}$"
+              title="Must be between 8 and 16 characters. Should have at least one special character (@$!%*?&), one number, one lowercase letter and one Uppercase letter."
               onChange={(e) => setPassword(e.currentTarget.value)}
               required />
           </div>

@@ -2,8 +2,12 @@ const baseAuthURL = '/api/auth';
 
 // API request for login
 export const login = async (credentials) => {
+  console.log("API - Contacting server to login user");
+
   try {
     const urlToFetch = baseAuthURL + '/login';
+
+    console.log(`API - Contacting server at URL ${urlToFetch}`);
 
     const response = await fetch(urlToFetch, {
       method: 'POST',
@@ -15,6 +19,7 @@ export const login = async (credentials) => {
 
     const jsonResponse = await response.json();
 
+    console.log("API - Received server response");
     return jsonResponse;
 
   } catch(err) {
@@ -67,14 +72,15 @@ export const isLoggedIn = async () => {
 
 // API request for logout
 export const logout = async () => {
+  console.log("API - Contacting server for user logout");
+
   try {
     const urlToFetch = baseAuthURL + '/logout';
 
-    const response = await fetch(urlToFetch, { method: 'POST' });
+    console.log(`API - Contacting server at URL ${urlToFetch}`);
+    await fetch(urlToFetch, { method: 'POST' });
 
-    const jsonResponse = await response.json();
-
-    return jsonResponse;
+    return;
 
   } catch(err) {
     throw new Error(err);

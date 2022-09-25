@@ -1,5 +1,5 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { isLoggedIn, login, register } from "../../../api/auth";
+import { isLoggedIn, login, register, logout } from "../../../api/auth";
 
 export const checkLoginStatus = createAsyncThunk(
   'auth/checkLogin',
@@ -20,6 +20,13 @@ export const checkLoginStatus = createAsyncThunk(
 export const loginUser = createAsyncThunk(
   'auth/loginUser',
   async (credentials) => {
+
+    // check if password satisfies regex format
+    if (!credentials.password.match(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,16}$/g)) {
+      console.log("Password is not valid");
+      throw new Error("Password format is not valid");
+    }
+
     try {
       const response = await login(credentials);
       return {
@@ -56,3 +63,16 @@ export const registerUser = createAsyncThunk(
     }
   }
 );
+
+export const logoutUser = createAsyncThunk(
+  'auth/logoutUser',
+  async () => {
+    try {
+      await logout();
+      return;
+      
+    } catch(err) {
+      throw err;
+    }
+  }
+)
