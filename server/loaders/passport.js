@@ -21,11 +21,14 @@ module.exports = (app) => {
   });
 
   // Local login
-  passport.use(new LocalStrategy(
-    async (username, password, done) => {
+  passport.use(new LocalStrategy({
+    usernameField: 'email'
+    },
+    async (email, password, done) => {
       try {
+        console.log("Passport local authentication")
         const user = await AuthServiceInstance.login({
-          username: email, password
+          email, password
         });
 
         return done(null, user);

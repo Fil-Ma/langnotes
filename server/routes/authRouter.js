@@ -52,12 +52,10 @@ module.exports = (app, passport) => {
           next(err);
         }
       }
-
   });
 
   // POST route for user credentials login
   router.post('/login',
-    passport.authenticate('local'),
     [
       check('email').isEmail().normalizeEmail(),
       check('password').isStrongPassword({
@@ -69,10 +67,13 @@ module.exports = (app, passport) => {
         minSymbols: 1
       })
     ],
+    passport.authenticate('local'),
     async (req, res, next) => {
 
       console.log("######################");
       console.log("Login POST request");
+
+      const errors = validationResult(req);
 
       // Check if the validation threw errors
       if (!errors.isEmpty()) {
@@ -127,6 +128,8 @@ module.exports = (app, passport) => {
 
     try {
       req.logout;
+      console.log("User is logged out");
+      res.status(200).send();
     } catch(err) {
       next(err);
     }

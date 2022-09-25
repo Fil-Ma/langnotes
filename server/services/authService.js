@@ -10,8 +10,7 @@ module.exports = class AuthService {
   // register function
   async register(data) {
 
-    console.log("AuthService --# Called Service");
-
+    console.log("AuthService --# Called Register Service");
     const { email, password } = data;
 
     try {
@@ -44,21 +43,31 @@ module.exports = class AuthService {
 
   // login function
   async login(data) {
+
+    console.log("AuthService --# Called Login Service");
     const { email, password } = data;
 
     try {
+      console.log("AuthService --# Verifying if user exists...");
       const user = await UserQueriesInstance.findOneByEmail(email);
 
       if (!user) {
+        console.log("AuthService --# Error! User not found");
+        console.log("AuthService --# Terminating service...");
         throw createError(401, "Incorrect username or password");
       }
+
+      console.log("AuthService --# Checking password...");
 
       const passwordCompareResult = await bcrypt.compare(password, user.password);
 
       if (!passwordCompareResult) {
+        console.log("AuthService --# Error! Password does not match");
+        console.log("AuthService --# Incorrect username or password");
         throw createError(401, "Incorrect username or password");
       }
 
+      console.log("AuthService --# User matches.. returning");
       return user;
 
     } catch(err) {

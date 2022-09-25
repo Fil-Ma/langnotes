@@ -1,4 +1,5 @@
 const { pool } = require("../database");
+const { v4: uuidv4 } = require("uuid");
 
 module.exports = class UserQueries {
 
@@ -8,7 +9,7 @@ module.exports = class UserQueries {
 
     try {
       console.log("DATABASE querying --# Querying DB for user insertion...");
-      const id = 1;
+      const id = uuidv4();
 
       const result = await pool.query('INSERT INTO users (id, email, password) VALUES ($1, $2, $3) RETURNING *', [id, userData.email, userData.password]);
 
@@ -27,15 +28,20 @@ module.exports = class UserQueries {
 
   // update user info
   async update(userData) {
+    console.log("DATABASE querying --# User update info request");
+
     try {
+      console.log("DATABASE querying --# Querying DB for user data...");
       const { id, ...params } = userData;
 
       const result = await pool.query('SELECT * FROM users WHERE id = $1', [id]);
 
       if (result.rows?.length) {
+        console.log("DATABASE querying --# Retrieving user info");
         return result.rows[0];
       }
 
+      console.log("DATABASE querying --# User not found");
       return null;
 
     } catch(err) {
@@ -65,12 +71,15 @@ module.exports = class UserQueries {
   // find user by id (if exists)
   async findOneById(id) {
     try {
+      console.log(`DATABASE querying --# Executing query, finding user by id = ${id}`);
       const result = await pool.query('SELECT * FORM users WHERE id = $1', [id]);
 
       if (result.rows?.length) {
+        console.log("DATABASE querying --# User found");
         return result.rows[0];
       }
 
+      console.log("DATABASE querying --# User does not exist");
       return null;
 
     } catch(err) {
