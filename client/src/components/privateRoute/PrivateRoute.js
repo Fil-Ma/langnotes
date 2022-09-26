@@ -3,12 +3,9 @@ import { Navigate } from "react-router-dom";
 function PrivateRoute({ isAuthenticated, children }) {
 
   if (isAuthenticated) {
-    console.log("user is isAuthenticated");
-    console.log(isAuthenticated);
     return children;
   } else {
-    console.log("not authorized")
-    console.log("redirecting")
+    console.log("User is not logged in. Redirecting..");
     return <Navigate to="/login" />
   }
 };

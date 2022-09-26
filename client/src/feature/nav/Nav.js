@@ -6,13 +6,13 @@ function Nav({ isAuthenticated }) {
   let guestNav = (
     <nav>
       <NavLink to="/" end className="nav-link" >Home</NavLink>
-      <NavLink to="about" className="nav-link" >About</NavLink>
+      <NavLink to="/about" className="nav-link" >About</NavLink>
     </nav>
   );
 
   let authenticatedUserNav = (
     <nav>
-      <NavLink to="support" end className="nav-link" >Support</NavLink>
+      <NavLink to="/support" end className="nav-link" >Support</NavLink>
     </nav>
   );
 

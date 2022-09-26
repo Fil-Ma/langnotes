@@ -1,11 +1,12 @@
-import Button from "../button/Button";
+import "./EmptyDashboard.css";
+import { Link } from "react-router-dom";
 
-const EmptyDashboard = ({ handleAddNotebookButton }) => {
+const EmptyDashboard = () => {
 
   return (
-    <div className="dashboard-add-notebook-container">
+    <div className="empty-dashboard-container">
       <p>It looks like you don't have any notebook. Please create a new Notebook in your favorite language to start</p>
-      <Button onClick={handleAddNotebookButton} className="dashboard-add-notebook">Add NoteBook</Button>
+      <Link to="/notebook/new" className="dashboard-add-btn link orange-background white-text">Add NoteBook</Link>
     </div>
   );
 };

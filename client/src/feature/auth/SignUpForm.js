@@ -28,7 +28,7 @@ function SignUpForm() {
       await dispatch(registerUser({ email, password }));
 
       console.log("Success! User registered");
-      navigate("../login");
+      navigate("/login");
     } catch(err) {
       console.log(err);
     }
@@ -46,7 +46,7 @@ function SignUpForm() {
 
   return (
     <main className="signup-main">
-      <div className="signup-form-container" >
+      <div className="signup-form-container white-background" >
 
         <div className="signup-form-title">
           <h2>Join LangNotes</h2>

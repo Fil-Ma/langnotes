@@ -1,11 +1,54 @@
+/*
+  STYLING NEW NOTEBOOK FORM
+*/
 
+.add-notebook-main {
+  padding: 3rem 0;
+}
 
 .new-notebook-form {
   border: 1px solid #000;
-  margin: 15% 35%;
-  font-size: 1.1rem;
+  border-radius: 1rem;
+  width: 30%;
+  margin: 0 auto;
+  padding: 3rem;
+  text-align: center;
 }
 
-.form-row {
+.input-row {
+  width: 100%;
+  padding: 0 2rem;
+}
+
+.input-row .input-container {
+  text-align: left;
   display: inline-block;
+  width: 50%;
+  padding: 0;
+}
+
+.new-notebook-form .input-row .input-container input[type="text"],
+.new-notebook-form .input-row .input-container select {
+  height: 30px;
+  width: 80%;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  margin-top: 0.8rem;
+}
+
+.new-notebook-form .input-container textarea {
+  height: 9rem;
+  width: 100%;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  margin-top: 0.8rem;
+}
+
+.new-notebook-form .submit-container input[type="submit"] {
+  cursor: pointer;
+  font-size: 1.1rem;
+  color: #fff;
+  background-color: #01d28e;
+  border: 1px solid #01d28e;
+  border-radius: 0.2rem;
+  padding: 0.8rem 0;
+  width: 40%;
 }

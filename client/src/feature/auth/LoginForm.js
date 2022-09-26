@@ -24,7 +24,7 @@ function LoginForm() {
       setIsLoading(false);
 
       console.log("Success! User is now logged in");
-      navigate("../dashboard");
+      navigate("/dashboard");
     } catch(err) {
       console.log(err);
       setIsLoading(false);
@@ -33,7 +33,7 @@ function LoginForm() {
 
   return (
     <main className="login-main">
-      <div className="login-form-container" >
+      <div className="login-form-container white-background" >
 
         <div className="login-form-title">
           <h2>Welcome back!</h2>

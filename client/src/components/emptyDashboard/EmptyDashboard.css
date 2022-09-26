@@ -1,0 +1,24 @@
+/*
+  STYLING  EMPTY DASHBOARD
+*/
+
+.empty-dashboard-container {
+  padding: 12.2rem 0;
+  text-align: center;
+  font-size: 1.1rem;
+}
+
+.empty-dashboard-container p {
+  margin-bottom: 6rem;
+}
+
+.dashboard-add-btn {
+  font-size: 1.2rem;
+  border: 1px solid #E18700;
+  border-radius: 0.3rem;
+  padding: 1rem 2rem;
+}
+
+.dashboard-add-btn:hover {
+  background-color: #B46C00;
+}
