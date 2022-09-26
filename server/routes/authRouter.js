@@ -96,6 +96,29 @@ module.exports = (app, passport) => {
       }
   });
 
+  router.get('/google', passport.authenticate('google', { scope: ["profile"] } ));
+
+  router.get('/google/callback',
+    passport.authenticate('google', { failureRedirect: '/login' }),
+    async (req, res, next) => {
+      res.redirect('/dashboard');
+    }
+  );
+
+  router.get(['/facebook', 'facebook/callbak'], (req, res, next) => {
+    res.status(500).send("Service not implemented");
+  });
+
+  // Facebook login is here disabled, to use it uncomment the following lines and delete the route above
+  // router.get('/facebook', passport.authenticate('facebook'));
+  //
+  // router.get('/facebook/callback',
+  //   passport.authenticate('facebook', { failureRedirect: '/login' }),
+  //   async (req, res) => {
+  //     res.redirect('/dashboard');
+  //   }
+  // );
+
   router.get('/logged_in', async (req, res, next) => {
 
     console.log("######################");

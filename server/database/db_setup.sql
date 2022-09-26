@@ -1,5 +1,7 @@
 CREATE TABLE users (
-  id integer PRIMARY KEY,
+  id uuid PRIMARY KEY,
   email varchar(100) UNIQUE,
-  password varchar(200)
+  password varchar(200),
+  google JSON,
+  facebook JSON
 );

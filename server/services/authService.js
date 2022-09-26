@@ -75,8 +75,50 @@ module.exports = class AuthService {
     }
   }
 
-  // for the future
-  // manage login with google
-  //manage login with facebook
+  // Google login function
+  async googleLogin(profile) {
+
+    console.log("AuthService --# Called Login Service with Google");
+    const { id, displayName } = profile;
+
+    try {
+      console.log("AuthService --# Verifying if user exists...");
+      const user = await UserQueriesInstance.findOneByGoogleId(id);
+
+      if (!user) {
+        console.log("AuthService --# User not found. Registering new user...");
+        return await UserQueriesInstance.create({ google: { id, displayName }})
+      }
+
+      console.log("AuthService --# Returning...");
+      return user;
+
+    } catch(err) {
+      throw createError(500, err);
+    }
+  };
+
+  // Facebook login function
+  async facebookLogin(profile) {
+
+    console.log("AuthService --# Called Login Service with Facebook");
+    const { id, displayName } = profile;
+
+    try {
+      console.log("AuthService --# Verifying if user exists...");
+      const user = await UserQueriesInstance.findOneByFacebookId(id);
+
+      if (!user) {
+        console.log("AuthService --# User not found. Registering new user...");
+        return await UserQueriesInstance.create({ facebook: { id, displayName }});
+      }
+
+      console.log("AuthService --# Returning...");
+      return user;
+
+    } catch(err) {
+      throw createError(500, err);
+    }
+  }
 
 }
