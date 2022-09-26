@@ -14,6 +14,28 @@ body {
     sans-serif;
 }
 
-/* .root {
+/* LINK ELEMENT STYLE */
 
-} */
+.link {
+  text-decoration: none;
+  color: #000;
+  cursor: pointer;
+}
+
+/* TEXT COLOR AND BACKGROUND COLOR */
+
+.orange-text {
+  color: #E18700;
+}
+
+.white-text {
+  color: #FFF;
+}
+
+.orange-background {
+  background-color: #E18700;
+}
+
+.white-background {
+  background-color: #FFF;
+}

@@ -87,6 +87,7 @@ input[type="submit"] {
 }
 
 .oauth-button {
+  display: block;
   color: #fff;
   padding: 0.7rem;
   width: 45%;
@@ -95,18 +96,14 @@ input[type="submit"] {
 }
 
 .google-login, .google-signup {
-  background-color: red;
-  border: 1px solid red;
+  background-color: #DB4437;
+  border: 1px solid #DB4437;
 }
 
 .facebook-login, .facebook-signup {
-  background-color: blue;
-  border: 1px solid blue;
+  background-color: #4267B2;
+  border: 1px solid #4267B2;
   margin-top: 0.5rem;
-}
-
-.google-login:hover, .facebook-login:hover {
-  cursor: pointer;
 }
 
 /*
@@ -115,4 +112,8 @@ input[type="submit"] {
 
 .signup-redirect {
   margin: 2rem 0;
+}
+
+.default-link:visited {
+  color: #0069c2;
 }

@@ -59,29 +59,24 @@ function Header({ isAuthenticated }) {
 
   let authenticationButtons = (
     <div className="auth-buttons-container">
-      <Button className="login button" >
-        <Link to="login" className="login link">Login</Link>
-      </Button>
-
-      <Button className="sign-up button" >
-        <Link to="signup" className="sign-up link">Sign-up</Link>
-      </Button>
+      <Link to="login" className="login link orange-text white-background">Login</Link>
+      <Link to="signup" className="sign-up link white-text orange-background">Sign-up</Link>
     </div>
   );
 
   let profileDropdownMenu = (
     <div className="auth-buttons-container">
-      <Button onClick={logout} className="logout button" >Sign Out</Button>
+      <Button onClick={logout} className="logout-button white-background" >Sign Out</Button>
 
-      <Button onClick={showDropdownOnClick} className="profile-dropdown">
+      <Button onClick={showDropdownOnClick} className="profile-dropdown white-background">
         <i className="fa-solid fa-caret-down"></i>
       </Button>
 
       <div id="dropdown-content" ref={ref}>
         <div className="dropdown-username">[MyUsername]</div>
-        <Link to="profile" className="dropdown-link">Edit Profile</Link>
+        <Link to="profile" className="dropdown-item link">Edit Profile</Link>
         <div className="dropdown-divider"></div>
-        <Link to="settings" className="dropdown-link">Settings</Link>
+        <Link to="settings" className="dropdown-item link">Settings</Link>
       </div>
     </div>
   );

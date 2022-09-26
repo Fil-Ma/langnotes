@@ -10,12 +10,6 @@ header {
   box-shadow: 0 0.1rem 1rem rgba(0, 0, 0, 0.1);
 }
 
-.link {
-  text-decoration: none;
-  color: #000;
-  cursor: pointer;
-}
-
 /*
   STYLING Logo
 */
@@ -37,49 +31,50 @@ header {
   padding: 0 1rem;
 }
 
-.button {
-  display: inline-flex;
-  padding: 0.5rem;
-  font-size: 1.2rem;
+/* style login and sign up */
+
+.login, .sign-up {
   border: 1px solid #E18700;
+  font-size: 1.2rem;
   border-radius: 0.3rem;
-  text-align: center;
+  padding: 0.5rem;
+  display: inline-flex;
   align-items: center;
-  cursor: pointer;
+  text-align: center;
 }
 
-.profile-dropdown, .logout {
-  color: #000;
-  background-color: #FFF;
+.sign-up {
+  margin-left: 0.8rem;
+}
+
+.login:hover {
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+.sign-up:hover {
+  background-color: #B46C00;
+}
+
+/* style logout and dropdown menu */
+
+.profile-dropdown, .logout-button {
   border: 1px solid #000;
 }
 
-.profile-dropdown:hover, .logout:hover .link {
+.profile-dropdown:hover, .logout-button:hover  {
   color: gray;
 }
 
-.logout.button {
+.logout-button {
   border-radius: 0.3rem 0 0 0.3rem;
   border-right: none;
+  font-size: 1.2rem;
+  text-align: center;
 }
 
 .profile-dropdown {
   border-radius: 0 0.3rem 0.3rem 0;
   border-left: 1px solid rgba(0, 0, 0, 0.3);
-}
-
-.login {
-  color: #E18700;
-  background-color: #FFF;
-}
-
-.sign-up.button {
-  margin-left: 0.8rem;
-}
-
-.sign-up {
-  color: #FFF;
-  background-color: #E18700;
 }
 
 /*
@@ -105,10 +100,12 @@ header {
   overflow: hidden;
 }
 
-.dropdown-link {
-  text-decoration: none;
-  color: #000;
+.dropdown-item {
   padding: 0.3rem 0;
+}
+
+.dropdown-item.link:hover {
+  color: gray;
 }
 
 .dropdown-divider {

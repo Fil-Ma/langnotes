@@ -22,7 +22,7 @@ function SignUpForm() {
     if (confirmPassword !== password) {
       throw new Error("The passwords do not match");
     }
-    
+
     try {
       e.preventDefault();
       await dispatch(registerUser({ email, password }));
@@ -101,12 +101,14 @@ function SignUpForm() {
 
         <div className="oauth-signup">
           <p>Or Signup with:</p>
-          <div className="google-signup oauth-button">
+
+          <Link to="/api/auth/google" className="google-signup oauth-button link">
             <i className="fa-brands fa-google"></i> SignIn with Google
-          </div>
-          <div className="facebook-signup oauth-button">
+          </Link>
+
+          <Link to="/api/auth/facebook" className="facebook-signup oauth-button link">
             <i className="fa-brands fa-facebook-f"></i> SignIn with Facebook
-          </div>
+          </Link>
         </div>
 
       </div>

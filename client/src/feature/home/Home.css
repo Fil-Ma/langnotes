@@ -29,19 +29,21 @@ main {
   background-color: #FFF;
 }
 
+.starter p {
+  margin-bottom: 3rem;
+}
+
 .starter-button {
-  color: #FFF;
-  background-color: #E18700;
-  font-size: 1.2rem;
+  font-size: 1.3rem;
   border: 1px solid #E18700;
   border-radius: 0.3rem;
   text-align: center;
-  margin-top: 1rem;
   padding: 1rem 2rem;
+  cursor: pointer;
 }
 
 .starter-button:hover {
-  cursor: pointer;
+  background-color: #B46C00;
 }
 
 /*

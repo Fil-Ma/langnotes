@@ -74,16 +74,18 @@ function LoginForm() {
 
         <div className="oauth-logins">
           <p>Or Login with:</p>
-          <div className="google-login oauth-button">
+
+          <Link to="/api/auth/google" className="google-login oauth-button link">
             <i className="fa-brands fa-google"></i> SignIn with Google
-          </div>
-          <div className="facebook-login oauth-button">
+          </Link>
+
+          <Link to="/api/auth/facebook" className="facebook-login oauth-button link">
             <i className="fa-brands fa-facebook-f"></i> SignIn with Facebook
-          </div>
+          </Link>
         </div>
 
         <div className="signup-redirect">
-          <p>Not a member? <Link to="../signup">Register</Link></p>
+          <p>Not a member? <Link to="../signup" className="default-link">Register</Link></p>
         </div>
 
       </div>
