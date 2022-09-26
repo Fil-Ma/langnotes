@@ -1,7 +1,7 @@
 import "./auth.css";
 import { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 
 import { registerUser } from '../../store/login/auth/auth.actions';
 

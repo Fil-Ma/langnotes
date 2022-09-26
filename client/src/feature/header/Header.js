@@ -59,8 +59,8 @@ function Header({ isAuthenticated }) {
 
   let authenticationButtons = (
     <div className="auth-buttons-container">
-      <Link to="login" className="login link orange-text white-background">Login</Link>
-      <Link to="signup" className="sign-up link white-text orange-background">Sign-up</Link>
+      <Link to="/login" className="login link orange-text white-background">Login</Link>
+      <Link to="/signup" className="sign-up link white-text orange-background">Sign-up</Link>
     </div>
   );
 

@@ -1,6 +1,7 @@
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
 import PageLayout from "./components/pageLayout/PageLayout";
+import PrivateRoute from "./components/privateRoute/PrivateRoute";
 
 import Home from "./feature/home/Home";
 import DashBoard from "./feature/dashboard/DashBoard";
@@ -22,7 +23,6 @@ function App() {
         <Route
           path="/login"
           element={<LoginForm />} />
-
         <Route
           path="/signup"
           element={<SignUpForm />} />
@@ -32,21 +32,31 @@ function App() {
           <Route
             path="/"
             element={<Home />} />
-
-          <Route
-            path="/dashboard"
-            element={<DashBoard />} />
-
-          <Route
-            path="/notebook/new"
-            element={<NewNoteBookForm />} />
-          <Route
-            path="/notebook"
-            element={<NoteBook />} />
-
           <Route
             path="/support"
             element={<Support />} />
+
+          <Route
+            path="/dashboard"
+            element={
+              <PrivateRoute isAuthenticated={isAuthenticated}>
+                <DashBoard />
+              </PrivateRoute>
+            } />
+          <Route
+            path="/notebook/new"
+            element={
+              <PrivateRoute isAuthenticated={isAuthenticated}>
+                <NewNoteBookForm />
+              </PrivateRoute>
+            } />
+          <Route
+            path="/notebook"
+            element={
+              <PrivateRoute isAuthenticated={isAuthenticated}>
+                <NoteBook />
+              </PrivateRoute>
+            } />
 
         </Route>
 
