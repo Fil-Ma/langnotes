@@ -70,11 +70,13 @@ header {
   border-right: none;
   font-size: 1.2rem;
   text-align: center;
+  cursor: pointer;
 }
 
 .profile-dropdown {
   border-radius: 0 0.3rem 0.3rem 0;
   border-left: 1px solid rgba(0, 0, 0, 0.3);
+  cursor: pointer;
 }
 
 /*

@@ -35,6 +35,7 @@ function Header({ isAuthenticated }) {
     try {
       e.preventDefault();
       await dispatch(logoutUser());
+      await dispatch({ type: 'USER_LOGOUT' });
       navigate("/");
     } catch(err) {
       console.log(err);

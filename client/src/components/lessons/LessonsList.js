@@ -13,6 +13,8 @@ function LessonsList() {
       <Lesson title="Lesson title" description="Description" />
       <Lesson title="Lesson title" description="Description" />
       <Lesson title="Lesson title" description="Description" />
+      <Lesson title="Lesson title" description="Description" />
+      <Lesson title="Lesson title" description="Description" />
 
     </section>
   );

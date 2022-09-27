@@ -24,6 +24,8 @@ function Vocabulary() {
       <VocabularyTerm content="Second" />
       <VocabularyTerm content="Third" />
       <VocabularyTerm content="Fourth" />
+      <VocabularyTerm content="Fifth" />
+      <VocabularyTerm content="Sixth" />
 
     </section>
   );

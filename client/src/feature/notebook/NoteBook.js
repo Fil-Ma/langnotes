@@ -1,8 +1,8 @@
-import "./NoteBook.css";
+import "./Notebook.css";
 import LessonsList from "../../components/lessons/LessonsList";
 import Vocabulary from "../../components/vocabulary/Vocabulary";
 
-function NoteBook() {
+function Notebook() {
 
   return (
     <main className="notebook">
@@ -15,4 +15,4 @@ function NoteBook() {
   )
 }
 
-export default NoteBook;
+export default Notebook;

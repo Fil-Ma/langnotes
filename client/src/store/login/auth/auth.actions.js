@@ -9,7 +9,8 @@ export const checkLoginStatus = createAsyncThunk(
 
       return {
         isAuthenticated: true,
-        user: response.user
+        user: response.user,
+        notebooks: response.notebooks
       }
     } catch(err) {
       throw err;
@@ -70,7 +71,7 @@ export const logoutUser = createAsyncThunk(
     try {
       await logout();
       return;
-      
+
     } catch(err) {
       throw err;
     }
