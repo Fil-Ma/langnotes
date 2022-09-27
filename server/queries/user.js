@@ -86,7 +86,7 @@ module.exports = class UserQueries {
   async findOneById(id) {
     try {
       console.log(`DATABASE querying --# Executing query, finding user by id = ${id}`);
-      const result = await pool.query('SELECT * FORM users WHERE id = $1', [id]);
+      const result = await pool.query('SELECT * FORM users WHERE id = ($1)::text', [id]);
 
       if (result.rows?.length) {
         console.log("DATABASE querying --# User found");
@@ -135,7 +135,7 @@ module.exports = class UserQueries {
 
       console.log("DATABASE querying --# User found");
       return null;
-      
+
     } catch(err) {
       throw new Error(err);
     }

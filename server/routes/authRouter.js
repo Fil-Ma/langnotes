@@ -6,7 +6,10 @@ const AuthService = require("../services/authService");
 const AuthServiceInstance = new AuthService();
 
 const UserService = require("../services/userService");
-const UserServiceInstanced = new UserService();
+const UserServiceInstance = new UserService();
+
+const NotebookService = require("../services/notebookService");
+const NotebookServiceInstance = new NotebookService();
 
 module.exports = (app, passport) => {
 
@@ -125,18 +128,27 @@ module.exports = (app, passport) => {
     console.log("Login status GET request");
 
     try {
+      // user id
       const { id } = req.user;
 
-      console.log(`Credentials are: id - ${id}`);
+      console.log(`User id is: ${id}`);
 
-      const user = await UserServiceInstance.get({ id });
-      // retrieve all booknotes managed by user
+      console.log("Retrieving User info");
+      // not working, problem querying uuid
+      //const user = await UserServiceInstance.get({ id });
 
-      console.log("Retrived user info");
+      console.log("Retrieving notebooks info based on user");
+      // not working, problem querying uuid
+      //const notebooks = await NotebookServiceInstance.loadNotebooks(id);
+
+      console.log("Sending info to client");
+
+      const user = {};
+      const notebooks = {};
 
       res.status(200).send({
-        loggedIn: true,
-        user
+        user,
+        notebooks
       });
 
     } catch(err) {
@@ -153,6 +165,7 @@ module.exports = (app, passport) => {
       req.logout;
       console.log("User is logged out");
       res.status(200).send();
+
     } catch(err) {
       next(err);
     }
