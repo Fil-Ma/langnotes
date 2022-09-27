@@ -1,0 +1,45 @@
+/*
+  STYLING VOCABULARY
+*/
+
+.vocabulary-container {
+  grid-column: 3;
+}
+
+.vocabulary-term-container {
+  border: 1px solid #000;
+  border-radius: 0.3rem;
+  margin-bottom: 1rem;
+  padding: 1rem;
+}
+
+.vocabulary-utils {
+  display: inline-flex;
+  width: 100%;
+}
+
+.vocabulary-utils p {
+  margin-top: 0;
+  margin-bottom: 1rem;
+  padding: 0.2rem 0.5rem;
+  width: 40%;
+}
+
+.vocabulary-utils input[type="text"] {
+  padding: 0.2rem 0.5rem;
+  border: none;
+  width: 90%;
+  border: 1px solid #000;
+  border-radius: 0.2rem;
+}
+
+.vocabulary-utils .search-term {
+  width: 60%;
+  display: inline-flex;
+  margin-bottom: 1rem;
+}
+
+.search-term i {
+  margin: auto 0;
+  padding: 0 0.5rem;
+}

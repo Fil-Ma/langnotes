@@ -1,0 +1,65 @@
+/*
+  STYLING LESSONS CONTAINER SECTION
+*/
+
+.lessons-container {
+  grid-column: 1 / 3;
+}
+
+/*
+  STYLING LESSONS DIV
+*/
+
+.lessons-container p {
+  padding: 0.2rem 0.5rem;
+  margin-top: 0;
+  margin-bottom: 1rem;
+}
+
+.lesson {
+  border: 1px solid #000;
+  border-radius: 0.3rem;
+  margin-bottom: 1rem;
+  padding: 0rem 1rem 1rem 1rem;
+}
+
+.lesson-tools i {
+  cursor: pointer;
+}
+
+.lesson-tools i:hover {
+  color: gray;
+}
+
+.lesson-title, .lesson-tools {
+  display: inline-block;
+}
+
+.lesson-title h3 {
+  margin: 18px 0;
+}
+
+.lesson-tools {
+  float: right;
+  margin: 18px 0;
+  padding: 0 2rem;
+  height: 1.5rem;
+  position: relative;
+}
+
+.hover-text {
+  display: none;
+  position: absolute;
+  bottom: 110%;
+  right: 50%;
+  transform: translateX(50%);
+  background-color: gray;
+  font-size: 0.8rem;
+  color: #fff;
+  white-space: nowrap;
+  padding: 0.2rem 0.4rem;
+}
+
+.lesson-tools:hover .hover-text {
+  display: block;
+}

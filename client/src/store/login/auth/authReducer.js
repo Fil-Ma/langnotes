@@ -5,7 +5,7 @@ const authSlice = createSlice({
   name: 'auth',
   initialState: {
     isFetching: false,
-    isAuthenticated: false,
+    isAuthenticated: true,
     error: null
   },
   reducers: {},
