@@ -9,23 +9,23 @@ import { checkLoginStatus } from "../../store/login/auth/auth.actions";
 
 function DashBoard() {
 
-  // const [isDashboardEmpty, setIsDashboardEmpty] = useState(true);
-  // const dispatch = useDispatch();
-  //
-  // dispatch(checkLoginStatus());
-  // const notebooks = useSelector((state) => state.user.notebooks);
-  //
-  // if (notebooks.length > 0) {
-  //   setIsDashboardEmpty(false);
-  // } else if (notebooks.length === 0 || notebooks === undefined) {
-  //   setIsDashboardEmpty(true);
-  // }
+  const [isDashboardEmpty, setIsDashboardEmpty] = useState(true);
+  const dispatch = useDispatch();
 
-  // { isDashboardEmpty ? <EmptyDashboard /> : <Notebook /> } fix here and authRouter
+  dispatch(checkLoginStatus());
+  const notebooks = useSelector((state) => state.user.notebooks);
+
+  if (notebooks.length > 0) {
+    setIsDashboardEmpty(false);
+  } else if (notebooks.length === 0 || notebooks === undefined) {
+    setIsDashboardEmpty(true);
+  }
+
+
   return (
     <main className="dashboard-main">
 
-      <EmptyDashboard />
+      { isDashboardEmpty ? <EmptyDashboard /> : <Notebook /> }
 
     </main>
   );
