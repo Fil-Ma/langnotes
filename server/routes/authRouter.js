@@ -78,25 +78,17 @@ module.exports = (app, passport) => {
 
       const errors = validationResult(req);
 
-      // Check if the validation threw errors
       if (!errors.isEmpty()) {
-
+        // Input validation returned errors, throwing new error
         console.log("Invalid inputs");
         next(new Error("Invalid inputs"));
 
       } else {
-        try {
-          const { email, password } = req.body;
-
-          const response = await AuthServiceInstance.login({ email, password });
-
-          console.log("Login success");
-          res.status(200).send(response);
-
-        } catch(err) {
-          next(err);
-        }
+        // Login is successful, returning user data
+        console.log("Login success");
+         res.status(200).send(req.user);
       }
+
   });
 
   router.get('/google', passport.authenticate('google', { scope: ["profile"] } ));
@@ -134,18 +126,12 @@ module.exports = (app, passport) => {
       console.log(`User id is: ${id}`);
 
       console.log("Retrieving User info");
-      // not working, problem querying uuid
-      //const user = await UserServiceInstance.get({ id });
+      const user = await UserServiceInstance.get({ id });
 
       console.log("Retrieving notebooks info based on user");
-      // not working, problem querying uuid
-      //const notebooks = await NotebookServiceInstance.loadNotebooks(id);
+      const notebooks = await NotebookServiceInstance.loadNotebooks(id);
 
       console.log("Sending info to client");
-
-      const user = {};
-      const notebooks = {};
-
       res.status(200).send({
         user,
         notebooks

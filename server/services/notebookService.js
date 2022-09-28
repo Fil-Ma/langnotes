@@ -7,10 +7,8 @@ module.exports = class NotebookService {
   async loadNotebooks(userId) {
 
     console.log("NotebookService --# Called Get Notebooks Service");
-    console.log("User id is " + userId);
 
     try {
-
       console.log("NotebookService --# Serching for notebooks owned by the user");
       const notebooks = await NotebookQueriesInstance.findAllByUserId(userId);
 
