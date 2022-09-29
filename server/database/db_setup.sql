@@ -21,11 +21,13 @@ CREATE TABLE notebooks (
   user_id UUID REFERENCES users(id),
   vocabulary_id UUID REFERENCES vocabularies(id) UNIQUE,
   name VARCHAR(50),
-  language VARCHAR(50)
+  language VARCHAR(50),
+  description VARCHAR(200)
 );
 
 CREATE TABLE lessons (
   id UUID PRIMARY KEY,
   notebook_id UUID REFERENCES notebooks(id),
-  content VARCHAR(200)
+  content VARCHAR(200),
+  title VARCHAR(50) 
 );

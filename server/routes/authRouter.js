@@ -116,22 +116,20 @@ module.exports = (app, passport) => {
 
   router.get('/logged_in', async (req, res, next) => {
 
-    console.log("######################");
-    console.log("Login status GET request");
+    //console.log("######################");
+    //console.log("Login status GET request");
 
     try {
       // user id
       const { id } = req.user;
 
-      console.log(`User id is: ${id}`);
-
-      console.log("Retrieving User info");
+      //console.log("Retrieving User info");
       const user = await UserServiceInstance.get({ id });
 
-      console.log("Retrieving notebooks info based on user");
-      const notebooks = await NotebookServiceInstance.loadNotebooks(id);
+      //console.log("Retrieving notebooks info based on user");
+      const notebooks = await NotebookServiceInstance.loadAllNotebooks(id);
 
-      console.log("Sending info to client");
+      //console.log("Sending info to client");
       res.status(200).send({
         user,
         notebooks

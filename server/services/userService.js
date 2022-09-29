@@ -6,20 +6,20 @@ module.exports = class UserService {
 
   async get(data) {
 
-    console.log("UserService --# Called Get User Service");
+    //console.log("UserService --# Called Get User Service");
     const { id } = data;
 
     try {
-      console.log("UserService --# Verifying if user already exists...");
+      //console.log("UserService --# Verifying if user already exists...");
       const user = await UserQueriesInstance.findOneById(id);
 
       if (!user) {
-        console.log("UserService --# Error! User does not exist");
-        console.log("UserService --# Terminating service...");
+        //console.log("UserService --# Error! User does not exist");
+        //console.log("UserService --# Terminating service...");
         throw createError(404, "User not found");
       }
 
-      console.log("UserService --# Retrieving user info...");
+      //console.log("UserService --# Retrieving user info...");
       return user;
 
     } catch(err) {
