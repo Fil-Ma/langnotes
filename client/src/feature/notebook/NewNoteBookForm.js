@@ -1,22 +1,32 @@
-import "./NewNoteBookForm.css";
+import "./NewNotebookForm.css";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
+import { addNotebook } from "../../store/login/user/user.actions";
 
-function NewNoteBookForm() {
+function NewNotebookForm() {
 
   const [notebookName, setNotebookName] = useState("");
   const [notebookLanguage, setNotebookLanguage] = useState("");
   const [notebookDescription, setNotebookDescription] = useState("");
-  const dispatch = useDispatch();
 
-  const handleNotebookSubmit = (e) => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  // handle submission of new notebook
+  const handleNotebookSubmit = async (e) => {
     e.preventDefault();
-    const data = {
-      notebookName,
-      notebookLanguage,
-      notebookDescription
-    };
-    // dispatch request to add notebook of data
+    try {
+      await dispatch(addNotebook({
+        name: notebookName,
+        language: notebookLanguage,
+        description: notebookDescription
+      }));
+      navigate("/dashboard");
+      
+    } catch(err) {
+      console.log(err);
+    }
   };
 
   return (
@@ -30,7 +40,7 @@ function NewNoteBookForm() {
               <input
                 type="text"
                 id="notebookName"
-                onChange={(e) => { setNotebookName(e.target.value) }}
+                onChange={(e) => setNotebookName(e.target.value) }
                 required />
             </div>
 
@@ -38,7 +48,7 @@ function NewNoteBookForm() {
               <label htmlFor="noteBookLanguage">Language:</label><br />
               <select
                 id="noteBookLanguage"
-                onChange={(e) => { setNotebookLanguage(e.target.value) }}
+                onChange={(e) => setNotebookLanguage(e.target.value) }
                 required >
                   <option defaultValue>Choose...</option>
                   <option>English</option>
@@ -55,7 +65,8 @@ function NewNoteBookForm() {
             <textarea
               id="notebookDescription"
               placeholder="Notebook for my language class.."
-              onChange={(e) => { setNotebookDescription(e.target.value) }}></textarea>
+              onChange={(e) => setNotebookDescription(e.target.value) }
+              required ></textarea>
           </div>
 
           <div className="submit-container white-color">
@@ -68,4 +79,4 @@ function NewNoteBookForm() {
   );
 }
 
-export default NewNoteBookForm;
+export default NewNotebookForm;

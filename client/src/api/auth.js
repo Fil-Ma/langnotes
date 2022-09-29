@@ -56,12 +56,12 @@ export const register = async (data) => {
 
 // API request to check if the user is logged in
 export const isLoggedIn = async () => {
-  console.log("API - Contacting server for user login status");
+  //console.log("API - Contacting server for user login status");
 
   try {
     const urlToFetch = baseAuthURL + '/logged_in';
 
-    console.log(`API - Contacting server at URL ${urlToFetch}`);
+    //console.log(`API - Contacting server at URL ${urlToFetch}`);
     const response = await fetch(urlToFetch);
 
     const jsonResponse = await response.json();

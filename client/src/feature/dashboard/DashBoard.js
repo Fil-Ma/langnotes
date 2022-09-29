@@ -1,7 +1,7 @@
 import "./DashBoard.css";
 
 import { useDispatch, useSelector } from "react-redux";
-import { useEffect, useState } from "react";
+import { useState, useEffect } from 'react';
 
 import Notebook from "../notebook/Notebook";
 import EmptyDashboard from "../../components/emptyDashboard/EmptyDashboard";
@@ -12,15 +12,19 @@ function DashBoard() {
   const [isDashboardEmpty, setIsDashboardEmpty] = useState(true);
   const dispatch = useDispatch();
 
-  dispatch(checkLoginStatus());
-  const notebooks = useSelector((state) => state.user.notebooks);
+  // select notebook in the state
+  const notebooks = useSelector((state) => state.login.user.notebooks);
 
-  if (notebooks.length > 0) {
-    setIsDashboardEmpty(false);
-  } else if (notebooks.length === 0 || notebooks === undefined) {
-    setIsDashboardEmpty(true);
-  }
+  // update notebooks in the state
+  useEffect(() => {
+    dispatch(checkLoginStatus());
 
+    if (notebooks.length > 0) {
+      setIsDashboardEmpty(false);
+    } else if (notebooks.length === 0) {
+      setIsDashboardEmpty(true);
+    }
+  }, [notebooks]);
 
   return (
     <main className="dashboard-main">

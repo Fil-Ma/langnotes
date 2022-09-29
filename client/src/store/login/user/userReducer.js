@@ -1,16 +1,14 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 import { checkLoginStatus, loginUser } from '../auth/auth.actions';
-
+import { addNotebook } from "./user.actions";
 
 const userSlice = createSlice({
   name: 'user',
   initialState: {
     id: "",
     email: "",
-    notebooks: {
-
-    }
+    notebooks: []
   },
   reducers: {},
   extraReducers: (builder) => {
@@ -27,6 +25,11 @@ const userSlice = createSlice({
         state.id = user.id;
         state.email = user.email;
         state.notebooks = notebooks;
+      })
+      // Add notebook and add it to the status
+      .addCase(addNotebook.fulfilled, (state, action) => {
+        const { notebook } = action.payload;
+        state.notebooks.push(notebook);
       })
   }
 })
