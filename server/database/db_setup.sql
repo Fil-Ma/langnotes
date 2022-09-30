@@ -29,5 +29,6 @@ CREATE TABLE lessons (
   id UUID PRIMARY KEY,
   notebook_id UUID REFERENCES notebooks(id),
   content VARCHAR(200),
-  title VARCHAR(50) 
+  title VARCHAR(50) ,
+  description VARCHAR(100)
 );

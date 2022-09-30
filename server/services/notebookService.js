@@ -23,7 +23,7 @@ module.exports = class NotebookService {
       return notebooks;
 
     } catch(err) {
-      throw err;
+      throw createError(500, err);
     }
   }
 
@@ -40,7 +40,7 @@ module.exports = class NotebookService {
       return newNotebook;
 
     } catch(err) {
-      throw err;
+      throw createError(500, err);
     }
   }
 
