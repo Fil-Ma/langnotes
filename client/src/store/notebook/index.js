@@ -1,5 +1,5 @@
 import { combineReducers } from "redux";
-import lessonReducer from "./lessonReducer";
+import lessonReducer from "./lesson/lessonReducer";
 import vocabularyReducer from "./vocabularyReducer";
 
 const notebookReducer = combineReducers({

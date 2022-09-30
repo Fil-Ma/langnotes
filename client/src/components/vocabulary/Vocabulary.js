@@ -1,7 +1,14 @@
 import "./vocabulary.css";
 import VocabularyTerm from "./VocabularyTerm";
 
-function Vocabulary() {
+function Vocabulary({ notebookId }) {
+
+  // const terms = useSelector((state) => state.vocabulary);
+
+  // useEffect(() => {
+  //   dispatch(loadVocabulary(notebook.id));
+  //
+  // }, [lessons, vocabulary]);
 
   return (
     <section className="vocabulary-container">

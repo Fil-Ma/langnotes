@@ -14,6 +14,7 @@ function DashBoard() {
 
   // select notebook in the state
   const notebooks = useSelector((state) => state.login.user.notebooks);
+  const currentNotebook = notebooks[0];
 
   // update notebooks in the state
   useEffect(() => {
@@ -29,7 +30,7 @@ function DashBoard() {
   return (
     <main className="dashboard-main">
 
-      { isDashboardEmpty ? <EmptyDashboard /> : <Notebook /> }
+      { isDashboardEmpty ? <EmptyDashboard /> : <Notebook notebook={currentNotebook} /> }
 
     </main>
   );

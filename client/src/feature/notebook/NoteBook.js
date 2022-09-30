@@ -2,14 +2,14 @@ import "./Notebook.css";
 import LessonsList from "../../components/lessons/LessonsList";
 import Vocabulary from "../../components/vocabulary/Vocabulary";
 
-function Notebook() {
+function Notebook({ notebook }) {
 
   return (
     <main className="notebook">
-      <h1 className="notebook-name">Notebook Name</h1>
+      <h1 className="notebook-name">{ notebook.name }</h1>
       <div className="notebook-container">
-        <LessonsList />
-        <Vocabulary />
+        <LessonsList notebookId={ notebook.id } />
+        <Vocabulary notebookId={ notebook.id } />
       </div>
     </main>
   )
