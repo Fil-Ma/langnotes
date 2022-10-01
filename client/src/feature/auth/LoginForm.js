@@ -9,7 +9,6 @@ function LoginForm() {
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [isLoading, setIsLoading] = useState(false);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -18,16 +17,14 @@ function LoginForm() {
   const handleLogin = async (e) => {
     console.log("Logging in...");
     try {
-      setIsLoading(true);
       e.preventDefault();
       await dispatch(loginUser({ email, password }));
-      setIsLoading(false);
 
       console.log("Success! User is now logged in");
       navigate("/dashboard");
+
     } catch(err) {
       console.log(err);
-      setIsLoading(false);
     }
   };
 

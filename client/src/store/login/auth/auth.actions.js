@@ -31,7 +31,8 @@ export const loginUser = createAsyncThunk(
     try {
       const response = await login(credentials);
       return {
-        user: response,
+        user: response.user,
+        // notebooks: response.notebooks,
         isAuthenticated: true
       }
     } catch(err) {

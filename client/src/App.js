@@ -5,6 +5,7 @@ import PrivateRoute from "./components/privateRoute/PrivateRoute";
 
 import Home from "./feature/home/Home";
 import DashBoard from "./feature/dashboard/DashBoard";
+import Notebook from "./feature/notebook/Notebook";
 import NewNotebookForm from "./feature/notebook/NewNotebookForm";
 import Support from "./feature/support/Support";
 import LoginForm from "./feature/auth/LoginForm";
@@ -47,6 +48,13 @@ function App() {
             element={
               <PrivateRoute isAuthenticated={isAuthenticated}>
                 <NewNotebookForm />
+              </PrivateRoute>
+            } />
+          <Route
+            path="/notebook/:notebookId"
+            element={
+              <PrivateRoute isAuthenticated={isAuthenticated}>
+                <Notebook />
               </PrivateRoute>
             } />
 

@@ -1,37 +1,29 @@
 import "./DashBoard.css";
-
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useState, useEffect } from 'react';
+import { useNavigate } from "react-router-dom";
 
-import Notebook from "../notebook/Notebook";
 import EmptyDashboard from "../../components/emptyDashboard/EmptyDashboard";
-import { checkLoginStatus } from "../../store/login/auth/auth.actions";
+import { checkLoginStatus } from '../../store/login/auth/auth.actions';
 
 function DashBoard() {
 
-  const [isDashboardEmpty, setIsDashboardEmpty] = useState(true);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const { notebooks } = useSelector((state) => state.login.user);
 
-  // select notebook in the state
-  const notebooks = useSelector((state) => state.login.user.notebooks);
-  const currentNotebook = notebooks[0];
-
-  // update notebooks in the state
   useEffect(() => {
     dispatch(checkLoginStatus());
+    const currentNotebook = notebooks[0];
 
-    if (notebooks.length > 0) {
-      setIsDashboardEmpty(false);
-    } else if (notebooks.length === 0) {
-      setIsDashboardEmpty(true);
+    if (currentNotebook) {
+      navigate(`/notebook/${currentNotebook.id}`);
     }
-  }, [notebooks]);
+  }, [notebooks])
 
   return (
     <main className="dashboard-main">
-
-      { isDashboardEmpty ? <EmptyDashboard /> : <Notebook notebook={currentNotebook} /> }
-
+      <EmptyDashboard />
     </main>
   );
 }

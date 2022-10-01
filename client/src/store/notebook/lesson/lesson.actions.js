@@ -7,7 +7,12 @@ export const loadAllLessons = createAsyncThunk(
     try {
       const response = await loadAllLessonsByNotebookId(notebookId);
 
+      if (!response) {
+        return;
+      }
+
       return response;
+
     } catch(err) {
       throw err;
     }
@@ -21,6 +26,7 @@ export const addLesson = createAsyncThunk(
       const response = await addNewLesson(data);
 
       return response;
+
     } catch(err) {
       throw err;
     }
@@ -34,6 +40,7 @@ export const updateLesson = createAsyncThunk(
       const response = await updateLessonData(data);
 
       return response;
+
     } catch(err) {
       throw err;
     }
@@ -47,6 +54,7 @@ export const deleteLesson = createAsyncThunk(
       const response = await deleteLessonById(lessonId);
 
       return response;
+
     } catch(err) {
       throw err;
     }
