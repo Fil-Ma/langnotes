@@ -86,7 +86,11 @@ module.exports = (app, passport) => {
       } else {
         // Login is successful, returning user data
         console.log("Login success");
-         res.status(200).send(req.user);
+        // const notebooks = await NotebookServiceInstance.loadAllNotebooks(req.user.id);
+        res.status(200).send({
+          user: req.user,
+          // notebooks
+        });
       }
 
   });

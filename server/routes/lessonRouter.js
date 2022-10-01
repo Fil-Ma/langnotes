@@ -10,9 +10,20 @@ module.exports = (app) => {
   app.use('/api/lesson', router);
 
   // load all lessons for a notebook by id (notebookId)
-  router.get('/notebook/:id', async (id, req, res, next) => {
+  router.get('/notebook/:id', async (req, res, next) => {
+
+    console.log("######################");
+    console.log("Lesson GET request for all lessons in notebook");
+
+    const { id } = req.params;
+    console.log("id is ", id)
+
     try {
       const lessons = await LessonServiceInstance.getAllLessons(id);
+
+      if (!lessons) {
+        return res.status(200).send();
+      }
 
       return res.status(200).send({ lessons });
 
@@ -35,7 +46,10 @@ module.exports = (app) => {
   });
 
   // Get lesson by id
-  router.get('/:id', async (id, req, res, next) => {
+  router.get('/:id', async (req, res, next) => {
+
+    const { id } = req.params;
+
     try {
       const lesson = await LessonServiceInstance.loadLessonById(id);
 
@@ -47,7 +61,7 @@ module.exports = (app) => {
   });
 
   // Get lesson by id
-  router.update('/', async (req, res, next) => {
+  router.put('/', async (req, res, next) => {
     const { id, title, description, content, notebookId } = req.body;
     try {
       const lesson = await LessonServiceInstance.updateLesson({
@@ -66,11 +80,14 @@ module.exports = (app) => {
   });
 
   // Get lesson by id
-  router.delete('/:id', async (id, req, res, next) => {
+  router.delete('/:id', async (req, res, next) => {
+
+    const { id } = req.params;
+
     try {
       await LessonServiceInstance.deleteLesson(id);
 
-      return res.status(200).send();
+      return res.status(200).send({ id });
 
     } catch (err) {
       next(err);

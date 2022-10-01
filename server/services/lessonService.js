@@ -10,10 +10,6 @@ module.exports = class LessonService {
     try {
       const lessons = await LessonQueriesInstance.getLessonsByNotebookId(notebookId);
 
-      if (!lessons) {
-        throw createError(404, "No lesson present");
-      }
-
       return lessons;
 
     } catch(err) {
@@ -52,7 +48,7 @@ module.exports = class LessonService {
       const lesson = await LessonQueriesInstance.update(data);
 
       return lesson;
-      
+
     } catch(err) {
       throw createError(500, err);
     }
