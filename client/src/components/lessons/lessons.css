@@ -7,13 +7,69 @@
 }
 
 /*
-  STYLING LESSONS DIV
+  STYLING LESSONSLIST BUTTON
 */
 
-.lessons-container p {
+.add-new.add-lesson {
   padding: 0.2rem 0.5rem;
   margin-top: 0;
   margin-bottom: 1rem;
+}
+
+/*
+  STYLING NEW LESSON FORM
+*/
+
+#new-lesson-form {
+  border: 1px solid #000;
+  border-radius: 0.3rem;
+  margin-bottom: 1rem;
+  padding: 1rem 2rem;
+  position: relative;
+  display: none;
+  z-index: 10;
+}
+
+#new-lesson-form form {
+  margin-top: 1rem;
+}
+
+.close-window-new-lessson {
+  position: absolute;
+  right: 1rem;
+  border: 0px;
+  cursor: pointer;
+}
+
+.close-window-new-lessson:hover {
+  color: red;
+}
+
+#new-lesson-form input[type="text"] {
+  width: 30%;
+  border: 1px solid rgba(0, 0, 0, 0.4);
+  margin: 0.5rem 0;
+}
+
+#new-lesson-form textarea {
+  width: 100%;
+  border: 1px solid rgba(0, 0, 0, 0.4);
+  margin: 0.5rem 0;
+  resize: none;
+}
+
+#new-lesson-form input[type="submit"] {
+  padding: 0.2rem 0.5rem;
+  margin: 0 0 1rem 0;
+  text-align: center;
+}
+
+/*
+  STYLING LESSONS PREVIEW
+*/
+
+.no-lessons-text {
+  text-align: center;
 }
 
 .lesson {

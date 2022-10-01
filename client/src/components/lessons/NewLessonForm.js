@@ -13,31 +13,43 @@ export default function NewLessonForm({
     <>
       <Button
         onClick={handleCloseWindow}
-        className="close-window-new-lessson"><i class="fa-regular fa-x"></i></Button>
+        className="close-window-new-lessson white-background"><i className="fa-regular fa-x"></i></Button>
 
       <form onSubmit={onSubmit} >
-        <input
-          type="text"
-          name="lessonTitle"
-          maxLength="30"
-          required
-          onChange={(e) => setLessonTitle(e.target.value)} />
+        <div>
+          <label htmlFor="lessonTitle">Title:</label><br />
+          <input
+            type="text"
+            id="lessonTitle"
+            name="lessonTitle"
+            maxLength="30"
+            required
+            onChange={(e) => setLessonTitle(e.target.value)} />
+        </div>
 
-        <input
-          type="text"
-          name="lessonDescription"
-          maxLength="50"
-          required
-          onChange={(e) => setLessonDescription(e.target.value)} />
+        <div>
+          <label htmlFor="lessonDescription">Description:</label><br />
+          <textarea
+            name="lessonDescription"
+            id="lessonDescription"
+            required
+            rows="2"
+            onChange={(e) => setLessonDescription(e.target.value)} ></textarea>
+        </div>
 
-        <input
-          type="text"
-          name="lessonContent"
-          maxLength="200"
-          required
-          onChange={(e) => setLessonContent(e.target.value)} />
+        <div>
+          <label htmlFor="lessonContent">Content:</label><br />
+          <textarea
+            name="lessonContent"
+            id="lessonContent"
+            rows="12"
+            required
+            onChange={(e) => setLessonContent(e.target.value)} ></textarea>
+        </div>
 
-        <input type="submit" value="Add Lesson" />
+        <div>
+          <input type="submit" value="Add Lesson to the current notebook" />
+        </div>
       </form>
     </>
   )

@@ -12,7 +12,6 @@ const lessonSlice = createSlice({
       // Load all lessons assigned to the current notebook
       .addCase(loadAllLessons.fulfilled, (state, action) => {
         if (action.payload) {
-          console.log("payload is ", action.payload)
           const { lessons } = action.payload;
           lessons.forEach(lesson => state.lessons = {
             ...state.lessons,
@@ -20,7 +19,7 @@ const lessonSlice = createSlice({
               title: lesson.title,
               description: lesson.description,
               content: lesson.content,
-              notebookId: lesson.notebookId
+              notebookId: lesson.notebook_id
             }
           })
         }
@@ -34,7 +33,7 @@ const lessonSlice = createSlice({
             title: lesson.title,
             description: lesson.description,
             content: lesson.content,
-            notebookId: lesson.notebookId
+            notebookId: lesson.notebook_id
           }
         };
       })
@@ -44,7 +43,7 @@ const lessonSlice = createSlice({
         state[lesson.id].title = lesson.title;
         state[lesson.id].description = lesson.description;
         state[lesson.id].content = lesson.content;
-        state[lesson.id].notebookId = lesson.notebookId;
+        state[lesson.id].notebookId = lesson.notebook_id;
       })
       // Delete lesson
       .addCase(deleteLesson.fulfilled, (state, action) => {

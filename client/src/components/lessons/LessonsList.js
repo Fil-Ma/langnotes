@@ -1,6 +1,6 @@
 import "./lessons.css";
 import { useDispatch, useSelector } from "react-redux";
-import { useState } from "react";
+import { useState, useEffect, useCallback } from "react";
 
 import Button from "../button/Button";
 import NewLessonForm from "./NewLessonForm";
@@ -16,19 +16,32 @@ function LessonsList({ notebookId }) {
 
   const dispatch = useDispatch();
   const lessons = useSelector((state) => state.notebook.lesson);
-
-  dispatch(loadAllLessons(notebookId));
-
   const newLessonForm = document.getElementById("new-lesson-form");
+
+  // update state on mounting and when notebookId is changed
+  useEffect(() => {
+    dispatch(loadAllLessons(notebookId));
+  }, [notebookId]);
+
+  // update lesson list rendered after update of selector lessons (updata of state.notebook.lesson)
+  const lessonList = useCallback((lessons) => {
+    return Object.keys(lessons).length > 0
+      ? <p className="no-lessons-text">Add lessons to view them in this section</p>
+      : Object.keys(lessons).forEach(lessonId => {
+          return (
+            <LessonPreview
+              lessonId={ lessonId }
+              title={ lessons[lessonId].title }
+              description={ lessons[lessonId].description } />
+          )
+        })
+  }, []);
 
   // This function handles opening of the form to add a new lesson
   const hendleShowNewLessonForm = (e) => {
     e.preventDefault();
-
-    if (!isLessonFormVisible) {
-      newLessonForm.style.display = "";
-      setIsLessonFormVisible(true);
-    }
+    newLessonForm.style.display = "block";
+    setIsLessonFormVisible(true);
     console.log("Opened form to submit new lesson data");
   };
 
@@ -49,7 +62,8 @@ function LessonsList({ notebookId }) {
         description: lessonDescription,
         content: lessonContent,
         notebookId
-      }))
+      }));
+      handleCloseNewLessonForm(e);
     } catch(err) {
       console.log(err);
     }
@@ -71,18 +85,7 @@ function LessonsList({ notebookId }) {
           setLessonContent={setLessonContent} />
       </div>
 
-      {
-        Object.keys(lessons).length > 0
-          ? <p>Add lessons to view them in this section</p>
-          : Object.keys(lessons).forEach(lessonId => {
-              return (
-                <LessonPreview
-                  lessonId={ lessonId }
-                  title={ lessons[lessonId].title }
-                  description={ lessons[lessonId].description } />
-              )
-            })
-      }
+      { lessonList(lessons) }
 
     </section>
   );
