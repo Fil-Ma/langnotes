@@ -23,14 +23,18 @@ module.exports = class LessonQueries {
   async createLesson(data) {
     const { title, content, description, notebookId } = data;
 
+    // console.log("querying db for lesson insert")
     try {
       const id = uuidv4();
+
+      // console.log(id, title, content, description, notebookId)
 
       const result = await pool.query('INSERT INTO lessons (id, title, content, description, notebook_id) VALUES ($1, $2, $3, $4, $5) RETURNING *',
         [id, title, content, description, notebookId]
       );
 
       if (result.rows?.length) {
+        // console.log("returning ", result.rows[0])
         return result.rows[0];
       }
 

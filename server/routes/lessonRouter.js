@@ -12,11 +12,10 @@ module.exports = (app) => {
   // load all lessons for a notebook by id (notebookId)
   router.get('/notebook/:id', async (req, res, next) => {
 
-    console.log("######################");
-    console.log("Lesson GET request for all lessons in notebook");
+    // console.log("######################");
+    // console.log("Lesson GET request for all lessons in notebook");
 
     const { id } = req.params;
-    console.log("id is ", id)
 
     try {
       const lessons = await LessonServiceInstance.getAllLessons(id);
@@ -34,9 +33,18 @@ module.exports = (app) => {
 
   // Add new lesson
   router.post('/new', async (req, res, next) => {
-    const { data } = req.body;
+
+    console.log("######################");
+    console.log("Lesson GET request for all lessons in notebook");
+
+    const { title, description, content, notebookId } = req.body;
     try {
-      const lesson = await LessonServiceInstance.addNewLesson(data);
+      const lesson = await LessonServiceInstance.addNewLesson({
+        title,
+        description,
+        content,
+        notebookId 
+      });
 
       return res.status(201).send({ lesson });
 
@@ -47,6 +55,9 @@ module.exports = (app) => {
 
   // Get lesson by id
   router.get('/:id', async (req, res, next) => {
+
+    console.log("######################");
+    console.log("Lesson GET request for single lesson id");
 
     const { id } = req.params;
 
