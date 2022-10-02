@@ -5,6 +5,9 @@ const router = express.Router();
 const NotebookService = require("../services/notebookService");
 const NotebookServiceInstance = new NotebookService();
 
+const VocabularyService = require("../services/vocabularyService");
+const VocabularyServiceInstance = new VocabularyService();
+
 module.exports = (app) => {
 
   app.use('/api/notebook', router);
@@ -19,15 +22,25 @@ module.exports = (app) => {
     const { name, language, description } = req.body;
 
     try {
-      const response = await NotebookServiceInstance.addNotebook({
+      const newNotebook = await NotebookServiceInstance.addNotebook({
         userId: id,
         name,
         language,
         description
       });
-
       console.log("Notebook Added");
-      return res.status(201).send({ response });
+
+      const newVocabulary = await VocabularyServiceInstance.create({
+        notebookId: newNotebook.id,
+        language,
+      });
+      console.log("Vocabulary created");
+
+      console.log("Sending response 201 to client");
+      return res.status(201).send({
+        notebook: newNotebook,
+        vocabulary: newVocabulary
+      });
 
     } catch(err) {
       next(err);

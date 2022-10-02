@@ -10,15 +10,15 @@ module.exports = (app) => {
   app.use('/api/lesson', router);
 
   // load all lessons for a notebook by id (notebookId)
-  router.get('/notebook/:id', async (req, res, next) => {
+  router.get('/notebook/:notebookId', async (req, res, next) => {
 
     // console.log("######################");
     // console.log("Lesson GET request for all lessons in notebook");
 
-    const { id } = req.params;
+    const { notebookId } = req.params;
 
     try {
-      const lessons = await LessonServiceInstance.getAllLessons(id);
+      const lessons = await LessonServiceInstance.getAllLessons(notebookId);
 
       if (!lessons) {
         return res.status(200).send();
@@ -43,7 +43,7 @@ module.exports = (app) => {
         title,
         description,
         content,
-        notebookId 
+        notebookId
       });
 
       return res.status(201).send({ lesson });
