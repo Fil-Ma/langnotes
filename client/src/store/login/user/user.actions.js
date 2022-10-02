@@ -9,7 +9,8 @@ export const addNotebook = createAsyncThunk(
       const response = await createNotebook(notebook);
 
       return {
-        notebook: response.notebook
+        notebook: response.notebook,
+        vocabulary: response.vocabulary
       }
     } catch(err) {
       throw err;

@@ -5,7 +5,7 @@ import PrivateRoute from "./components/privateRoute/PrivateRoute";
 
 import Home from "./feature/home/Home";
 import DashBoard from "./feature/dashboard/DashBoard";
-import Notebook from "./feature/notebook/Notebook";
+import NotebookContainer from "./feature/notebook/NotebookContainer";
 import NewNotebookForm from "./feature/notebook/NewNotebookForm";
 import Support from "./feature/support/Support";
 import LoginForm from "./feature/auth/LoginForm";
@@ -20,9 +20,11 @@ function App() {
   return (
     <Router>
       <Routes>
+
         <Route
           path="/login"
           element={<LoginForm />} />
+
         <Route
           path="/signup"
           element={<SignUpForm />} />
@@ -43,6 +45,7 @@ function App() {
                 <DashBoard />
               </PrivateRoute>
             } />
+
           <Route
             path="/notebook/new"
             element={
@@ -50,11 +53,12 @@ function App() {
                 <NewNotebookForm />
               </PrivateRoute>
             } />
+
           <Route
             path="/notebook/:notebookId"
             element={
               <PrivateRoute isAuthenticated={isAuthenticated}>
-                <Notebook />
+                <NotebookContainer />
               </PrivateRoute>
             } />
 

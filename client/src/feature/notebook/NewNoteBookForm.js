@@ -23,7 +23,7 @@ function NewNotebookForm() {
         description: notebookDescription
       }));
       navigate("/dashboard");
-      
+
     } catch(err) {
       console.log(err);
     }

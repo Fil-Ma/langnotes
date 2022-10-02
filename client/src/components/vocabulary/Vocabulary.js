@@ -1,21 +1,35 @@
 import "./vocabulary.css";
+
+import { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+
+import Button from "../button/Button";
 import VocabularyTerm from "./VocabularyTerm";
+import { loadVocabulary } from "../../store/notebook/vocabulary/vocabulary.actions";
 
 function Vocabulary({ notebookId }) {
 
-  // const terms = useSelector((state) => state.vocabulary);
+  const dispatch = useDispatch();
+  const terms = useSelector((state) => state.notebook.vocabulary.terms);
 
-  // useEffect(() => {
-  //   dispatch(loadVocabulary(notebook.id));
-  //
-  // }, [lessons, vocabulary]);
+  useEffect(() => {
+    dispatch(loadVocabulary(notebookId));
+  }, [notebookId]);
+
+  const handleShowNewTermForm = (e) => {
+    e.preventDefault();
+    // newTermForm.style.display = "block";
+    // setIsTermFormVisible(true);
+  };
 
   return (
     <section className="vocabulary-container">
       <h2>Your vocabulary</h2>
 
       <div className="vocabulary-utils">
-        <p>(+) Add New</p>
+        <Button
+          onClick={handleShowNewTermForm}
+          className="add-new add-term">(+) Add New</Button>
 
         <div className="search-term">
           <i className="fa-solid fa-magnifying-glass"></i>
@@ -27,12 +41,18 @@ function Vocabulary({ notebookId }) {
 
       </div>
 
-      <VocabularyTerm content="First" />
-      <VocabularyTerm content="Second" />
-      <VocabularyTerm content="Third" />
-      <VocabularyTerm content="Fourth" />
-      <VocabularyTerm content="Fifth" />
-      <VocabularyTerm content="Sixth" />
+      {
+        terms.length < 1
+          ? <p className="no-terms-text">There are no terms in this vocabulary</p>
+          : terms.forEach(term => {
+              return (
+                <VocabularyTerm
+                  termId={term.id}
+                  content={term.content}
+                  definition={term.definition} />
+              )
+            })
+      }
 
     </section>
   );
