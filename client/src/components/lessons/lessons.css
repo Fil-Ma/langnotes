@@ -20,29 +20,9 @@
   STYLING NEW LESSON FORM
 */
 
-#new-lesson-form {
-  border: 1px solid #000;
-  border-radius: 0.3rem;
-  margin-bottom: 1rem;
-  padding: 1rem 2rem;
-  position: relative;
-  display: none;
-  z-index: 10;
-}
-
 #new-lesson-form form {
-  margin-top: 1rem;
-}
-
-.close-window-new-lessson {
-  position: absolute;
-  right: 1rem;
-  border: 0px;
-  cursor: pointer;
-}
-
-.close-window-new-lessson:hover {
-  color: red;
+  margin-top: 1.5rem;
+  padding: 0 2rem;
 }
 
 #new-lesson-form input[type="text"] {
