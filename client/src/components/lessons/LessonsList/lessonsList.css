@@ -1,0 +1,25 @@
+/*
+  STYLING LESSONS CONTAINER SECTION
+*/
+
+.lessons-container {
+  grid-column: 1 / 3;
+}
+
+/*
+  STYLING LESSONSLIST BUTTON
+*/
+
+.add-new.add-lesson {
+  padding: 0.2rem 0.5rem;
+  margin-top: 0;
+  margin-bottom: 1rem;
+}
+
+/*
+  STYLING EMPTY LESSONSLIST PARAGRAPH
+*/
+
+.no-lessons-text {
+  text-align: center;
+}

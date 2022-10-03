@@ -18,7 +18,7 @@ export const createNotebook = async (notebook) => {
 
     const jsonResponse = await response.json();
 
-    console.log("API - Received server response");
+    // console.log("API - Received server response");
     return jsonResponse;
 
   } catch(err) {

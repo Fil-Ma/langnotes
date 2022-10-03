@@ -1,0 +1,28 @@
+/*
+  STYLING VOCABULARY FORM
+*/
+
+#new-term-form form {
+  margin-top: 1.5rem;
+  padding: 0 2rem;
+}
+
+#new-term-form input[type="text"] {
+  width: 30%;
+  border: 1px solid rgba(0, 0, 0, 0.4);
+  margin: 1rem 0 2rem 0;
+}
+
+#new-term-form textarea {
+  width: 100%;
+  border: 1px solid rgba(0, 0, 0, 0.4);
+  margin: 1rem 0 2rem 0;
+  resize: none;
+}
+
+#new-term-form input[type="submit"] {
+  padding: 1.2rem 1rem;
+  margin-bottom: 2rem;
+  font-size: 1rem;
+  text-align: center;
+}

@@ -1,4 +1,4 @@
-import "./lessons.css";
+import "./newLessonForm.css";
 
 export default function NewLessonForm({
   onSubmit,
@@ -15,7 +15,6 @@ export default function NewLessonForm({
           type="text"
           id="lessonTitle"
           name="lessonTitle"
-          maxLength="30"
           required
           onChange={(e) => setLessonTitle(e.target.value)} />
       </div>
@@ -41,7 +40,10 @@ export default function NewLessonForm({
       </div>
 
       <div>
-        <input type="submit" value="Add Lesson to the current notebook" />
+        <input
+          className="link orange-background orange-border white-text"
+          type="submit"
+          value="Add Lesson to the current notebook" />
       </div>
     </form>
   )

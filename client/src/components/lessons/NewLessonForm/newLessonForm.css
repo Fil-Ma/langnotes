@@ -1,0 +1,28 @@
+/*
+  STYLING NEW LESSON FORM
+*/
+
+#new-lesson-form form {
+  margin-top: 1.5rem;
+  padding: 0 2rem;
+}
+
+#new-lesson-form input[type="text"] {
+  width: 30%;
+  border: 1px solid rgba(0, 0, 0, 0.4);
+  margin: 0.5rem 0;
+}
+
+#new-lesson-form textarea {
+  width: 100%;
+  border: 1px solid rgba(0, 0, 0, 0.4);
+  margin: 0.5rem 0;
+  resize: none;
+}
+
+#new-lesson-form input[type="submit"] {
+  padding: 1.1rem 1rem;
+  margin: 2rem 0;
+  font-size: 1rem;
+  text-align: center;
+}

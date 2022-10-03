@@ -1,4 +1,6 @@
-function VocabularyTerm({ termId, content, definition }) {
+import "./vocabularyTerm.css";
+
+function VocabularyTerm({ content, definition }) {
 
   return (
     <div className="vocabulary-term-container">

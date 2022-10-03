@@ -1,16 +1,16 @@
-import "./lessons.css";
+import "./lessonsList.css";
 import { useDispatch, useSelector } from "react-redux";
 import { useState, useEffect } from "react";
 
-import Button from "../button/Button";
-import Modal from "../modal/Modal";
-import NewLessonForm from "./NewLessonForm";
-import LessonPreview from "./LessonPreview";
-import { loadAllLessons, addLesson } from "../../store/notebook/lesson/lesson.actions";
+import Button from "../../button/Button";
+import Modal from "../../modal/Modal";
+import NewLessonForm from "../NewLessonForm/NewLessonForm";
+import LessonPreview from "../LessonPreview/LessonPreview";
+import { loadAllLessons, addLesson } from "../../../store/notebook/lesson/lesson.actions";
 
 export default function LessonsList({ notebookId }) {
 
-  const [isFormVisible, setIsFormVisible] = useState(false);
+  const [isLessonFormVisible, setIsLessonFormVisible] = useState(false);
   const [lessonTitle, setLessonTitle] = useState("");
   const [lessonDescription, setLessonDescription] = useState("");
   const [lessonContent, setLessonContent] = useState("");
@@ -26,19 +26,20 @@ export default function LessonsList({ notebookId }) {
   }, [notebookId]);
 
   // This function handles opening of the form to add a new lesson
-  const hendleShowNewLessonForm = (e) => {
+  const handleShowNewLessonForm = (e) => {
     e.preventDefault();
-    setIsFormVisible(true);
+    setIsLessonFormVisible(true);
     console.log("Opened form to submit new lesson data");
   };
 
   // This function handles closing of the form to add a new lesson
   const handleCloseNewLessonForm = (e) => {
     e.preventDefault();
-    setIsFormVisible(false);
+    setIsLessonFormVisible(false);
     console.log("Closed form to submit new lesson data");
   };
 
+  // This function handles closing of the form id user clicks outside the window
   const handleClickOutside = (e) => {
     if (e.target === lessonForm) {
       handleCloseNewLessonForm(e);
@@ -65,14 +66,16 @@ export default function LessonsList({ notebookId }) {
     <section className="lessons-container">
       <h2>Lessons</h2>
       <Button
-        onClick={hendleShowNewLessonForm}
-        className="add-new add-lesson">(+) Add New</Button>
+        onClick={handleShowNewLessonForm}
+        className="add-new add-lesson white-text orange-background orange-border link">
+          (+) Add New
+      </Button>
 
       <Modal
         id="new-lesson-form"
         handleClose={handleCloseNewLessonForm}
         handleClickOutside={handleClickOutside}
-        isFormVisible={isFormVisible}>
+        isFormVisible={isLessonFormVisible}>
           <NewLessonForm
             onSubmit={handleSubmitNewLesson}
             setLessonTitle={setLessonTitle}
@@ -83,12 +86,12 @@ export default function LessonsList({ notebookId }) {
       {
         Object.keys(lessons).length < 1
           ? <p className="no-lessons-text">Add lessons to view them in this section</p>
-          : Object.keys(lessons).forEach(lessonId => {
+          : Object.keys(lessons).map(lessonId => {
               return (
                 <LessonPreview
-                  lessonId={ lessonId }
-                  title={ lessons[lessonId].title }
-                  description={ lessons[lessonId].description } />
+                  key={lessonId}
+                  title={lessons[lessonId].title}
+                  description={lessons[lessonId].description} />
               )
             })
       }

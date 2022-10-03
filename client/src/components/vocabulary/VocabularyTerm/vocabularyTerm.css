@@ -1,0 +1,14 @@
+/*
+  STYLING VOCABULARY TERM PREVIEW
+*/
+
+.term-content {
+  margin: 0;
+  font-size: 1.1rem;
+}
+
+.term-definition {
+  margin-top: 0.5rem;
+  margin-bottom: 0;
+  font-size: 0.9rem;
+}

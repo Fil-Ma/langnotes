@@ -32,8 +32,17 @@ body {
   color: #FFF;
 }
 
+.orange-border {
+  border: 1px solid #E18700;
+  border-radius: 0.3rem;
+}
+
 .orange-background {
   background-color: #E18700;
+}
+
+.orange-background.link:hover {
+  background-color: #B46C00;
 }
 
 .white-background {

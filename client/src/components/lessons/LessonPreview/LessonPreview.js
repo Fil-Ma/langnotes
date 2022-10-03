@@ -1,6 +1,6 @@
-import "./lessons.css";
+import "./lessonPreview.css";
 
-function LessonPreview({ lessonId, title, description }) {
+function LessonPreview({ title, description }) {
 
   return (
     <div className="lesson">

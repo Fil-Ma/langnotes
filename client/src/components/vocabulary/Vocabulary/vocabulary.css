@@ -22,14 +22,8 @@
 .vocabulary-utils {
   display: inline-flex;
   width: 100%;
+  justify-content: space-between;
 }
-
-/* .vocabulary-utils p {
-  margin-top: 0;
-  margin-bottom: 1rem;
-  padding: 0.2rem 0.5rem;
-  width: 40%;
-} */
 
 .vocabulary-utils input[type="text"] {
   padding: 0.2rem 0.5rem;

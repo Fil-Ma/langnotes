@@ -1,7 +1,7 @@
 const baseVocabularyURL = '/api/vocabulary';
 
 export const loadVocabularyData = async (notebookId) => {
-  console.log("API - Contacting server to add new term to vocabulary");
+  console.log("API - Contacting server to load vocabulary data");
 
   try {
     const urlToFetch = baseVocabularyURL + '/' + notebookId;
@@ -12,7 +12,7 @@ export const loadVocabularyData = async (notebookId) => {
 
     const jsonResponse = await response.json();
 
-    console.log("API - Received server response");
+    // console.log("API - Received server response");
     return jsonResponse;
 
   } catch(err) {
@@ -38,7 +38,7 @@ export const addTermToVocabulary = async (data) => {
 
     const jsonResponse = await response.json();
 
-    console.log("API - Received server response");
+    // console.log("API - Received server response");
     return jsonResponse;
 
   } catch(err) {

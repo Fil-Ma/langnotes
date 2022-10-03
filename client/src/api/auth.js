@@ -19,7 +19,7 @@ export const login = async (credentials) => {
 
     const jsonResponse = await response.json();
 
-    console.log("API - Received server response");
+    // console.log("API - Received server response");
     return jsonResponse;
 
   } catch(err) {
@@ -44,7 +44,7 @@ export const register = async (data) => {
       body: JSON.stringify(data)
     });
 
-    console.log("API - Received server response");
+    // console.log("API - Received server response");
     const jsonResponse = await response.json();
 
     return jsonResponse;
