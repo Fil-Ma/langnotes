@@ -12,13 +12,20 @@ module.exports = (app) => {
   app.use('/api/vocabulary', router);
 
   router.get('/:notebookId', async (req, res, next) => {
+
+    console.log("######################");
+    console.log("Vocabulary request to load all data");
+
     const { notebookId } = req.params;
 
     try {
       const vocabulary = await VocabularyServiceInstance.loadVocabulary(notebookId);
+      console.log("Loaded vocabulary data");
 
       const terms = await TermsServiceInstance.loadAllTerms(vocabulary.id);
+      console.log("Loaded vocabulary terms");
 
+      console.log("Sending data to user");
       return res.status(200).send({
         vocabulary,
         terms
@@ -30,12 +37,19 @@ module.exports = (app) => {
   });
 
   router.post('/add', async (req, res, next) => {
-    const { data } = req.body;
+
+    console.log("######################");
+    console.log("Vocabulary Add Term request");
+
+    const data = req.body;
 
     try {
       const newTerm = await VocabularyServiceInstance.addNewTerm(data);
+      console.log("Added successfully the new term");
 
-      return res.status(201).send({ newTerm });
+      return res.status(201).send({
+        term: newTerm
+      });
 
     } catch(err) {
       next(err);

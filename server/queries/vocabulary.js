@@ -15,7 +15,7 @@ module.exports = class VocabularyQueries {
         [id, notebookId, language]
       );
 
-      console.log("DATABASE querying --# Vocabuary added, returning infos...");
+      console.log("DATABASE querying --# Vocabulary added, returning infos...");
       return result.rows[0];
 
     } catch(err) {
@@ -24,11 +24,15 @@ module.exports = class VocabularyQueries {
   }
 
   async getVocabularyByNotebookId(notebookId) {
+    console.log("DATABASE querying --# Vocabulary LOAD DATA function");
+
     try {
+      console.log("DATABASE querying --# Querying db for info retrieval");
       const result = await pool.query('SELECT * FROM vocabularies WHERE notebook_id = $1',
         [notebookId]
       );
 
+      console.log("DATABASE querying --# Returning...");
       return result.rows[0];
 
     } catch(err) {
@@ -37,15 +41,17 @@ module.exports = class VocabularyQueries {
   }
 
   async createTerm(data) {
+    console.log("DATABASE querying --# Term INSERT function called");
     const { vocabularyId, content, definition } = data;
 
     const id = uuidv4();
-
     try {
+      console.log("DATABASE querying --# Querying db for insertion");
       const result = await pool.query('INSERT INTO terms (id, vocabulary_id, content, definition) VALUES ($1, $2, $3, $4) RETURNING *',
         [id, vocabularyId, content, definition]
       );
 
+      console.log("DATABASE querying --# Term added, returning infos...");
       return result.rows[0];
 
     } catch (err) {

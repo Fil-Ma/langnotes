@@ -15,7 +15,7 @@ CREATE TABLE terms (
   id UUID PRIMARY KEY,
   vocabulary_id UUID REFERENCES vocabularies(id) UNIQUE,
   content VARCHAR(20),
-  definition VARCHAR(50)
+  definition VARCHAR(200)
 );
 
 CREATE TABLE notebooks (
