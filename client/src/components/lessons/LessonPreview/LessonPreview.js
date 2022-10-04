@@ -1,6 +1,12 @@
 import "./lessonPreview.css";
 
-function LessonPreview({ title, description }) {
+function LessonPreview({
+  lessonId,
+  title,
+  description,
+  handleEdit,
+  handleDelete
+}) {
 
   return (
     <div className="lesson">
@@ -9,8 +15,14 @@ function LessonPreview({ title, description }) {
       </div>
 
       <div className="lesson-tools">
-        <i className="fa-solid fa-pencil fa-sm"></i>
-        <div className="hover-text">Edit Lesson</div>
+        <div className="edit-icon-container" onClick={handleEdit}>
+          <i className="fa-solid fa-pencil fa-sm"></i>
+          <div className="hover-text">Edit Lesson</div>
+        </div>
+        <div className="delete-icon-container" onClick={handleDelete}>
+          <i className="fa-solid fa-trash"></i>
+          <div className="hover-text">Delete Lesson</div>
+        </div>
       </div>
 
       <div className="lesson-description">

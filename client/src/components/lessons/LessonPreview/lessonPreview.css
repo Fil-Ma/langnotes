@@ -23,14 +23,20 @@
 
 .lesson-title h3 {
   margin: 18px 0;
+  height: 1.5rem;
 }
 
 .lesson-tools {
   float: right;
   margin: 18px 0;
-  padding: 0 2rem;
+  padding: 0 1rem;
   height: 1.5rem;
+  display: inline-flex;
+}
+
+.edit-icon-container, .delete-icon-container {
   position: relative;
+  padding: 0 1rem;
 }
 
 .hover-text {
@@ -46,6 +52,7 @@
   padding: 0.2rem 0.4rem;
 }
 
-.lesson-tools:hover .hover-text {
+.edit-icon-container:hover .hover-text,
+.delete-icon-container:hover .hover-text {
   display: block;
 }

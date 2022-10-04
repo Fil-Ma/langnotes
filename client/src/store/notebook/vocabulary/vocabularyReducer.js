@@ -21,6 +21,17 @@ const vocabularySlice = createSlice({
         const { vocabulary, terms } = action.payload;
         state.id = vocabulary.id;
         state.language = vocabulary.language;
+
+        // sort terms in alphabetical order
+        terms.sort((a, b) => {
+          if ( a.content < b.content ){
+            return -1;
+          }
+          if ( a.content > b.content ){
+            return 1;
+          }
+          return 0;
+        });
         state.terms = terms;
       })
       .addCase(addNewTerm.fulfilled, (state, action) => {

@@ -5,12 +5,14 @@ import { useState, useEffect } from "react";
 import Button from "../../button/Button";
 import Modal from "../../modal/Modal";
 import NewLessonForm from "../NewLessonForm/NewLessonForm";
+import Lesson from "../Lesson/Lesson";
 import LessonPreview from "../LessonPreview/LessonPreview";
 import { loadAllLessons, addLesson } from "../../../store/notebook/lesson/lesson.actions";
 
 export default function LessonsList({ notebookId }) {
 
   const [isLessonFormVisible, setIsLessonFormVisible] = useState(false);
+
   const [lessonTitle, setLessonTitle] = useState("");
   const [lessonDescription, setLessonDescription] = useState("");
   const [lessonContent, setLessonContent] = useState("");
@@ -37,6 +39,11 @@ export default function LessonsList({ notebookId }) {
     e.preventDefault();
     setIsLessonFormVisible(false);
     console.log("Closed form to submit new lesson data");
+
+    //reset states after when closing the modal
+    setLessonTitle("");
+    setLessonDescription("");
+    setLessonContent("");
   };
 
   // This function handles closing of the form id user clicks outside the window
@@ -78,6 +85,9 @@ export default function LessonsList({ notebookId }) {
         isFormVisible={isLessonFormVisible}>
           <NewLessonForm
             onSubmit={handleSubmitNewLesson}
+            title={lessonTitle}
+            description={lessonDescription}
+            content={lessonContent}
             setLessonTitle={setLessonTitle}
             setLessonDescription={setLessonDescription}
             setLessonContent={setLessonContent} />
@@ -86,10 +96,11 @@ export default function LessonsList({ notebookId }) {
       {
         Object.keys(lessons).length < 1
           ? <p className="no-lessons-text">Add lessons to view them in this section</p>
-          : Object.keys(lessons).map(lessonId => {
+          : Object.keys(lessons).map((lessonId) => {
               return (
                 <LessonPreview
                   key={lessonId}
+                  lessonId={lessonId}
                   title={lessons[lessonId].title}
                   description={lessons[lessonId].description} />
               )

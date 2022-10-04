@@ -2,6 +2,8 @@ import "./newTermForm.css";
 
 export default function NewTermForm({
   onSubmit,
+  content,
+  definition,
   setContent,
   setDefinition
 }) {
@@ -15,6 +17,7 @@ export default function NewTermForm({
           id="termContent"
           name="termContent"
           required
+          value={content}
           onChange={(e) => setContent(e.target.value)} />
       </div>
 
@@ -25,6 +28,7 @@ export default function NewTermForm({
           id="termDefinition"
           required
           rows="3"
+          value={definition}
           onChange={(e) => setDefinition(e.target.value)} ></textarea>
       </div>
 

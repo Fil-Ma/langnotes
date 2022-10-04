@@ -2,6 +2,9 @@ import "./newLessonForm.css";
 
 export default function NewLessonForm({
   onSubmit,
+  title,
+  description,
+  content,
   setLessonTitle,
   setLessonDescription,
   setLessonContent
@@ -16,6 +19,7 @@ export default function NewLessonForm({
           id="lessonTitle"
           name="lessonTitle"
           required
+          value={title}
           onChange={(e) => setLessonTitle(e.target.value)} />
       </div>
 
@@ -26,6 +30,7 @@ export default function NewLessonForm({
           id="lessonDescription"
           required
           rows="2"
+          value={description}
           onChange={(e) => setLessonDescription(e.target.value)} ></textarea>
       </div>
 
@@ -36,6 +41,7 @@ export default function NewLessonForm({
           id="lessonContent"
           rows="12"
           required
+          value={content}
           onChange={(e) => setLessonContent(e.target.value)} ></textarea>
       </div>
 

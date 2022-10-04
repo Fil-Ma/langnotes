@@ -12,6 +12,8 @@ import { loadVocabulary, addNewTerm } from "../../../store/notebook/vocabulary/v
 export default function Vocabulary({ notebookId }) {
 
   const [isTermFormOpen, setIsTermFormOpen] = useState(false);
+  const [searchValue, setSearchValue] = useState("");
+
   const [content, setContent] = useState("");
   const [definition, setDefinition] = useState("");
 
@@ -35,6 +37,8 @@ export default function Vocabulary({ notebookId }) {
     e.preventDefault();
     setIsTermFormOpen(false);
     console.log("Opened form to add vocabulary term");
+    setContent("");
+    setDefinition("");
   };
 
   // Handles if user click outside the window of the form
@@ -42,11 +46,6 @@ export default function Vocabulary({ notebookId }) {
     if (e.target === termForm) {
       closeTermForm(e);
     }
-  };
-
-  // Search term function
-  const handleSearchTerm = (e) => {
-
   };
 
   // Handles submission of the new term form
@@ -63,6 +62,22 @@ export default function Vocabulary({ notebookId }) {
       console.log(err);
     }
   };
+
+  // Search term function
+  const handleSearchTerm = (e) => {
+    e.preventDefault();
+    const lowerCaseInput = e.target.value.toLowerCase();
+    setSearchValue(lowerCaseInput);
+  };
+
+  // filtered array of terms
+  const filteredTerms = terms.filter((term) => {
+    if (searchValue === "") {
+      return term;
+    } else {
+      return term.content.toLowerCase().includes(searchValue) || term.definition.toLowerCase().includes(searchValue);
+    }
+  })
 
   return (
     <section className="vocabulary-container">
@@ -81,6 +96,7 @@ export default function Vocabulary({ notebookId }) {
             type="text"
             name="term-search"
             placeholder="Search in vocabulary.."
+            value={searchValue}
             onChange={handleSearchTerm} />
         </div>
 
@@ -93,14 +109,16 @@ export default function Vocabulary({ notebookId }) {
         isFormVisible={isTermFormOpen}>
           <NewTermForm
             onSubmit={handleSubmitNewTerm}
+            content={content}
+            definition={definition}
             setContent={setContent}
             setDefinition={setDefinition} />
       </Modal>
 
       {
-        terms.length < 1
+        filteredTerms.length < 1
           ? <p className="no-terms-text">There are no terms in this vocabulary</p>
-          : terms.map(term => {
+          : filteredTerms.map(term => {
               return (
                 <VocabularyTerm
                   key={term.id}
