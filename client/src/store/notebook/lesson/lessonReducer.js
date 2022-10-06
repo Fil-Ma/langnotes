@@ -11,18 +11,20 @@ const lessonSlice = createSlice({
     builder
       // Load all lessons assigned to the current notebook
       .addCase(loadAllLessons.fulfilled, (state, action) => {
-        if (action.payload) {
-          const { lessons } = action.payload;
-          lessons.forEach(lesson => state.lessons = {
-            ...state.lessons,
-            [lesson.id]: {
-              title: lesson.title,
-              description: lesson.description,
-              content: lesson.content,
-              notebookId: lesson.notebook_id
-            }
-          })
-        }
+        const { lessons } = action.payload;
+        console.log(lessons);
+        // reset state before loading lessons
+        state.lessons = {};
+        // add lessons to state with id as key
+        lessons.forEach(lesson => state.lessons = {
+          ...state.lessons,
+          [lesson.id]: {
+            title: lesson.title,
+            description: lesson.description,
+            content: lesson.content,
+            notebookId: lesson.notebook_id
+          }
+        });
       })
       // Add new lesson
       .addCase(addLesson.fulfilled, (state, action) => {

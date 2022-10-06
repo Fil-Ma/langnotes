@@ -1,6 +1,7 @@
 import "./Notebook.css";
 import { useParams } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { useEffect } from "react";
 
 import Notebook from "./Notebook";
 import LessonsList from "../../components/lessons/LessonsList/LessonsList";

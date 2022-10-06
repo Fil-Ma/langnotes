@@ -1,5 +1,5 @@
 import "./Header.css";
-import { useState, useEffect, useRef } from "react";
+import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 
@@ -14,7 +14,6 @@ function Header({ isAuthenticated }) {
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const ref = useRef(null);
 
   // event handler to manage dropdown menu
   const showDropdownOnClick = (e) => {
@@ -42,22 +41,6 @@ function Header({ isAuthenticated }) {
     }
   }
 
-  // This function should close the dropdown list if the user clicks outside the menu
-  useEffect(() => {
-    const checkIfClickedOutside = e => {
-      if (isMenuOpen && ref.current && !ref.current.contains(e.target)) {
-        dropdownContent.style.display = "none";
-        setIsMenuOpen(false);
-      }
-    };
-    document.addEventListener("mousedown", checkIfClickedOutside);
-    return () => {
-      // Cleanup the event listener
-      document.removeEventListener("mousedown", checkIfClickedOutside)
-    };
-  }, [ref, isMenuOpen]);
-
-
   let authenticationButtons = (
     <div className="auth-buttons-container">
       <Link to="/login" className="login link orange-text white-background">Login</Link>
@@ -73,7 +56,7 @@ function Header({ isAuthenticated }) {
         <i className="fa-solid fa-caret-down"></i>
       </Button>
 
-      <div id="dropdown-content" ref={ref}>
+      <div id="dropdown-content">
         <div className="dropdown-username">[MyUsername]</div>
         <Link to="profile" className="dropdown-item link">Edit Profile</Link>
         <div className="dropdown-divider"></div>
