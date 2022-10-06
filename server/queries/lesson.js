@@ -77,13 +77,18 @@ module.exports = class LessonQueries {
 
   // Retrieve all lessons assigned to a notebook
   async getLessonsByNotebookId(notebookId) {
+
+    console.log("DATABASE querying --# Lesson LOAD ALL DATA function");
     try {
+      console.log("DATABASE querying --# Querying db for info retrieval");
       const result = await pool.query('SELECT * FROM lessons WHERE notebook_id = $1', [notebookId]);
 
       if (result.rows?.length) {
+        console.log("DATABASE querying --# Returning...");
         return result.rows;
       }
 
+      console.log("DATABASE querying --# There are no lessons. Returning...");
       return null;
 
     } catch(err) {

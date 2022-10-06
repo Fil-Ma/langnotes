@@ -25,7 +25,7 @@ module.exports = (app) => {
       const terms = await TermsServiceInstance.loadAllTerms(vocabulary.id);
       console.log("Loaded vocabulary terms");
 
-      console.log("Sending data to user");
+      console.log("Sending data to the user");
       return res.status(200).send({
         vocabulary,
         terms

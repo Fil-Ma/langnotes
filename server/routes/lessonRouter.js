@@ -12,18 +12,16 @@ module.exports = (app) => {
   // load all lessons for a notebook by id (notebookId)
   router.get('/notebook/:notebookId', async (req, res, next) => {
 
-    // console.log("######################");
-    // console.log("Lesson GET request for all lessons in notebook");
+    console.log("######################");
+    console.log("Lesson GET request for all lessons in notebook");
 
     const { notebookId } = req.params;
 
     try {
       const lessons = await LessonServiceInstance.getAllLessons(notebookId);
+      console.log("Loaded lessons");
 
-      if (!lessons) {
-        return res.status(200).send();
-      }
-
+      console.log("Sending data to the user")
       return res.status(200).send({ lessons });
 
     } catch(err) {

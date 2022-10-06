@@ -7,9 +7,17 @@ module.exports = class LessonService {
 
   async getAllLessons(notebookId) {
 
+    console.log("LessonService --# Called GET all lessons service");
     try {
+      console.log("LessonService --# Querying db for data");
       const lessons = await LessonQueriesInstance.getLessonsByNotebookId(notebookId);
 
+      if (!lessons) {
+        console.log("LessonService --# There are no lessons. Returning...");
+        return [];
+      }
+
+      console.log("LessonService --# Returning lesson data");
       return lessons;
 
     } catch(err) {
