@@ -6,7 +6,7 @@ import PrivateRoute from "./components/privateRoute/PrivateRoute";
 import Home from "./feature/home/Home";
 import DashBoard from "./feature/dashboard/DashBoard";
 import NotebookContainer from "./feature/notebook/NotebookContainer";
-import NewNotebookForm from "./feature/notebook/NewNotebookForm";
+import NewNotebookForm from "./feature/notebook/NewNotebookForm/NewNotebookForm";
 import Support from "./feature/support/Support";
 import LoginForm from "./feature/auth/LoginForm";
 import SignUpForm from "./feature/auth/SignUpForm";

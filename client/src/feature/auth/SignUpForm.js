@@ -62,6 +62,7 @@ export default function SignUpForm() {
               placeholder="Email address"
               pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
               onChange={(e) => setEmail(e.target.value)}
+              maxLength="100"
               required />
           </div>
 

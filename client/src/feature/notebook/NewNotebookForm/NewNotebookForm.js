@@ -2,7 +2,7 @@ import "./NewNotebookForm.css";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { addNotebook } from "../../store/login/user/user.actions";
+import { addNotebook } from "../../../store/login/user/user.actions";
 
 export default function NewNotebookForm() {
 
@@ -41,6 +41,7 @@ export default function NewNotebookForm() {
                 type="text"
                 id="notebookName"
                 onChange={(e) => setNotebookName(e.target.value) }
+                maxLength="50"
                 required />
             </div>
 
@@ -49,6 +50,7 @@ export default function NewNotebookForm() {
               <select
                 id="noteBookLanguage"
                 onChange={(e) => setNotebookLanguage(e.target.value) }
+                maxLength="50"
                 required >
                   <option defaultValue>Choose...</option>
                   <option>English</option>
@@ -66,6 +68,7 @@ export default function NewNotebookForm() {
               id="notebookDescription"
               placeholder="Notebook for my language class.."
               onChange={(e) => setNotebookDescription(e.target.value) }
+              maxLength="200"
               required ></textarea>
           </div>
 

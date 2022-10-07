@@ -20,6 +20,7 @@ export default function NewLessonForm({
           name="lessonTitle"
           required
           value={title}
+          maxLength="50"
           onChange={(e) => setLessonTitle(e.target.value)} />
       </div>
 
@@ -31,6 +32,7 @@ export default function NewLessonForm({
           required
           rows="2"
           value={description}
+          maxLength="100"
           onChange={(e) => setLessonDescription(e.target.value)} ></textarea>
       </div>
 
@@ -42,6 +44,7 @@ export default function NewLessonForm({
           rows="12"
           required
           value={content}
+          maxLength="200"
           onChange={(e) => setLessonContent(e.target.value)} ></textarea>
       </div>
 

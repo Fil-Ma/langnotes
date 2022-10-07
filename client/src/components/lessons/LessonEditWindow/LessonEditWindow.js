@@ -31,6 +31,7 @@ export default function LessonEditWindow({
                 <input
                   type="text"
                   value={title}
+                  maxLength="50"
                   onChange={(e) => setLessonTitle(e.target.value)} />
               </form>
             ) : <span onDoubleClick={() => setIsEditingTitle(true)}>{title}</span>
@@ -45,6 +46,7 @@ export default function LessonEditWindow({
                 <input
                   type="text"
                   value={description}
+                  maxLength="100"
                   onChange={(e) => setLessonDescription(e.target.value)} />
               </form>
             ) : <span onDoubleClick={() => setIsEditingDescription(true)}>{description}</span>
@@ -59,6 +61,7 @@ export default function LessonEditWindow({
                 <textarea
                   value={content}
                   rows="4"
+                  maxLength="200"
                   onChange={(e) => setLessonContent(e.target.value)} />
               </form>
             ) : <span onDoubleClick={() => setIsEditingContent(true)}>{content}</span>

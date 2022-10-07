@@ -28,6 +28,7 @@ export default function TermEditWindow({
                 <input
                   type="text"
                   value={content}
+                  maxLength="20"
                   onChange={(e) => setContent(e.target.value)} />
               </form>
             ) : <span onDoubleClick={() => setIsEditingContent(true)}>{content}</span>
@@ -43,6 +44,7 @@ export default function TermEditWindow({
                   type="text"
                   value={definition}
                   rows="4"
+                  maxLength="200"
                   onChange={(e) => setDefinition(e.target.value)} />
               </form>
             ) : <span onDoubleClick={() => setIsEditingDefinition(true)}>{definition}</span>

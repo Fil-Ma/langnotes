@@ -17,6 +17,7 @@ export default function NewTermForm({
           id="termContent"
           name="termContent"
           required
+          maxLength="20"
           value={content}
           onChange={(e) => setContent(e.target.value)} />
       </div>
@@ -28,6 +29,7 @@ export default function NewTermForm({
           id="termDefinition"
           required
           rows="3"
+          maxLength="200"
           value={definition}
           onChange={(e) => setDefinition(e.target.value)} ></textarea>
       </div>
