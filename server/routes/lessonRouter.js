@@ -73,16 +73,16 @@ module.exports = (app) => {
     }
   });
 
-  // Get lesson by id
+  // Update lesson
   router.put('/', async (req, res, next) => {
 
     console.log("######################");
     console.log("Lesson UPDATE request for lesson data");
 
-    const { id, title, description, content, notebookId } = req.body;
+    const { lessonId, title, description, content, notebookId } = req.body;
     try {
       const lesson = await LessonServiceInstance.updateLesson({
-        id,
+        lessonId,
         title,
         description,
         content,

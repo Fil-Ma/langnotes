@@ -43,12 +43,12 @@ module.exports = class LessonQueries {
   // Update lessons data
   async update(data) {
     console.log("DATABASE querying --# Lesson UDDATE function");
-    const { id, title, content, description, notebookId } = data;
-    
+    const { lessonId, title, content, description, notebookId } = data;
+
     try {
       console.log("DATABASE querying --# Querying db for lesson update");
       const result = await pool.query('UPDATE lessons SET title = $2, content = $3, description = $4, notebook_id = $5 WHERE id = $1 RETURNING *',
-        [id, title, content, description, notebookId]
+        [lessonId, title, content, description, notebookId]
       );
 
       console.log("DATABASE querying --# Lesson updated. Returning new data...");
