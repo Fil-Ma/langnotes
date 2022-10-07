@@ -8,34 +8,63 @@ module.exports = (app) => {
 
   app.use('/api/term', router);
 
-  router.put('/', async (req, res, next) => {
-    console.log("######################");
-    console.log("Vocabulary UPDATE Term request");
-
-    const data = req.body;
+  // if the request has params, extract termId and check if term exists in db
+  router.param('termId', async (req, res, next, termId) => {
     try {
-      const term = await TermsServiceInstance.updateTerm(data);
-      console.log("Term updated. Returning infos...");
+      const term = await TermsServiceInstance.getTermById(termId);
 
-      return res.status(200).send({
-        term
-      });
+      if (term) {
+        req.termId = termId;
+        req.term = term;
+      }
+
+      next();
 
     } catch(err) {
       next(err);
     }
   });
 
-  router.delete('/:id', async (req, res, next) => {
+  // get term by id
+  router.get('/:termId', async (req, res, next) => {
+    console.log("######################");
+    console.log("Vocabulary GET Term request");
+
+    const term = req.term;
+    return res.send({ term });
+  });
+
+  // update term
+  router.put('/:termId', async (req, res, next) => {
+    console.log("######################");
+    console.log("Vocabulary UPDATE Term request");
+
+    const { content, definition } = req.body;
+    try {
+      const term = await TermsServiceInstance.updateTerm({
+        termId: req.termId,
+        content,
+        definition
+      });
+      console.log("Term updated. Returning infos...");
+
+      return res.send({ term });
+
+    } catch(err) {
+      next(err);
+    }
+  });
+
+  // delete term
+  router.delete('/:termId', async (req, res, next) => {
     console.log("######################");
     console.log("Vocabulary DELETE Term request");
 
-    const { id } = req.params;
     try {
-      await TermsServiceInstance.deleteTerm(id);
+      await TermsServiceInstance.deleteTerm(req.termId);
       console.log("Term deleted");
 
-      return res.status(200).send({ id });
+      return res.status(204).send({ id });
 
     } catch(err) {
       next(err);

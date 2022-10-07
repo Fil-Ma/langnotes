@@ -5,6 +5,8 @@ const { PORT } = require("./config");
 
 const app = express();
 
+module.exports = app;
+
 async function startServer() {
   loaders(app);
 
