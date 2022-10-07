@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { addNotebook } from "../../login/user/user.actions";
-import { addNewTerm, loadVocabulary } from "./vocabulary.actions";
+import { addNewTerm, loadVocabulary, updateTerm, deleteTerm } from "./vocabulary.actions";
 
 const vocabularySlice = createSlice({
   name: 'vocabulary',
@@ -37,6 +37,18 @@ const vocabularySlice = createSlice({
       .addCase(addNewTerm.fulfilled, (state, action) => {
         const { term } = action.payload;
         state.terms.push(term);
+      })
+      .addCase(updateTerm.fulfilled, (state, action) => {
+        const { term } = action.payload;
+        const termToUpdateIndex = state.terms.findIndex(element => element.id === term.id);
+        state.terms[termToUpdateIndex].content = term.content;
+        state.terms[termToUpdateIndex].definition = term.definition;
+      })
+      .addCase(deleteTerm.fulfilled, (state, action) => {
+        const { id } = action.payload;
+        const termToDeleteIndex = state.terms.findIndex(element => element.id === term.id);
+        // remove the element at index termToDeleteIndex
+        state.terms.splice(termToDeleteIndex, 1);
       })
   }
 });

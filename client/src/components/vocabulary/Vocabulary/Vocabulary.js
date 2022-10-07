@@ -122,6 +122,7 @@ export default function Vocabulary({ notebookId }) {
               return (
                 <VocabularyTerm
                   key={term.id}
+                  termId={term.id}
                   content={term.content}
                   definition={term.definition} />
               )

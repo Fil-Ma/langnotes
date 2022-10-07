@@ -41,7 +41,6 @@ const lessonSlice = createSlice({
       // Update lesson
       .addCase(updateLesson.fulfilled, (state, action) => {
         const { lesson } = action.payload;
-        console.log("state lessons is", state.lessons[lesson.id]);
         state.lessons[lesson.id].title = lesson.title;
         state.lessons[lesson.id].description = lesson.description;
         state.lessons[lesson.id].content = lesson.content;

@@ -1,5 +1,10 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { addTermToVocabulary, loadVocabularyData } from "../../../api/vocabulary";
+import {
+  addTermToVocabulary,
+  loadVocabularyData,
+  updateVocabularyTerm,
+  deleteVocabularyTerm
+ } from "../../../api/vocabulary";
 
 export const loadVocabulary = createAsyncThunk(
   'vocabulary/loadVocabulary',
@@ -20,6 +25,34 @@ export const addNewTerm = createAsyncThunk(
   async (data) => {
     try {
       const response = await addTermToVocabulary(data);
+
+      return response;
+
+    } catch(err) {
+      throw err;
+    }
+  }
+);
+
+export const updateTerm = createAsyncThunk(
+  'vocabulary/updateTerm',
+  async (data) => {
+    try {
+      const response = await updateVocabularyTerm(data);
+
+      return response;
+
+    } catch(err) {
+      throw err;
+    }
+  }
+);
+
+export const deleteTerm = createAsyncThunk(
+  'vocabulary/deleteTerm',
+  async (termId) => {
+    try {
+      const response = await deleteVocabularyTerm(termId);
 
       return response;
 
