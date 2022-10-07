@@ -1,13 +1,16 @@
 const baseLessonURL = '/api/lesson';
 
 export const loadAllLessonsByNotebookId = async (notebookId) => {
+  console.log("API - Contacting server to load all lesson");
   try {
     const urlToFetch = baseLessonURL + '/notebook/'+ notebookId;
+    console.log(`API - Contacting server at URL ${urlToFetch}`);
 
     const response = await fetch(urlToFetch);
 
     const jsonResponse = await response.json();
 
+    // console.log("API - Received server response");
     return jsonResponse;
 
   } catch(err) {
@@ -16,11 +19,13 @@ export const loadAllLessonsByNotebookId = async (notebookId) => {
 };
 
 export const updateLessonData = async (data) => {
+  console.log("API - Contacting server to update lesson");
   try {
     const urlToFetch = baseLessonURL + '/';
+    console.log(`API - Contacting server at URL ${urlToFetch}`);
 
     const response = await fetch(urlToFetch, {
-      method: 'PATCH',
+      method: 'PUT',
       headers: {
         'Content-Type': 'application/json'
       },
@@ -29,6 +34,7 @@ export const updateLessonData = async (data) => {
 
     const jsonResponse = await response.json();
 
+    // console.log("API - Received server response");
     return jsonResponse;
 
   } catch(err) {
@@ -62,13 +68,16 @@ export const addNewLesson = async (data) => {
 };
 
 export const deleteLessonById = async (lessonId) => {
+  console.log("API - Contacting server to delete lesson");
   try {
     const urlToFetch = baseLessonURL + '/' + lessonId;
+    console.log(`API - Contacting server at URL ${urlToFetch}`);
 
     const response = await fetch(urlToFetch, { method: 'DELETE' });
 
     const jsonResponse = await response.json();
 
+    // console.log("API - Received server response");
     return jsonResponse;
 
   } catch(err) {

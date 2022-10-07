@@ -12,7 +12,6 @@ const lessonSlice = createSlice({
       // Load all lessons assigned to the current notebook
       .addCase(loadAllLessons.fulfilled, (state, action) => {
         const { lessons } = action.payload;
-        console.log(lessons);
         // reset state before loading lessons
         state.lessons = {};
         // add lessons to state with id as key
@@ -42,15 +41,15 @@ const lessonSlice = createSlice({
       // Update lesson
       .addCase(updateLesson.fulfilled, (state, action) => {
         const { lesson } = action.payload;
-        state[lesson.id].title = lesson.title;
-        state[lesson.id].description = lesson.description;
-        state[lesson.id].content = lesson.content;
-        state[lesson.id].notebookId = lesson.notebook_id;
+        console.log("state lessons is", state.lessons[lesson.id]);
+        state.lessons[lesson.id].title = lesson.title;
+        state.lessons[lesson.id].description = lesson.description;
+        state.lessons[lesson.id].content = lesson.content;
       })
       // Delete lesson
       .addCase(deleteLesson.fulfilled, (state, action) => {
         const { id } = action.payload;
-        const currentState = { ...state };
+        const currentState = { ...state.lessons };
         delete currentState[id];
         state.lessons = currentState;
       })
