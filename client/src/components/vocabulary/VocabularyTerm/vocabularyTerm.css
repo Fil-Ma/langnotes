@@ -2,9 +2,53 @@
   STYLING VOCABULARY TERM PREVIEW
 */
 
+.term-content, .vocabulary-tools {
+  display: inline-block;
+}
+
 .term-content h3 {
   margin: 0;
   font-size: 1.1rem;
+}
+
+.vocabulary-tools {
+  float: right;
+  height: 1.5rem;
+}
+
+.vocabulary-tools i {
+  cursor: pointer;
+}
+
+.vocabulary-tools i:hover {
+  color: gray;
+}
+
+.term-edit-icon-container, .term-delete-icon-container {
+  display: inline-flex;
+  height: 100%;
+  align-items: center;
+  padding: 0 0.5rem;
+  margin: 0 0.5rem;
+  position: relative;
+}
+
+.hover-text {
+  display: none;
+  position: absolute;
+  bottom: 110%;
+  right: 50%;
+  transform: translateX(50%);
+  background-color: gray;
+  font-size: 0.8rem;
+  color: #fff;
+  white-space: nowrap;
+  padding: 0.2rem 0.4rem;
+}
+
+.term-edit-icon-container:hover .hover-text,
+.term-delete-icon-container:hover .hover-text {
+  display: block;
 }
 
 .term-definition p {

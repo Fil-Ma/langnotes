@@ -5,7 +5,7 @@ import { useNavigate, Link } from "react-router-dom";
 
 import { registerUser } from '../../store/login/auth/auth.actions';
 
-function SignUpForm() {
+export default function SignUpForm() {
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -115,5 +115,3 @@ function SignUpForm() {
     </main>
   );
 }
-
-export default SignUpForm;

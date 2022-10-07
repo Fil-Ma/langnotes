@@ -1,0 +1,8 @@
+/*
+  STYLING TERM EDIT WINDOW
+*/
+
+.term-edit-inputs-container textarea {
+  resize: none;
+  width: 80%;
+}

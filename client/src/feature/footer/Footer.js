@@ -1,7 +1,7 @@
 import "./Footer.css";
 import { Link } from "react-router-dom";
 
-function Footer() {
+export default function Footer() {
   return (
     <footer>
       <hr />
@@ -29,5 +29,3 @@ function Footer() {
     </footer>
   );
 }
-
-export default Footer;

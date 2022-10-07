@@ -1,13 +1,12 @@
 import "./Notebook.css";
 import { useParams } from "react-router-dom";
-import { useSelector, useDispatch } from "react-redux";
-import { useEffect } from "react";
+import { useSelector } from "react-redux";
 
 import Notebook from "./Notebook";
 import LessonsList from "../../components/lessons/LessonsList/LessonsList";
 import Vocabulary from "../../components/vocabulary/Vocabulary/Vocabulary";
 
-function NotebookContainer() {
+export default function NotebookContainer() {
 
   const { notebookId } = useParams();
 
@@ -20,5 +19,3 @@ function NotebookContainer() {
     </Notebook>
   )
 }
-
-export default NotebookContainer;

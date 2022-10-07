@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 import { loginUser } from '../../store/login/auth/auth.actions';
 
-function LoginForm() {
+export default function LoginForm() {
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -91,5 +91,3 @@ function LoginForm() {
     </main>
   );
 }
-
-export default LoginForm;

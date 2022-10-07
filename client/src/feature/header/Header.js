@@ -7,7 +7,7 @@ import Nav from "../nav/Nav";
 import Button from "../../components/button/Button";
 import { logoutUser } from '../../store/login/auth/auth.actions';
 
-function Header({ isAuthenticated }) {
+export default function Header({ isAuthenticated }) {
 
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const dropdownContent = document.getElementById("dropdown-content");
@@ -73,5 +73,3 @@ function Header({ isAuthenticated }) {
     </header>
   );
 }
-
-export default Header;

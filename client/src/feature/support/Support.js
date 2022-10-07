@@ -1,6 +1,7 @@
 import "./Support.css";
 
-function Support() {
+export default function Support() {
+  
   return (
     <main className="support-page">
       <h1>Support and troubleshooting</h1>
@@ -8,5 +9,3 @@ function Support() {
     </main>
   );
 }
-
-export default Support;

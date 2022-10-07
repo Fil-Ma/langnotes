@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { addNotebook } from "../../store/login/user/user.actions";
 
-function NewNotebookForm() {
+export default function NewNotebookForm() {
 
   const [notebookName, setNotebookName] = useState("");
   const [notebookLanguage, setNotebookLanguage] = useState("");
@@ -78,5 +78,3 @@ function NewNotebookForm() {
     </main>
   );
 }
-
-export default NewNotebookForm;

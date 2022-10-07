@@ -1,7 +1,7 @@
 import "./EmptyDashboard.css";
 import { Link } from "react-router-dom";
 
-const EmptyDashboard = () => {
+export default function EmptyDashboard() {
 
   return (
     <div className="empty-dashboard-container">
@@ -10,5 +10,3 @@ const EmptyDashboard = () => {
     </div>
   );
 };
-
-export default EmptyDashboard;

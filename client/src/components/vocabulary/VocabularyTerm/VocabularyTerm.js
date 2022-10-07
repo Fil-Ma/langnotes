@@ -1,9 +1,11 @@
 import "./vocabularyTerm.css";
 
-function VocabularyTerm({
+export default function VocabularyTerm({
   termId,
   content,
-  definition
+  definition,
+  handleEdit,
+  handleDelete
 }) {
 
   return (
@@ -14,11 +16,11 @@ function VocabularyTerm({
       </div>
 
       <div className="vocabulary-tools">
-        <div className="edit-icon-container" >
+        <div className="term-edit-icon-container" onClick={(e) => handleEdit(termId, e)} >
           <i className="fa-solid fa-pencil fa-sm"></i>
           <div className="hover-text">Edit Term</div>
         </div>
-        <div className="delete-icon-container" >
+        <div className="term-delete-icon-container" onClick={(e) => handleDelete(termId, e)}>
           <i className="fa-solid fa-trash"></i>
           <div className="hover-text">Delete Term</div>
         </div>
@@ -31,5 +33,3 @@ function VocabularyTerm({
     </div>
   )
 }
-
-export default VocabularyTerm;

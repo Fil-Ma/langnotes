@@ -2,7 +2,7 @@ import "./nav.css";
 import { NavLink } from "react-router-dom";
 import UserNav from "./UserNav";
 
-function Nav({ isAuthenticated }) {
+export default function Nav({ isAuthenticated }) {
   let nav = (
       <nav>
         <NavLink to="/" end className="nav-link" >Home</NavLink>
@@ -20,5 +20,3 @@ function Nav({ isAuthenticated }) {
   }
   return nav;
 }
-
-export default Nav;

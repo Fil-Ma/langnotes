@@ -3,7 +3,9 @@ import { Outlet } from "react-router-dom";
 import Header from "../../feature/header/Header";
 import Footer from "../../feature/footer/Footer";
 
-const PageLayout = ({ isAuthenticated }) => {
+export default function PageLayout ({
+  isAuthenticated
+}) {
 
   return (
     <>
@@ -13,5 +15,3 @@ const PageLayout = ({ isAuthenticated }) => {
     </>
   );
 };
-
-export default PageLayout;

@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 import EmptyDashboard from "../../components/emptyDashboard/EmptyDashboard";
 import { checkLoginStatus } from '../../store/login/auth/auth.actions';
 
-function DashBoard() {
+export default function DashBoard() {
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -27,5 +27,3 @@ function DashBoard() {
     </main>
   );
 }
-
-export default DashBoard;

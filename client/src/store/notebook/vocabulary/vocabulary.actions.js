@@ -1,10 +1,6 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import {
-  addTermToVocabulary,
-  loadVocabularyData,
-  updateVocabularyTerm,
-  deleteVocabularyTerm
- } from "../../../api/vocabulary";
+import { addTermToVocabulary, loadVocabularyData } from "../../../api/vocabulary";
+import { updateVocabularyTerm, deleteVocabularyTerm } from "../../../api/term";
 
 export const loadVocabulary = createAsyncThunk(
   'vocabulary/loadVocabulary',

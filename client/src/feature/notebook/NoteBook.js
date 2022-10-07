@@ -1,6 +1,6 @@
 import "./Notebook.css";
 
-function Notebook({ notebook, children }) {
+export default function Notebook({ notebook, children }) {
 
   return (
     <main className="notebook">
@@ -11,4 +11,3 @@ function Notebook({ notebook, children }) {
     </main>
   )
 }
-export default Notebook;
