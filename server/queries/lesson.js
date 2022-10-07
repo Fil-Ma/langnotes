@@ -21,24 +21,19 @@ module.exports = class LessonQueries {
 
   // Create one lessons in db
   async createLesson(data) {
+    console.log("DATABASE querying --# Lesson INSERT function");
     const { title, content, description, notebookId } = data;
 
-    // console.log("querying db for lesson insert")
     try {
       const id = uuidv4();
 
-      // console.log(id, title, content, description, notebookId)
-
+      console.log("DATABASE querying --# Querying db for insertion");
       const result = await pool.query('INSERT INTO lessons (id, title, content, description, notebook_id) VALUES ($1, $2, $3, $4, $5) RETURNING *',
         [id, title, content, description, notebookId]
       );
 
-      if (result.rows?.length) {
-        // console.log("returning ", result.rows[0])
-        return result.rows[0];
-      }
-
-      return null;
+      console.log("DATABASE querying --# Lesson added. Returning data...");
+      return result.rows[0];
 
     } catch(err) {
       throw new Error(err);
@@ -47,29 +42,33 @@ module.exports = class LessonQueries {
 
   // Update lessons data
   async update(data) {
+    console.log("DATABASE querying --# Lesson UDDATE function");
     const { id, title, content, description, notebookId } = data;
-
+    
     try {
+      console.log("DATABASE querying --# Querying db for lesson update");
       const result = await pool.query('UPDATE lessons SET title = $2, content = $3, description = $4, notebook_id = $5 WHERE id = $1 RETURNING *',
         [id, title, content, description, notebookId]
       );
 
-      if (result.rows?.length) {
-        return result.rows[0];
-      }
+      console.log("DATABASE querying --# Lesson updated. Returning new data...");
+      return result.rows[0];
 
-      return null;
     } catch(err) {
       throw new Error(err);
     }
   }
 
   // Delete one lessons in db by id
-  async deleteLessonByid(id) {
+  async deleteLessonById(id) {
+    console.log("DATABASE querying --# Lesson DELETE function");
     try {
-      await pool.query('DELETE FROM lessons WHERE id = $id', [id]);
+      console.log("DATABASE querying --# Querying db for deletion");
+      await pool.query('DELETE FROM lessons WHERE id = $1', [id]);
 
+      console.log("DATABASE querying --# Item deleted. Returning...");
       return null;
+
     } catch(err) {
       throw new Error(err);
     }

@@ -21,7 +21,7 @@ module.exports = (app) => {
       const lessons = await LessonServiceInstance.getAllLessons(notebookId);
       console.log("Loaded lessons");
 
-      console.log("Sending data to the user")
+      console.log("Sending data to the user");
       return res.status(200).send({ lessons });
 
     } catch(err) {
@@ -43,7 +43,9 @@ module.exports = (app) => {
         content,
         notebookId
       });
+      console.log("Added lesson");
 
+      console.log("Sending data to the user");
       return res.status(201).send({ lesson });
 
     } catch(err) {
@@ -61,7 +63,9 @@ module.exports = (app) => {
 
     try {
       const lesson = await LessonServiceInstance.loadLessonById(id);
+      console.log("Loaded lesson");
 
+      console.log("Sending data to the user");
       return res.status(200).send({ lesson });
 
     } catch (err) {
@@ -71,6 +75,10 @@ module.exports = (app) => {
 
   // Get lesson by id
   router.put('/', async (req, res, next) => {
+
+    console.log("######################");
+    console.log("Lesson UPDATE request for lesson data");
+
     const { id, title, description, content, notebookId } = req.body;
     try {
       const lesson = await LessonServiceInstance.updateLesson({
@@ -80,7 +88,9 @@ module.exports = (app) => {
         content,
         notebookId
       });
+      console.log("Lesson updated");
 
+      console.log("Sending data to the user");
       return res.status(201).send({ lesson });
 
     } catch (err) {
@@ -91,11 +101,16 @@ module.exports = (app) => {
   // Get lesson by id
   router.delete('/:id', async (req, res, next) => {
 
+    console.log("######################");
+    console.log("Lesson DELETE request");
+
     const { id } = req.params;
 
     try {
       await LessonServiceInstance.deleteLesson(id);
+      console.log("Lesson deleted");
 
+      console.log("Sending answer to user");
       return res.status(200).send({ id });
 
     } catch (err) {
