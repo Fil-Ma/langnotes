@@ -32,7 +32,12 @@ module.exports = class TermsService {
       const term = await TermsQueriesInstance.update(data);
 
       console.log("TermsService --# Term updated. Returning...");
-      return term;
+      return {
+        id: term.id,
+        content: term.content,
+        definition: term.definition,
+        vocabularyId: term.vocabulary_id
+      };
 
     } catch(err) {
       throw createError(500, err);

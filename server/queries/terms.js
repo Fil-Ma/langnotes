@@ -33,7 +33,7 @@ module.exports = class TermsQueries {
       );
 
       console.log("DATABASE querying --# Term updated. Returning...");
-      return;
+      return result.rows[0];
 
     } catch(err) {
       throw new Error(err);

@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 
-const TermsService = require("../../services/termsService");
+const TermsService = require("../services/termsService");
 const TermsServiceInstance = new TermsService();
 
 module.exports = (app) => {
