@@ -21,7 +21,7 @@ const lessonSlice = createSlice({
             title: lesson.title,
             description: lesson.description,
             content: lesson.content,
-            notebookId: lesson.notebook_id
+            notebookId: lesson.notebookId
           }
         });
       })
@@ -34,7 +34,7 @@ const lessonSlice = createSlice({
             title: lesson.title,
             description: lesson.description,
             content: lesson.content,
-            notebookId: lesson.notebook_id
+            notebookId: lesson.notebookId
           }
         };
       })

@@ -6,13 +6,10 @@ export const loadVocabularyData = async (notebookId) => {
   try {
     const urlToFetch = baseVocabularyURL + '/' + notebookId;
 
-    console.log(`API - Contacting server at URL ${urlToFetch}`);
-
     const response = await fetch(urlToFetch);
 
     const jsonResponse = await response.json();
 
-    // console.log("API - Received server response");
     return jsonResponse;
 
   } catch(err) {
