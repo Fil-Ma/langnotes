@@ -6,19 +6,14 @@ const TermsQueriesInstance = new TermsQueries();
 module.exports = class TermsService {
 
   // load all terms by vocabulary id
-  async loadAllTerms(vocabularyId) {
-
-    console.log("TermsService --# Called LOAD terms by vocabulary id");
+  async loadAllTermsByVocabularyId(vocabularyId) {
     try {
-      console.log("TermsService --# Querying db for terms");
       const terms = await TermsQueriesInstance.getTermsByVocabularyId(vocabularyId);
 
       if (!terms) {
-        console.log("TermsService --# Vocabulary is empty");
         return [];
       }
 
-      console.log("TermsService --# Loaded terms, returning...");
       return terms;
 
     } catch(err) {
@@ -26,30 +21,13 @@ module.exports = class TermsService {
     }
   }
 
-  // get single term by term id
-  async getTermById(termId) {
-    console.log("TermsService --# Called GET term by id");
-
+  // add new term to db
+  async addNewTerm(data) {
     try {
-      console.log("TermsService --# Querying db");
-      const term = await TermsQueriesInstance.getById(termId);
+      const term = await TermsQueriesInstance.addTerm(data);
 
-      return term;
-
-    } catch(err) {
-      throw createError(500, err);
-    }
-  }
-
-  // update single term by id
-  async updateTerm(data) {
-    console.log("TermsService --# Called UPDATE term");
-    try {
-      console.log("TermsService --# Querying db for update");
-      const term = await TermsQueriesInstance.update(data);
-
-      console.log("TermsService --# Term updated. Returning...");
       return {
+        vocabularyId: term.vocabulary_id,
         id: term.id,
         content: term.content,
         definition: term.definition
@@ -60,14 +38,45 @@ module.exports = class TermsService {
     }
   }
 
+  // get single term by term id
+  async getTermById(termId) {
+    try {
+      const term = await TermsQueriesInstance.getById(termId);
+
+      return {
+        vocabularyId: term.vocabulary_id,
+        id: term.id,
+        content: term.content,
+        definition: term.definition
+      };
+
+    } catch(err) {
+      throw createError(500, err);
+    }
+  }
+
+  // update single term by id
+  async updateTerm(data) {
+    try {
+      const term = await TermsQueriesInstance.update(data);
+
+      return {
+        id: term.id,
+        content: term.content,
+        definition: term.definition,
+        vocabularyId: term.vocabulary_id
+      };
+
+    } catch(err) {
+      throw createError(500, err);
+    }
+  }
+
   // delete single term by id
   async deleteTerm(termId) {
-    console.log("TermsService --# Called DELETE term");
     try {
-      console.log("TermsService --# Querying db for delete");
       await TermsQueriesInstance.delete(termId);
-
-      console.log("TermsService --# Term deleted. Returning...");
+      
       return;
 
     } catch(err) {

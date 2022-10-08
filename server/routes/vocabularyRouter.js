@@ -11,44 +11,20 @@ module.exports = (app) => {
 
   app.use('/api/vocabulary', router);
 
+  // get vocabulary by notebook id
   router.get('/:notebookId', async (req, res, next) => {
-
-    console.log("######################");
-    console.log("Vocabulary request to load all data");
-
     const { notebookId } = req.params;
 
     try {
+      // get vocabulary data
       const vocabulary = await VocabularyServiceInstance.loadVocabulary(notebookId);
-      console.log("Loaded vocabulary data");
 
-      const terms = await TermsServiceInstance.loadAllTerms(vocabulary.id);
-      console.log("Loaded vocabulary terms");
+      // get terms in vocabulary
+      const terms = await TermsServiceInstance.loadAllTermsByVocabularyId(vocabulary.id);
 
-      console.log("Sending data to the user");
       return res.status(200).send({
         vocabulary,
         terms
-      });
-
-    } catch(err) {
-      next(err);
-    }
-  });
-
-  router.post('/add', async (req, res, next) => {
-
-    console.log("######################");
-    console.log("Vocabulary Add Term request");
-
-    const data = req.body;
-
-    try {
-      const newTerm = await VocabularyServiceInstance.addNewTerm(data);
-      console.log("Added successfully the new term");
-
-      return res.status(201).send({
-        term: newTerm
       });
 
     } catch(err) {

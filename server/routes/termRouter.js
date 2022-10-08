@@ -6,7 +6,7 @@ const TermsServiceInstance = new TermsService();
 
 module.exports = (app) => {
 
-  app.use('/api/term', router);
+  app.use('/api/terms', router);
 
   // if the request has params, extract termId and check if term exists in db
   router.param('termId', async (req, res, next, termId) => {
@@ -27,26 +27,39 @@ module.exports = (app) => {
 
   // get term by id
   router.get('/:termId', async (req, res, next) => {
-    console.log("######################");
-    console.log("Vocabulary GET Term request");
 
     const term = req.term;
     return res.send({ term });
   });
 
+  // add new term
+  router.post('/', async (req, res, next) => {
+    const { vocabularyId, content, definition } = req.body;
+
+    try {
+      const term = await TermsServiceInstance.addNewTerm({
+        vocabularyId,
+        content,
+        definition
+      });
+
+      return res.status(201).send({ term });
+
+    } catch(err) {
+      next(err);
+    }
+  });
+
   // update term
   router.put('/:termId', async (req, res, next) => {
-    console.log("######################");
-    console.log("Vocabulary UPDATE Term request");
-
     const { content, definition } = req.body;
+
     try {
       const term = await TermsServiceInstance.updateTerm({
         termId: req.termId,
         content,
         definition
       });
-      console.log("Term updated. Returning infos...");
 
       return res.send({ term });
 
@@ -57,14 +70,12 @@ module.exports = (app) => {
 
   // delete term
   router.delete('/:termId', async (req, res, next) => {
-    console.log("######################");
-    console.log("Vocabulary DELETE Term request");
-
     try {
-      await TermsServiceInstance.deleteTerm(req.termId);
-      console.log("Term deleted");
+      const id = req.termId;
 
-      return res.status(204).send({ id });
+      await TermsServiceInstance.deleteTerm(id);
+
+      return res.send({ id });
 
     } catch(err) {
       next(err);

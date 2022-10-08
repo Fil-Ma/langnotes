@@ -40,22 +40,4 @@ module.exports = class VocabularyQueries {
     }
   }
 
-  async createTerm(data) {
-    console.log("DATABASE querying --# Term INSERT function called");
-    const { vocabularyId, content, definition } = data;
-
-    const id = uuidv4();
-    try {
-      console.log("DATABASE querying --# Querying db for insertion");
-      const result = await pool.query('INSERT INTO terms (id, vocabulary_id, content, definition) VALUES ($1, $2, $3, $4) RETURNING *',
-        [id, vocabularyId, content, definition]
-      );
-
-      console.log("DATABASE querying --# Term added, returning infos...");
-      return result.rows[0];
-
-    } catch (err) {
-      throw new Error(err);
-    }
-  }
 }

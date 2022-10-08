@@ -9,7 +9,16 @@ module.exports = async (app) => {
 
   // Error handler
   app.use((err, req, res, next) => {
-    const { message, status } = err;
-    return res.status(status).send({ message });
+    if (!err.message) {
+      return res.status(err.status).send( "An error occured" );
+    }
+
+    const { message } = err;
+    if (!err.status) {
+      return res.status(500).send({ message });
+    }
+
+    return res.status(err.status).send({ message });
+
   });
 }

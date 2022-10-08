@@ -35,23 +35,4 @@ module.exports = class VocabularyService {
     }
   }
 
-  async addNewTerm(data) {
-
-    console.log("VocabularyService --# Called INSERT term service");
-    try {
-      console.log("VocabularyService --# Querying db for vocabulary insertion");
-      const term = await VocabularyQueriesInstance.createTerm(data);
-
-      console.log("VocabularyService --# Term added, retrieving infos...");
-      return {
-        vocabularyId: term.vocabulary_id,
-        id: term.id,
-        content: term.content,
-        definition: term.definition
-      };
-
-    } catch(err) {
-      throw createError(500, err);
-    }
-  }
 }
