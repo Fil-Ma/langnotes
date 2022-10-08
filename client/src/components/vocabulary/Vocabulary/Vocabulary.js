@@ -138,8 +138,7 @@ export default function Vocabulary({
       await dispatch(updateTerm({
         termId,
         content,
-        definition,
-        notebookId
+        definition
       }));
       closeEditTermWindow(e);
     } catch(err) {
