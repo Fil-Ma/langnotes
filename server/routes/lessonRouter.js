@@ -7,7 +7,7 @@ const LessonServiceInstance = new LessonService();
 
 module.exports = (app) => {
 
-  app.use('/api/lesson', router);
+  app.use('/api/lessons', router);
 
   // load all lessons for a notebook by id (notebookId)
   router.get('/notebook/:notebookId', async (req, res, next) => {

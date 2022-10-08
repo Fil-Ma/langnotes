@@ -3,7 +3,12 @@ const request = require("supertest");
 
 const app = require("../index.js");
 
-// Test TERM
+// Test LESSONS
+describe('/api/lessons routes', function() {
+  
+});
+
+// Test TERMS
 describe('/api/terms routes', function() {
 
   describe('GET /api/terms/:termId', function() {
@@ -129,7 +134,7 @@ describe('/api/terms routes', function() {
         .expect(201)
         .then((response) => {
           const { term } = response.body;
-          
+
           expect(term).to.be.an.instanceOf(Object);
           expect(term).to.not.be.an.instanceOf(Array);
         });

@@ -1,5 +1,5 @@
 const express = require("express");
-const { check, validationResult } = require("express-validator");
+const { body, validationResult } = require("express-validator");
 const router = express.Router();
 
 const AuthService = require("../services/authService");
@@ -19,8 +19,8 @@ module.exports = (app, passport) => {
   // POST route for user credentials registration
   router.post('/register',
     [
-      check('email').isEmail().normalizeEmail(),
-      check('password').isStrongPassword({
+      body('email', 'Your email is not valid').trim().isEmail().normalizeEmail(),
+      body('password', 'Password not strong enough').isStrongPassword({
         minLength: 8,
         maxLength: 16,
         minLowercase: 1,
@@ -30,38 +30,30 @@ module.exports = (app, passport) => {
       })
     ],
     async (req, res, next) => {
+      const { email, password } = req.body;
 
-      console.log("######################");
-      console.log("Register POST request");
+      try {
+        // check validation errors
+        const errors = validationResult(req).array();
 
-      const errors = validationResult(req);
-
-      // Check if the validation threw errors
-      if (!errors.isEmpty()) {
-
-        console.log("Invalid inputs");
-        next(new Error("Invalid inputs"));
-
-      } else {
-        try {
-          const { email, password } = req.body;
-
-          const response = await AuthServiceInstance.register({ email, password });
-
-          console.log("User registered");
-          return res.status(201).send(response);
-
-        } catch(err) {
-          next(err);
+        if (errors.length > 0) {
+          throw new Error(errors[0].msg);
         }
+
+        const response = await AuthServiceInstance.register({ email, password });
+
+        return res.status(201).send(response);
+
+      } catch(err) {
+        next(err);
       }
   });
 
   // POST route for user credentials login
   router.post('/login',
     [
-      check('email').isEmail().normalizeEmail(),
-      check('password').isStrongPassword({
+      body('email').isEmail().normalizeEmail(),
+      body('password').isStrongPassword({
         minLength: 8,
         maxLength: 16,
         minLowercase: 1,
@@ -73,26 +65,22 @@ module.exports = (app, passport) => {
     passport.authenticate('local'),
     async (req, res, next) => {
 
-      console.log("######################");
-      console.log("Login POST request");
+      try {
+        // check validation errors
+        const errors = validationResult(req).array();
 
-      const errors = validationResult(req);
+        if (errors.length > 0) {
+          throw new Error(errors[0].msg);
+        }
 
-      if (!errors.isEmpty()) {
-        // Input validation returned errors, throwing new error
-        console.log("Invalid inputs");
-        next(new Error("Invalid inputs"));
-
-      } else {
-        // Login is successful, returning user data
-        console.log("Login success");
         // const notebooks = await NotebookServiceInstance.loadAllNotebooks(req.user.id);
         res.status(200).send({
           user: req.user,
           // notebooks
         });
+      } catch(err) {
+        next(err);
       }
-
   });
 
   router.get('/google', passport.authenticate('google', { scope: ["profile"] } ));
@@ -145,14 +133,10 @@ module.exports = (app, passport) => {
   });
 
   router.post('/logout', async (req, res, next) => {
-
-    console.log("######################");
-    console.log("Logout POST request");
-
     try {
       req.logout;
-      console.log("User is logged out");
-      res.status(200).send();
+
+      return res.status(200).send();
 
     } catch(err) {
       next(err);

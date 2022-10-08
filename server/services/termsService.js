@@ -40,6 +40,7 @@ module.exports = class TermsService {
 
   // get single term by term id
   async getTermById(termId) {
+    
     try {
       const term = await TermsQueriesInstance.getById(termId);
 
@@ -76,7 +77,7 @@ module.exports = class TermsService {
   async deleteTerm(termId) {
     try {
       await TermsQueriesInstance.delete(termId);
-      
+
       return;
 
     } catch(err) {
