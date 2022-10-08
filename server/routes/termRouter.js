@@ -35,13 +35,14 @@ module.exports = (app) => {
       } catch(err) {
         next(err);
       }
-  });
+    }
+  );
 
   // get term by id
   router.get('/:termId', async (req, res, next) => {
-
-    const term = req.term;
-    return res.send({ term });
+    return res.send({
+      term: req.term
+    });
   });
 
   // add new term

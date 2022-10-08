@@ -1,5 +1,5 @@
 const express = require("express");
-// const { check, validationResult } = require("express-validator");
+const { body, param, validationResult } = require("express-validator");
 const router = express.Router();
 
 const LessonService = require("../services/LessonService");
@@ -10,108 +10,144 @@ module.exports = (app) => {
   app.use('/api/lessons', router);
 
   // load all lessons for a notebook by id (notebookId)
-  router.get('/notebook/:notebookId', async (req, res, next) => {
+  router.get('/notebook/:notebookId',
+    [
+      param('notebookId').isUUID(4)
+    ],
+    async (req, res, next) => {
+      const { notebookId } = req.params;
+      
+      try {
+        // check validation errors
+        const errors = validationResult(req).array();
 
-    console.log("######################");
-    console.log("Lesson GET request for all lessons in notebook");
+        if (errors.length > 0) {
+          throw new Error(errors[0].msg);
+        }
 
-    const { notebookId } = req.params;
+        const lessons = await LessonServiceInstance.getAllLessons(notebookId);
 
-    try {
-      const lessons = await LessonServiceInstance.getAllLessons(notebookId);
-      console.log("Loaded lessons");
+        return res.status(200).send({ lessons });
 
-      console.log("Sending data to the user");
-      return res.status(200).send({ lessons });
+      } catch(err) {
+        next(err);
+      }
+  });
 
-    } catch(err) {
-      next(err);
+  // if is present the lesson id param, extract it
+  router.use('/:lessonId',
+    param('lessonId', 'Lesson id must be uuid type').isUUID(4),
+    async (req, res, next) => {
+      const { lessonId } = req.params;
+
+      try {
+        const errors = validationResult(req).array();
+
+        if (errors.length > 0) {
+          throw new Error(errors[0].msg);
+        }
+
+        const lesson = await LessonServiceInstance.getLessonById(lessonId);
+
+        if (lesson) {
+          req.lessonId = lessonId;
+          req.lesson = lesson;
+        }
+
+        next();
+
+      } catch(err) {
+        next(err);
+      }
     }
+  );
+
+  // Get lesson by id
+  router.get('/:lessonId', async (req, res, next) => {
+    return res.send({
+      lesson: req.lesson
+    });
   });
 
   // Add new lesson
-  router.post('/new', async (req, res, next) => {
+  router.post('/',
+    [
+      body('title').notEmpty().trim().escape(),
+      body('description').notEmpty().trim().escape(),
+      body('content').notEmpty().trim().escape(),
+      body('notebookId').isUUID(4)
+    ],
+    async (req, res, next) => {
+      const { title, description, content, notebookId } = req.body;
 
-    console.log("######################");
-    console.log("Lesson GET request for all lessons in notebook");
+      try {
+        // check validation errors
+        const errors = validationResult(req).array();
 
-    const { title, description, content, notebookId } = req.body;
-    try {
-      const lesson = await LessonServiceInstance.addNewLesson({
-        title,
-        description,
-        content,
-        notebookId
-      });
-      console.log("Added lesson");
+        if (errors.length > 0) {
+          throw new Error(errors[0].msg);
+        }
 
-      console.log("Sending data to the user");
-      return res.status(201).send({ lesson });
+        const lesson = await LessonServiceInstance.addNewLesson({
+          title,
+          description,
+          content,
+          notebookId
+        });
 
-    } catch(err) {
-      next(err);
+        return res.status(201).send({ lesson });
+
+      } catch(err) {
+        next(err);
+      }
     }
-  });
-
-  // Get lesson by id
-  router.get('/:id', async (req, res, next) => {
-
-    console.log("######################");
-    console.log("Lesson GET request for single lesson id");
-
-    const { id } = req.params;
-
-    try {
-      const lesson = await LessonServiceInstance.loadLessonById(id);
-      console.log("Loaded lesson");
-
-      console.log("Sending data to the user");
-      return res.status(200).send({ lesson });
-
-    } catch (err) {
-      next(err);
-    }
-  });
+  );
 
   // Update lesson
-  router.put('/', async (req, res, next) => {
+  router.put('/:lessonId',
+    [
+      body('title').notEmpty().trim().escape(),
+      body('description').notEmpty().trim().escape(),
+      body('content').notEmpty().trim().escape(),
+      body('notebookId').isUUID(4)
+    ],
+    async (req, res, next) => {
+      const { title, description, content, notebookId } = req.body;
 
-    console.log("######################");
-    console.log("Lesson UPDATE request for lesson data");
+      try {
+        // check validation errors
+        const errors = validationResult(req).array();
 
-    const { lessonId, title, description, content, notebookId } = req.body;
-    try {
-      const lesson = await LessonServiceInstance.updateLesson({
-        lessonId,
-        title,
-        description,
-        content,
-        notebookId
-      });
-      console.log("Lesson updated");
+        if (errors.length > 0) {
+          throw new Error(errors[0].msg);
+        }
 
-      console.log("Sending data to the user");
-      return res.status(201).send({ lesson });
+        const lesson = await LessonServiceInstance.updateLesson({
+          lessonId: req.lessonId,
+          title,
+          description,
+          content,
+          notebookId
+        });
 
-    } catch (err) {
-      next(err);
+        return res.send({ lesson });
+
+      } catch (err) {
+        next(err);
+      }
     }
-  });
+  );
 
   // Get lesson by id
-  router.delete('/:id', async (req, res, next) => {
-
-    console.log("######################");
-    console.log("Lesson DELETE request");
-
-    const { id } = req.params;
-
+  router.delete('/:lessonId', async (req, res, next) => {
     try {
-      await LessonServiceInstance.deleteLesson(id);
-      console.log("Lesson deleted");
+      const lessonId = req.lessonId;
 
-      console.log("Sending answer to user");
-      return res.status(200).send({ id });
+      await LessonServiceInstance.deleteLesson(lessonId);
+
+      return res.send({
+        id: lessonId
+      });
 
     } catch (err) {
       next(err);

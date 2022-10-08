@@ -7,7 +7,7 @@ module.exports = class TermsQueries {
    * Retrieves from db all terms assigned to a vocabulary.
    * @async
    * @method
-   * @param   {Uuid}  vocabularyId  [vocabulary id]
+   * @param   {UUID}  vocabularyId  [vocabulary id]
    * @returns {Array}               [Array of terms objects]
    * @throws  {newError}            [When the query to the db generates errors.]
    */
@@ -30,7 +30,7 @@ module.exports = class TermsQueries {
    * Retrieves from db a single term by id.
    * @async
    * @method
-   * @param   {Uuid}        termId    [term id]
+   * @param   {UUID}        termId    [term id]
    * @returns {Object|null}           [Term in the db]
    * @throws  {newError}              [When the query to the db generates errors.]
    */
@@ -65,7 +65,7 @@ module.exports = class TermsQueries {
       const result = await pool.query('INSERT INTO terms (id, vocabulary_id, content, definition) VALUES ($1, $2, $3, $4) RETURNING *',
         [id, vocabularyId, content, definition]
       );
-      
+
       return result.rows[0];
 
     } catch(err) {
@@ -100,7 +100,7 @@ module.exports = class TermsQueries {
    * Deletes from db a single term by id.
    * @async
    * @method
-   * @param   {Uuid}        termId    [Term id]
+   * @param   {UUID}        termId    [Term id]
    * @throws  {newError}              [When the query to the db generates errors.]
    */
   async delete(termId) {

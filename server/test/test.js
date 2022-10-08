@@ -1,11 +1,283 @@
 const expect = require("chai").expect;
 const request = require("supertest");
 
+const LessonQueries = require("../queries/lessons");
+const LessonQueriesInstance = new LessonQueries();
+
 const app = require("../index.js");
 
 // Test LESSONS
 describe('/api/lessons routes', function() {
-  
+
+  describe('GET /api/lessons/notebook/:notebookId', function() {
+
+    it('returns an array', function() {
+      return request(app)
+        .get(`/api/lessons/notebook/b84061b8-1283-48c1-a791-507095a29ebe`)
+        .expect(200)
+        .then((response) => {
+          const { lessons } = response.body;
+          expect(lessons).to.be.an.instanceOf(Array);
+        });
+    });
+
+    it('returns an array of all lessons', function() {
+      return request(app)
+        .get('/api/lessons/notebook/b84061b8-1283-48c1-a791-507095a29ebe')
+        .expect(200)
+        .then(async (response) => {
+          const dbLessons = await LessonQueriesInstance.getLessonsByNotebookId('b84061b8-1283-48c1-a791-507095a29ebe');
+          const { lessons } = response.body;
+          expect(lessons.length).to.be.equal(dbLessons.length);
+
+          lessons.forEach((lesson) => {
+            expect(lesson).to.have.ownProperty('id');
+            expect(lesson).to.have.ownProperty('title');
+            expect(lesson).to.have.ownProperty('content');
+            expect(lesson).to.have.ownProperty('description');
+            expect(lesson).to.have.ownProperty('notebookId');
+          });
+        });
+    });
+  });
+
+  describe('GET /api/lessons/:lessonId', function() {
+
+    it('returns a single lesson object', function() {
+      return request(app)
+        .get('/api/lessons/3a14afd1-7f0a-4af5-8d00-11bff7531e7b')
+        .expect(200)
+        .then((response) => {
+          const { lesson } = response.body;
+          expect(lesson).to.be.an.instanceOf(Object);
+          expect(lesson).to.not.be.an.instanceOf(Array);
+        })
+    });
+
+    it('returns a full lesson object', function() {
+      return request(app)
+        .get('/api/lessons/3a14afd1-7f0a-4af5-8d00-11bff7531e7b')
+        .expect(200)
+        .then((response) => {
+          const { lesson } = response.body;
+          expect(lesson).to.have.ownProperty('id');
+          expect(lesson).to.have.ownProperty('title');
+          expect(lesson).to.have.ownProperty('content');
+          expect(lesson).to.have.ownProperty('description');
+          expect(lesson).to.have.ownProperty('notebookId');
+        })
+    });
+
+    it('returned minion has the correct id', function() {
+      return request(app)
+        .get('/api/lessons/3a14afd1-7f0a-4af5-8d00-11bff7531e7b')
+        .expect(200)
+        .then((response) => {
+          const { lesson } = response.body;
+          expect(lesson.id).to.be.an.equal('3a14afd1-7f0a-4af5-8d00-11bff7531e7b');
+        })
+    });
+
+    it('called with non-uuid ID returns 500 error', function() {
+      return request(app)
+        .get('/api/lessons/notAnId')
+        .expect(500);
+    });
+  });
+
+  describe('PUT /api/lessons/:lessonId', function() {
+
+    it('updates the correct lesson and returns it', function() {
+      let initialLesson;
+      let updatedLesson;
+      return request(app)
+        .get('/api/lessons/3a14afd1-7f0a-4af5-8d00-11bff7531e7b')
+        .then((response) => {
+          const { lesson } = response.body;
+          initialLesson = lesson;
+          updatedLesson = Object.assign({}, initialLesson, { title: 'Test'});
+          return request(app)
+            .put('/api/lessons/3a14afd1-7f0a-4af5-8d00-11bff7531e7b')
+            .send(updatedLesson)
+            .expect(200)
+        })
+        .then((response) => {
+          const { lesson } = response.body;
+          expect(lesson).to.be.deep.equal(updatedLesson);
+        });
+    });
+
+    it('updates the correct lesson and persists to the database', function() {
+      let initialLesson;
+      let updatedLesson;
+      return request(app)
+        .get('/api/lessons/3a14afd1-7f0a-4af5-8d00-11bff7531e7b')
+        .then((response) => {
+          const { lesson } = response.body;
+          initialLesson = lesson;
+          updatedLesson = Object.assign({}, initialLesson, { title: 'Persistance Test'});
+          return request(app)
+            .put('/api/lessons/3a14afd1-7f0a-4af5-8d00-11bff7531e7b')
+            .send(updatedLesson)
+            .expect(200)
+        })
+        .then(() => {
+          return request(app)
+            .get('/api/lessons/3a14afd1-7f0a-4af5-8d00-11bff7531e7b')
+        })
+        .then((response) => {
+          const { lesson } = response.body;
+          expect(lesson.title).to.equal('Persistance Test');
+        });
+    });
+
+    it('called with a non-uuid ID returns a 500 error', function() {
+      return request(app)
+        .put('/api/lessons/notAnId')
+        .expect(500);
+    });
+
+    it('called with an invalid ID does not change the database array', function() {
+      let initialLessonArray;
+      return request(app)
+        .get(`/api/lessons/notebook/b84061b8-1283-48c1-a791-507095a29ebe`)
+        .then((response) => {
+          const { lessons } = response.body;
+          initialLessonArray = lessons;
+        })
+        .then(() => {
+          return request(app)
+            .put('/api/lessons/notAnId')
+            .send({ key: 'value'});
+        })
+        .then(() => {
+          return request(app)
+            .get(`/api/lessons/notebook/b84061b8-1283-48c1-a791-507095a29ebe`);
+        })
+        .then((response) => {
+          const { lessons } = response.body;
+          expect(lessons).to.be.deep.equal(initialLessonArray);
+        });
+    });
+  });
+
+  describe('POST /api/lessons', function() {
+
+    it('returns a single lesson object', function() {
+      const initialLesson = {
+        title: "testing again",
+        content: "Post test term",
+        description: "Testing if route returns full object",
+        notebookId: "b84061b8-1283-48c1-a791-507095a29ebe"
+      };
+      return request(app)
+        .post('/api/lessons')
+        .send(initialLesson)
+        .expect(201)
+        .then((response) => {
+          const { lesson } = response.body;
+          expect(lesson).to.be.an.instanceOf(Object);
+          expect(lesson).to.not.be.an.instanceOf(Array);
+        })
+    });
+
+    it('returns a full lesson object', function() {
+      const initialLesson = {
+        title: "testing again",
+        content: "Post test term2",
+        description: "Testing if route returns full object",
+        notebookId: "b84061b8-1283-48c1-a791-507095a29ebe"
+      };
+      return request(app)
+        .post('/api/lessons')
+        .send(initialLesson)
+        .expect(201)
+        .then((response) => {
+          const { lesson } = response.body;
+          expect(lesson).to.have.ownProperty('id');
+          expect(lesson).to.have.ownProperty('title');
+          expect(lesson).to.have.ownProperty('content');
+          expect(lesson).to.have.ownProperty('description');
+          expect(lesson).to.have.ownProperty('notebookId');
+        })
+    });
+  });
+
+  describe('DELETE /api/lessons/:lessonId', function() {
+
+    it('returns id of the deleted lesson', function() {
+      const initialLesson = {
+        title: "delete again",
+        content: "Post test term",
+        description: "Testing if route returns full object",
+        notebookId: "b84061b8-1283-48c1-a791-507095a29ebe"
+      };
+
+      return request(app)
+        .post(`/api/lessons`)
+        .send(initialLesson)
+        .then((response) => {
+          const { lesson } = response.body;
+
+          return request(app)
+            .delete(`/api/lessons/${lesson.id}`)
+            .expect(200)
+            .then((response) => {
+              const { id } = response.body;
+              expect(id).to.be.deep.equal(lesson.id);
+            });
+        });
+    });
+
+    it('deletes the correct lesson by id', function() {
+      let initialLessonArray;
+      let lessonIdToDelete;
+      const initialLesson = {
+        title: "delete again",
+        content: "Post test term",
+        description: "Testing if route returns full object",
+        notebookId: "b84061b8-1283-48c1-a791-507095a29ebe"
+      };
+
+      return request(app)
+        .post(`/api/lessons`)
+        .send(initialLesson)
+        .then((response) => {
+          const { lesson } = response.body;
+          lessonIdToDelete = lesson.id;
+        })
+        .then(() => {
+          return request(app)
+            .get('/api/lessons/notebook/b84061b8-1283-48c1-a791-507095a29ebe')
+            .then((response) => {
+              const { lessons } = response.body;
+              initialLessonArray = lessons;
+            });
+        })
+        .then(() => {
+          return request(app)
+            .delete(`/api/lessons/${lessonIdToDelete}`)
+            .expect(200);
+        })
+        .then(() => {
+          return request(app)
+            .get('/api/lessons/notebook/b84061b8-1283-48c1-a791-507095a29ebe')
+            .then((response) => {
+              const { lessons } = response.body;
+              expect(lessons).to.not.be.deep.equal(initialLessonArray);
+              const deletedLesson = lessons.find(element => element.id === lessonIdToDelete);
+              expect(deletedLesson).to.be.undefined;
+            });
+        });
+    });
+
+    it('called with a non-uuid ID returns a 500 error', function() {
+      return request(app)
+        .delete('/api/lessons/notAnId')
+        .expect(500);
+    });
+  });
+
 });
 
 // Test TERMS
