@@ -14,7 +14,7 @@ To install dependancies, run `npm install` both in server and in client folders.
 
 This project requires a [PostgreSQL](https://www.postgresql.org/) v12 database to be running locally. Reference the following diagram that represents table relations and run the SQL commands located in file `/server/resources/db_setup_sql`.
 
-![Database relations diagram](/resources/diagram.jpg)
+![Database relations diagram](/resources/db_diagram.png)
 
 This repo includes an `example.env` file that contains important environment variables for reference.  Make sure to create a `.env` file and include all variables found in the `example.env` file, replacing the example values with those specific to your environment/needs.
 
@@ -24,12 +24,10 @@ Make sure to setup the proxy port of the client application towards the correct 
 
 Once the app is installed locally, you can start the server at `http://localhost:<your-port>` with the commands:
 
-  cd server
-  node index.js
+`cd server`
+`node index.js`
 
 You can start the React app on default port (3000) with the following commands:
 
-  cd client
-  npm start
-
-# Testing
+`cd client`
+`npm start`
