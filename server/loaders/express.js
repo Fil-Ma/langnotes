@@ -18,7 +18,7 @@ module.exports = (app) => {
   // Parses urlencoded bodies
   app.use(bodyParser.urlencoded({ extended: true }));
 
-  // ?
+  // trust client proxy
   app.set("trust proxy", 1);
 
   // Create session
@@ -29,7 +29,9 @@ module.exports = (app) => {
       saveUninitialized: false,
       cookie: {
         secure: false,
-        maxAge: 24*60*60*1000
+        maxAge: 24*60*60*1000,
+        secure: true,
+        sameSite: 'strict'
       }
     })
   );
