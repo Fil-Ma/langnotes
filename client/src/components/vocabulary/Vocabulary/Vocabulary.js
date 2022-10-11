@@ -56,14 +56,12 @@ export default function Vocabulary({
   const openNewTermForm = (e) => {
     e.preventDefault();
     setIsTermFormOpen(true);
-    console.log("Closed term form");
   };
 
   // Handles closing of window to add a new term
   const closeNewTermForm = (e) => {
     e.preventDefault();
     setIsTermFormOpen(false);
-    console.log("Opened form to add vocabulary term");
 
     // reset states
     setContent("");
@@ -72,6 +70,8 @@ export default function Vocabulary({
 
   // Handles if user click outside the window of the form
   const clickOutsideForm = (e) => {
+    console.log(termForm)
+    console.log(e.target)
     if (e.target === termForm) {
       closeNewTermForm(e);
     }
@@ -108,7 +108,6 @@ export default function Vocabulary({
     setContent(currentTerm.content);
     setDefinition(currentTerm.definition);
     setIsEditTermOpen(true);
-    console.log("Opened edit term window");
   };
 
   // handle closing of edit term window
@@ -120,7 +119,6 @@ export default function Vocabulary({
     setCurrentTermId("");
     // close modal
     setIsEditTermOpen(false);
-    console.log("Edit term window is now closed");
   };
 
   // handle when user clicks outside of modal content, and close modal window
@@ -205,7 +203,7 @@ export default function Vocabulary({
       <Modal
         id="new-term-form"
         handleClose={closeNewTermForm}
-        handleClickOuside={clickOutsideForm}
+        handleClickOutside={clickOutsideForm}
         isFormVisible={isTermFormOpen}>
           <NewTermForm
             onSubmit={handleSubmitNewTerm}
@@ -218,7 +216,7 @@ export default function Vocabulary({
       <Modal
         id="edit-term-window"
         handleClose={closeEditTermWindow}
-        handleClickOuside={handleClickOutsideTermEdit}
+        handleClickOutside={handleClickOutsideTermEdit}
         isFormVisible={isEditTermOpen}>
           <TermEditWindow
             termId={currentTermId}

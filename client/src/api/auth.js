@@ -7,8 +7,6 @@ export const login = async (credentials) => {
   try {
     const urlToFetch = baseAuthURL + '/login';
 
-    console.log(`API - Contacting server at URL ${urlToFetch}`);
-
     const response = await fetch(urlToFetch, {
       method: 'POST',
       headers: {
@@ -19,7 +17,6 @@ export const login = async (credentials) => {
 
     const jsonResponse = await response.json();
 
-    // console.log("API - Received server response");
     return jsonResponse;
 
   } catch(err) {
@@ -34,8 +31,6 @@ export const register = async (data) => {
   try {
     const urlToFetch = baseAuthURL + '/register';
 
-    console.log(`API - Contacting server at URL ${urlToFetch}`);
-
     const response = await fetch(urlToFetch, {
       method: 'POST',
       headers: {
@@ -44,7 +39,6 @@ export const register = async (data) => {
       body: JSON.stringify(data)
     });
 
-    // console.log("API - Received server response");
     const jsonResponse = await response.json();
 
     return jsonResponse;
@@ -56,12 +50,9 @@ export const register = async (data) => {
 
 // API request to check if the user is logged in
 export const isLoggedIn = async () => {
-  //console.log("API - Contacting server for user login status");
-
   try {
     const urlToFetch = baseAuthURL + '/logged_in';
 
-    //console.log(`API - Contacting server at URL ${urlToFetch}`);
     const response = await fetch(urlToFetch);
 
     const jsonResponse = await response.json();
@@ -80,7 +71,6 @@ export const logout = async () => {
   try {
     const urlToFetch = baseAuthURL + '/logout';
 
-    console.log(`API - Contacting server at URL ${urlToFetch}`);
     await fetch(urlToFetch, { method: 'POST' });
 
     return;

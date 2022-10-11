@@ -85,14 +85,12 @@ export default function LessonsList({
   const handleOpenNewLessonForm = (e) => {
     e.preventDefault();
     setIsLessonFormVisible(true);
-    console.log("Opened form to submit new lesson data");
   };
 
   // This function hides new lesson form modal
   const handleCloseNewLessonForm = (e) => {
     e.preventDefault();
     setIsLessonFormVisible(false);
-    console.log("Closed form to submit new lesson data");
 
     //reset states when closing the modal
     setLessonTitle("");
@@ -147,7 +145,6 @@ export default function LessonsList({
 
     // open modal
     setIsModalOpen(true);
-    console.log("Opened lesson informations");
   };
 
   // This function hides edit lesson modal

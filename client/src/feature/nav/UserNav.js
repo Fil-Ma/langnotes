@@ -5,14 +5,19 @@ import { useSelector } from "react-redux";
 export default function UserNav() {
 
   const notebooks = useSelector((state) => state.login.user.notebooks);
+  let notebookLinks;
+
+  if (notebooks.length > 0) {
+    notebookLinks = notebooks.map((element, index) => {
+      const link = `/notebook/${element.id}`;
+      return <NavLink to={link} key ={index} className="nav-link">{element.name}</NavLink>
+    })
+  }
 
   return (
     <div className="nav-notebook-container">
       {
-        notebooks.map((element, index) => {
-          const link = `/notebook/${element.id}`;
-          return <NavLink to={link} key ={index} className="nav-link">{element.name}</NavLink>
-        })
+        notebookLinks
       }
       {
         notebooks.length < 3
