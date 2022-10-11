@@ -1,0 +1,342 @@
+openapi: 3.0.3
+info:
+  title: LangNotes - OpenAPI 3.0
+  description: >-
+    This is the official documentation of LangNotes REST api. This document has
+    been originated with Swagger online editor, available at
+    [https://swagger.io](https://swagger.io). 
+  version: 1.0.0
+paths:
+  /api/terms:
+    summary: Allows operation on terms table
+    description: CRUD operations for terms table
+    post:
+      summary: Adds term to the database
+      description: Adds new term data to the database
+      operationId: post_term
+      requestBody:
+        description: Update an existent user in the store
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PostTerm'
+        required: true
+      responses:
+        '200':
+          description: Successfull operation
+          content:
+            application/json:
+              schema: 
+                $ref: '#/components/schemas/Term'  
+        '500':
+          description: An error occured while adding term to database
+      tags:
+        - terms
+  /api/terms/{termId}:
+    summary: CRUD operations for terms
+    description: CRUD operations for terms
+    get:
+      summary: Get term by id
+      description: Retrives term information by selection with id
+      operationId: get_term
+      parameters:
+        - name: termId
+          in: path
+          description: 'The ID term that must be fetched'
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          description: Successfull operation
+          content:
+            application/json:
+              schema: 
+                $ref: '#/components/schemas/Term'  
+        '500':
+          description: Term id must be uuid type
+      tags:
+        - terms
+    put:
+      summary: Updates Term by id
+      description: Updates term data by selecting the object with id
+      operationId: put_term
+      parameters:
+        - name: termId
+          in: path
+          description: 'The ID of the term that must be updated'
+          required: true
+          schema:
+            type: string
+            format: uuid
+      requestBody:
+        description: Update an existent term in the store
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Term'
+        required: true
+      responses:
+        '200':
+          description: Successfull operation
+          content:
+            application/json:
+              schema: 
+                $ref: '#/components/schemas/Term'  
+        '500':
+          description: Term id must be uuid type
+      tags:
+        - terms
+    delete:
+      summary: Deletes term by id
+      description: Deletes term by id
+      operationId: delete_term
+      parameters:
+        - name: termId
+          in: path
+          description: 'The ID of the term that must be deleted'
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          description: Successfull operation
+          content:
+            application/json:
+              schema: 
+                $ref: '#/components/schemas/TermId'  
+        '500':
+          description: Term id must be uuid type
+      tags:
+        - terms
+  /api/lessons:
+    summary: Allows operation on lessons table
+    description: CRUD operations for lessons table
+    post:
+      summary: Adds lesson to the database
+      description: Adds new lesson data to the database
+      operationId: post_lesson
+      requestBody:
+        description: Update an existent user in the store
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PostLesson'
+        required: true
+      responses:
+        '200':
+          description: Successfull operation
+          content:
+            application/json:
+              schema: 
+                $ref: '#/components/schemas/Lesson'  
+        '500':
+          description: An error occured while adding lesson to database
+      tags:
+        - lessons
+  /api/lessons/notebook/{notebookId}:
+    summary: Allows operation on lessons table
+    description: CRUD operations for lessons table
+    get:
+      summary: Get all lessons assigned to netbook (by id)
+      description: Retrives informations of lessons assigned to notebook
+      operationId: get_all_lessons
+      parameters:
+        - name: notebookId
+          in: path
+          description: 'The ID notebook that must be fetched'
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          description: Successfull operation
+          content:
+            application/json:
+              schema: 
+                $ref: '#/components/schemas/Lessons'  
+        '500':
+          description: notebook id must be uuid type
+      tags:
+        - lessons
+  /api/terms/{lessonId}:
+    summary: CRUD operations for lessons
+    description: CRUD operations for lessons
+    get:
+      summary: Get lesson by id
+      description: Retrives lesson information by selection with id
+      operationId: get_lesson
+      parameters:
+        - name: lessonId
+          in: path
+          description: 'The ID lesson that must be fetched'
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          description: Successfull operation
+          content:
+            application/json:
+              schema: 
+                $ref: '#/components/schemas/Lesson'  
+        '500':
+          description: lesson id must be uuid type
+      tags:
+        - lessons
+    put:
+      summary: Updates lesson by id
+      description: Updates lesson data by selecting the object with id
+      operationId: put_lesson
+      parameters:
+        - name: lessonId
+          in: path
+          description: 'The ID of the lesson that must be updated'
+          required: true
+          schema:
+            type: string
+            format: uuid
+      requestBody:
+        description: Update an existent lesson in the store
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Lesson'
+        required: true
+      responses:
+        '200':
+          description: Successfull operation
+          content:
+            application/json:
+              schema: 
+                $ref: '#/components/schemas/Lesson'  
+        '500':
+          description: lesson id must be uuid type
+      tags:
+        - lessons
+    delete:
+      summary: Deletes lesson by id
+      description: Deletes lesson by id
+      operationId: delete_lesson
+      parameters:
+        - name: lessonId
+          in: path
+          description: 'The ID of the lesson that must be deleted'
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          description: Successfull operation
+          content:
+            application/json:
+              schema: 
+                $ref: '#/components/schemas/LessonId'  
+        '500':
+          description: lesson id must be uuid type
+      tags:
+        - lessons
+components:
+  schemas:
+    Lesson:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          example: 69fd9d30-e758-4f55-ba3c-18ecfb3cd3d7
+        content:
+          type: string
+          example: je mange, tu manges, il/elle/on mange, nous mangeons, vous mangez, ils/elles mangent
+        description:
+          type: string
+          example: This lesson describes the use of verb "to eat"
+        notebookId:
+          type: string
+          format: uuid
+          example: b84061b8-1283-48c1-a791-507095a29ebe
+        title:
+          type: string
+          example: Lesson 002
+    PostLesson:
+      type: object
+      properties:
+        content:
+          type: string
+          example: je mange, tu manges, il/elle/on mange, nous mangeons, vous mangez, ils/elles mangent
+        description:
+          type: string
+          example: This lesson describes the use of verb "to eat"
+        notebookId:
+          type: string
+          format: uuid
+          example: b84061b8-1283-48c1-a791-507095a29ebe
+        title:
+          type: string
+          example: Lesson 002
+    LessonId:
+      type: string
+      format: uuid
+      example: 69fd9d30-e758-4f55-ba3c-18ecfb3cd3d7
+    Lessons:
+      type: array
+      items:
+        type: object
+        properties:
+          id:
+            type: string
+            format: uuid
+            example: b84061b8-1283-48c1-a791-507095a29ebe
+          name:
+            type: string
+            example: French Notebook
+          language:
+            type: string
+            example: French
+          userId:
+            type: string
+            format: uuid
+            example: 8ae45236-bed8-49fb-a643-3b50c0870536
+          description:
+            type: string
+            example: This is the notebook I use to learn french
+    Term:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          example: 276be446-1602-498d-9d63-f44577a32fa4
+        content:
+          type: string
+          example: Salut
+        definition:
+          type: string
+          example: Salut definition
+        vocabularyId:
+          type: string
+          format: uuid
+          example: 8ce2cdd1-0a52-489e-a097-970fe3ef122f
+    TermId:
+      type: string
+      format: uuid
+      example: 8ce2cdd1-0a52-489e-a097-970fe3ef122f
+    PostTerm:
+      type: object
+      properties:
+        content:
+          type: string
+          example: Salut
+        definition:
+          type: string
+          example: Salut definition
+        vocabularyId:
+          type: string
+          format: uuid
+          example: 8ce2cdd1-0a52-489e-a097-970fe3ef122f
+        
