@@ -1,5 +1,6 @@
 const bodyParser = require("body-parser");
 const cors = require("cors");
+const helmet = require("helmet");
 const session = require("express-session");
 const { SESSION_SECRET } = require("../config");
 
@@ -7,6 +8,9 @@ module.exports = (app) => {
 
   // Enable CORS
   app.use(cors());
+
+  // enable helmet
+  app.use(helmet());
 
   // Transforms raw string of req.body into JSON
   app.use(bodyParser.json());

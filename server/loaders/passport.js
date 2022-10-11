@@ -29,7 +29,6 @@ module.exports = (app) => {
     },
     async (email, password, done) => {
       try {
-        console.log("Passport local authentication")
         const user = await AuthServiceInstance.login({
           email, password
         });

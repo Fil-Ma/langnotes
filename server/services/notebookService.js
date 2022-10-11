@@ -14,7 +14,7 @@ module.exports = class NotebookService {
         return [];
       }
 
-      return notebooks.forEach(element => {
+      return notebooks.map(element => {
         return {
           id: element.id,
           name: element.name,
