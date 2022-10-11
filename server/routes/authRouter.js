@@ -52,7 +52,7 @@ module.exports = (app, passport) => {
   // POST route for user credentials login
   router.post('/login',
     [
-      body('email').isEmail().normalizeEmail(),
+      body('email').trim().isEmail().normalizeEmail(),
       body('password').isStrongPassword({
         minLength: 8,
         maxLength: 16,

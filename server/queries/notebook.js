@@ -3,21 +3,22 @@ const { v4: uuidv4 } = require("uuid");
 
 module.exports = class NotebookQueries {
 
+  /**
+   * get all notebooks assigned to a single user (by id).
+   * @async
+   * @method
+   * @param   {UUID}      userId  [user id]
+   * @returns {Array}             [Array of notebook objects]
+   * @throws  {newError}          [When the query to the db generates errors.]
+   */
   async findAllByUserId(userId) {
-
-    // console.log("DATABASE querying --# Notebook SELECT function called");
-
     try {
-      // console.log("DATABASE querying --# Notebook finding all notebooks owned by the user");
       const result = await pool.query('SELECT id, name, language FROM notebooks WHERE user_id = $1', [userId]);
-      // console.log(result.rows);
 
       if (result.rows?.length) {
-        // console.log("DATABASE querying --# Notebooks found returning");
         return result.rows;
       }
 
-      // console.log("DATABASE querying --# The user does not have any notebook");
       return null;
 
     } catch(err) {
@@ -25,22 +26,88 @@ module.exports = class NotebookQueries {
     }
   }
 
+  /**
+   * Add notebook to the db.
+   * @async
+   * @method
+   * @param   {Object}      data  [notebook data]
+   * @returns {Object}            [notebook data added to the db]
+   * @throws  {newError}          [When the query to the db generates errors.]
+   */
   async createNotebook(data) {
-
-    console.log("DATABASE querying --# Notebook INSERT function called");
-
     const { name, language, userId, description } = data;
+    const id = uuidv4();
 
     try {
-      const id = uuidv4();
-
-      console.log("DATABASE querying --# Querying db to add a new notebook");
       const result = await pool.query('INSERT INTO notebooks (id, name, language, user_id, description) VALUES ($1, $2, $3, $4, $5) RETURNING *',
         [id, name, language, userId, description]
       );
 
-      console.log("DATABASE querying --# Returning new notebook data");
       return result.rows[0];
+
+    } catch(err) {
+      throw new Error(err);
+    }
+  }
+
+  /**
+   * Retrives all data of one notebook (by id).
+   * @async
+   * @method
+   * @param   {UUID}      notebookId  [notebook id]
+   * @returns {Object}                [notebook data]
+   * @throws  {newError}              [When the query to the db generates errors.]
+   */
+  async getById(notebookId) {
+    try {
+      const result = await pool.query('SELECT * FROM notebooks WHERE id = $1',
+        [notebookId]
+      );
+
+      return result.rows[0];
+
+    } catch(err) {
+      throw new Error(err);
+    }
+  }
+
+  /**
+   * Updates notebook data.
+   * @async
+   * @method
+   * @param   {Object}      data    [notebook data]
+   * @returns {Object}              [notebook updated data]
+   * @throws  {newError}            [When the query to the db generates errors.]
+   */
+  async update(data) {
+    const { id, name, language, description } = data;
+
+    try {
+      const result = await pool.query('UPDATE notebooks SET name = $1, language = $2, description = $3 WHERE id = $4 RETURNING *',
+        [name, language, description, id]
+      );
+
+      return result.rows[0];
+
+    } catch(err) {
+      throw new Error(err);
+    }
+  }
+
+  /**
+   * Updates notebook data.
+   * @async
+   * @method
+   * @param   {UUID}      notebookId    [notebook id]
+   * @throws  {newError}                [When the query to the db generates errors.]
+   */
+  async delete(notebookId) {
+    try {
+      await pool.query('DELETE FROM notebooks WHERE id = $1',
+        [notebookId]
+      );
+
+      return null;
 
     } catch(err) {
       throw new Error(err);

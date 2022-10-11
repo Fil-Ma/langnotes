@@ -1,4 +1,5 @@
 const express = require("express");
+const { param, validationResult } = require("express-validator");
 const router = express.Router();
 
 const VocabularyService = require("../services/vocabularyService");
@@ -12,24 +13,34 @@ module.exports = (app) => {
   app.use('/api/vocabulary', router);
 
   // get vocabulary by notebook id
-  router.get('/:notebookId', async (req, res, next) => {
-    const { notebookId } = req.params;
+  router.get('/:notebookId',
+    [
+      param('notebookId').isUUID(4)
+    ],
+    async (req, res, next) => {
+      const { notebookId } = req.params;
 
-    try {
-      // get vocabulary data
-      const vocabulary = await VocabularyServiceInstance.loadVocabulary(notebookId);
+      try {
+        const errors = validationResult(req).array();
 
-      // get terms in vocabulary
-      const terms = await TermsServiceInstance.loadAllTermsByVocabularyId(vocabulary.id);
+        if (errors.length > 0) {
+          throw new Error(errors[0].msg);
+        }
 
-      return res.status(200).send({
-        vocabulary,
-        terms
-      });
+        // get vocabulary data
+        const vocabulary = await VocabularyServiceInstance.loadVocabulary(notebookId);
 
-    } catch(err) {
-      next(err);
-    }
+        // get terms in vocabulary
+        const terms = await TermsServiceInstance.loadAllTermsByVocabularyId(vocabulary.id);
+
+        return res.status(200).send({
+          vocabulary,
+          terms
+        });
+
+      } catch(err) {
+        next(err);
+      }
   });
 
 }

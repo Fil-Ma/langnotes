@@ -7,20 +7,22 @@ module.exports = class NotebookService {
 
   // This function retrieves all notebooks assigned to a user (by id)
   async loadAllNotebooks(userId) {
-
-    // console.log("NotebookService --# Called Get Notebooks Service");
-
     try {
-      // console.log("NotebookService --# Serching for notebooks owned by the user");
       const notebooks = await NotebookQueriesInstance.findAllByUserId(userId);
 
       if (!notebooks) {
-        // console.log("NotebookService --# There are no notebooks available for the user");
         return [];
       }
 
-      // console.log("NotebookService --# Notebooks found! Returning infos");
-      return notebooks;
+      return notebooks.forEach(element => {
+        return {
+          id: element.id,
+          name: element.name,
+          language: element.language,
+          userId: element.user_id,
+          description: element.description
+        };
+      });
 
     } catch(err) {
       throw createError(500, err);
@@ -29,15 +31,72 @@ module.exports = class NotebookService {
 
   // This function adds a new notebook
   async addNotebook(notebook) {
-
-    console.log("NotebookService --# Called Add Notebook Service");
-
     try {
-      console.log("NotebookService --# Adding notebook to db");
       const newNotebook = await NotebookQueriesInstance.createNotebook(notebook);
 
-      console.log("NotebookService --# Notebook added! Returning");
-      return newNotebook;
+      return {
+        id: newNotebook.id,
+        name: newNotebook.name,
+        language: newNotebook.language,
+        userId: newNotebook.user_id,
+        description: newNotebook.description
+      };
+
+    } catch(err) {
+      throw createError(500, err);
+    }
+  }
+
+  // get notebook data by id
+  async loadNotebookDataById(notebookId) {
+    try {
+      const notebook = await NotebookQueriesInstance.getById(notebookId);
+
+      return {
+        id: notebook.id,
+        name: notebook.name,
+        language: notebook.language,
+        userId: notebook.user_id,
+        description: notebook.description
+      };
+
+    } catch(err) {
+      throw createError(500, err);
+    }
+  }
+
+  // update notebook data
+  async updateNotebookData(data) {
+    const { id, name, language, userId, description } = data;
+
+    try {
+      const notebook = await NotebookQueriesInstance.update({
+        id,
+        name,
+        language,
+        userId,
+        description
+      });
+
+      return {
+        id: notebook.id,
+        name: notebook.name,
+        language: notebook.language,
+        userId: notebook.user_id,
+        description: notebook.description
+      };
+
+    } catch(err) {
+      throw createError(500, err);
+    }
+  }
+
+  // delete notebook
+  async deleteNotebook(notebookId) {
+    try {
+      await NotebookQueriesInstance.delete(notebookId);
+
+      return;
 
     } catch(err) {
       throw createError(500, err);
