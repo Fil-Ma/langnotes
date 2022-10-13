@@ -9,6 +9,6 @@
 
 .notebook-container {
   display: grid;
-  gap: 3rem;
+  gap: 3rem 5rem;
   grid-template-columns: repeat(3, 1fr);
 }

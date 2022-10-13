@@ -197,6 +197,7 @@ export default function LessonsList({
   return (
     <section className="lessons-container">
       <h2>Lessons</h2>
+      
       <Button
         onClick={handleOpenNewLessonForm}
         className="add-new add-lesson white-text orange-background orange-border link">

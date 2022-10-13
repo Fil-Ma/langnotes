@@ -16,7 +16,9 @@ header {
 
 .logo-container {
   display: inline-block;
-  height: 3rem;
+  font-family: 'Inspiration', cursive;
+  font-size: 2.3rem;
+  color: #E18700;
 }
 
 /*

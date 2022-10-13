@@ -9,6 +9,11 @@ footer {
   font-size: 1rem;
 }
 
+.footer-logo-container {
+  font-family: 'Inspiration', cursive;
+  font-size: 1.4rem;
+}
+
 .footer-logo-container, .footer-copyright, .footer-social {
   display: inline-block;
 }

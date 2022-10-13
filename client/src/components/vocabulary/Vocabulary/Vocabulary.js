@@ -180,7 +180,7 @@ export default function Vocabulary({
   return (
     <section className="vocabulary-container">
       <h2>Vocabulary</h2>
-
+      
       <div className="vocabulary-utils">
         <Button
           onClick={openNewTermForm}

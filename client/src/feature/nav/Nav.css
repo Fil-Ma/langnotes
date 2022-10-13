@@ -2,6 +2,10 @@
   STYLING NAVIGATION LINKS
 */
 
+nav {
+  margin-left: 3rem;
+}
+
 nav, .nav-notebook-container {
   display: inline-flex;
   height: 3rem;

@@ -54,7 +54,7 @@
   border: 1px solid rgba(0, 0, 0, 0.4);
   border-radius: 0.2rem;
   width: 98%;
-  margin-top: 0.6rem;
+  margin-top: 0.8rem;
   background-color: #FFF;
 }
 
@@ -128,7 +128,7 @@
 */
 
 .signup-redirect {
-  margin: 1.5rem 0;
+  margin: 1.7rem 0;
 }
 
 .default-link:visited {

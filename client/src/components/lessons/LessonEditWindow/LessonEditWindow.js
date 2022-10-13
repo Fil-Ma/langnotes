@@ -32,6 +32,7 @@ export default function LessonEditWindow({
                   type="text"
                   value={title}
                   maxLength="50"
+                  autoFocus
                   onChange={(e) => setLessonTitle(e.target.value)} />
               </form>
             ) : <span onDoubleClick={() => setIsEditingTitle(true)}>{title}</span>
@@ -47,6 +48,7 @@ export default function LessonEditWindow({
                   type="text"
                   value={description}
                   maxLength="100"
+                  autoFocus
                   onChange={(e) => setLessonDescription(e.target.value)} />
               </form>
             ) : <span onDoubleClick={() => setIsEditingDescription(true)}>{description}</span>
@@ -62,6 +64,7 @@ export default function LessonEditWindow({
                   value={content}
                   rows="4"
                   maxLength="200"
+                  autoFocus
                   onChange={(e) => setLessonContent(e.target.value)} />
               </form>
             ) : <span onDoubleClick={() => setIsEditingContent(true)}>{content}</span>

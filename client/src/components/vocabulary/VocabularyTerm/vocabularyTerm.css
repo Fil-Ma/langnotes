@@ -2,6 +2,11 @@
   STYLING VOCABULARY TERM PREVIEW
 */
 
+.vocabulary-term-container {
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  border-radius: 0.2rem;
+}
+
 .term-content, .vocabulary-tools {
   display: inline-block;
 }

@@ -24,7 +24,7 @@ export default function UserNav() {
           ? (
               <div className="nav-add-notebook nav-link">
                 <Link to="/notebook/new" className="add-sign link">
-                  Add New <i className="fa-solid fa-plus"></i>
+                  Add New <i className="fa-solid fa-plus orange-text"></i>
                 </Link>
               </div>
             )
