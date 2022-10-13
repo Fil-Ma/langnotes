@@ -49,7 +49,6 @@ module.exports = (app) => {
     },
     async (accessToken, refreshToken, profile, done) => {
       try {
-        console.log("Passport authentication with google");
         const user = await AuthServiceInstance.googleLogin(profile);
         return done(null, user);
       } catch(err) {
@@ -66,7 +65,6 @@ module.exports = (app) => {
     },
     async (accessToken, refreshToken, profile, done) => {
       try {
-        console.log("Passport authentication with facebook");
         const user = await AuthServiceInstance.facebookLogin(profile);
         return done(null, user);
       } catch(err) {

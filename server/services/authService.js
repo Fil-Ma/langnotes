@@ -59,13 +59,19 @@ module.exports = class AuthService {
 
   // Google login function
   async googleLogin(profile) {
-    const { id, displayName } = profile;
+    const { id, displayName, emails } = profile;
 
     try {
       const user = await UserQueriesInstance.findOneByGoogleId(id);
 
       if (!user) {
-        return await UserQueriesInstance.create({ google: { id, displayName }})
+        return await UserQueriesInstance.create({
+          google: {
+            id,
+            displayName,
+            email: emails[0].value
+          }
+        })
       }
 
       return user;

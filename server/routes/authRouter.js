@@ -73,22 +73,22 @@ module.exports = (app, passport) => {
           throw new Error(errors[0].msg);
         }
 
-        // const notebooks = await NotebookServiceInstance.loadAllNotebooks(req.user.id);
-        res.status(200).send({
+        res.send({
           user: req.user,
-          // notebooks
         });
       } catch(err) {
         next(err);
       }
   });
 
-  router.get('/google', passport.authenticate('google', { scope: ["profile"] } ));
+  router.get('/google', passport.authenticate('google', { scope: ["profile", "email"] } ));
 
   router.get('/google/callback',
-    passport.authenticate('google', { failureRedirect: '/login' }),
+    passport.authenticate('google', { failureRedirect: 'http:localhost:3000/login' }),
     async (req, res, next) => {
-      res.redirect('/dashboard');
+      res.send({
+        user: req.user
+      })
     }
   );
 

@@ -1,6 +1,7 @@
 const bodyParser = require("body-parser");
 const cors = require("cors");
 const helmet = require("helmet");
+const morgan = require("morgan");
 const session = require("express-session");
 const { SESSION_SECRET } = require("../config");
 
@@ -11,6 +12,8 @@ module.exports = (app) => {
 
   // enable helmet
   app.use(helmet());
+
+  app.use(morgan('dev'));
 
   // Transforms raw string of req.body into JSON
   app.use(bodyParser.json());
@@ -29,9 +32,7 @@ module.exports = (app) => {
       saveUninitialized: false,
       cookie: {
         secure: false,
-        maxAge: 24*60*60*1000,
-        secure: true,
-        sameSite: 'strict'
+        maxAge: 24*60*60*1000
       }
     })
   );
