@@ -25,9 +25,11 @@ Make sure to setup the proxy port of the client application towards the correct 
 Once the app is installed locally, you can start the server at `http://localhost:<your-port>` with the commands:
 
 `cd server`
+
 `node index.js`
 
 You can start the React app on default port (3000) with the following commands:
 
 `cd client`
+
 `npm start`
