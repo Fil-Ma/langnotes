@@ -24,21 +24,6 @@ export const login = async (credentials) => {
   }
 };
 
-export const googleLoginApi = async () => {
-  try {
-    const urlToFetch = baseAuthURL + '/google';
-
-    const response = await fetch(urlToFetch);
-
-    const jsonResponse = response.json();
-
-    return jsonResponse;
-
-  } catch(err) {
-    throw new Error(err);
-  }
-}
-
 // API request for register
 export const register = async (data) => {
   console.log("API - Contacting server to register user");

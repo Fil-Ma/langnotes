@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { checkLoginStatus, loginUser, registerUser, logoutUser, googleLogin } from './auth.actions';
+import { checkLoginStatus, loginUser, registerUser, logoutUser } from './auth.actions';
 
 const authSlice = createSlice({
   name: 'auth',
@@ -22,15 +22,6 @@ const authSlice = createSlice({
       })
       // login failure
       .addCase(loginUser.rejected, (state, action) => {
-        const { error } = action.payload;
-        state.isAuthenticated = false;
-        state.error = error;
-      })
-      .addCase(googleLogin.fulfilled, (state, action) => {
-        const { isAuthenticated } = action.payload;
-        state.isAuthenticated = isAuthenticated;
-      })
-      .addCase(googleLogin.rejected, (state, action) => {
         const { error } = action.payload;
         state.isAuthenticated = false;
         state.error = error;

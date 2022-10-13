@@ -40,21 +40,6 @@ export const loginUser = createAsyncThunk(
   }
 );
 
-export const googleLogin = createAsyncThunk(
-  'auth/googleLogin',
-  async () => {
-    try {
-      const response = await googleLoginApi();
-      return {
-        user: response.user,
-        isAuthenticated: true
-      }
-    } catch(err) {
-      throw err;
-    }
-  }
-)
-
 export const registerUser = createAsyncThunk(
   'auth/registerUser',
   async (credentials) => {

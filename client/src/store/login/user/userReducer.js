@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-import { checkLoginStatus, loginUser, googleLogin } from '../auth/auth.actions';
+import { checkLoginStatus, loginUser } from '../auth/auth.actions';
 import { addNotebook } from "./user.actions";
 
 const userSlice = createSlice({
@@ -16,11 +16,6 @@ const userSlice = createSlice({
       // Configure state in case of login
       .addCase(loginUser.fulfilled, (state, action) => {
         const { user } = action.payload;
-        state.id = user.id;
-        state.email = user.email;
-      })
-      .addCase(googleLogin.fulfilled, (state, action) => {
-        const { user} = action.payload;
         state.id = user.id;
         state.email = user.email;
       })

@@ -4,7 +4,7 @@ import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import Button from "../../components/button/Button";
-import { loginUser, googleLogin } from '../../store/login/auth/auth.actions';
+import { loginUser, checkLoginStatus } from '../../store/login/auth/auth.actions';
 
 export default function LoginForm() {
 
@@ -31,7 +31,10 @@ export default function LoginForm() {
   const handleGoogleLogin = async (e) => {
     try {
       e.preventDefault();
-      await dispatch(googleLogin());
+      const accessWindow = window.open("/api/auth/google");
+      accessWindow.close();
+
+      await dispatch(checkLoginStatus());
 
       navigate("/dashboard");
     } catch(err) {
