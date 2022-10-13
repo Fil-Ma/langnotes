@@ -3,7 +3,8 @@ import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-import { loginUser } from '../../store/login/auth/auth.actions';
+import Button from "../../components/button/Button";
+import { loginUser, googleLogin } from '../../store/login/auth/auth.actions';
 
 export default function LoginForm() {
 
@@ -16,18 +17,36 @@ export default function LoginForm() {
 
   // manage login when clicked on button
   const handleLogin = async (e) => {
-    console.log("Logging in...");
     try {
       e.preventDefault();
       await dispatch(loginUser({ email, password }));
 
-      console.log("Success! User is now logged in");
       navigate("/dashboard");
 
     } catch(err) {
       console.log(err);
     }
   };
+
+  const handleGoogleLogin = async (e) => {
+    try {
+      e.preventDefault();
+      await dispatch(googleLogin());
+
+      navigate("/dashboard");
+    } catch(err) {
+      console.log(err);
+    }
+  }
+
+  const handleFacebookLogin = async (e) => {
+    try {
+      e.preventDefault();
+
+    } catch(err) {
+      console.log(err);
+    }
+  }
 
   return (
     <main className="login-main">
@@ -74,13 +93,13 @@ export default function LoginForm() {
         <div className="oauth-logins">
           <p>Or Login with:</p>
 
-          <Link to="/api/auth/google" className="google-login oauth-button link">
-            <i className="fa-brands fa-google"></i> SignIn with Google
-          </Link>
+          <Button
+            className="google-login oauth-button link"
+            onClick={handleGoogleLogin}><i className="fa-brands fa-google"></i> SignIn with Google</Button>
 
-          <Link to="/api/auth/facebook" className="facebook-login oauth-button link">
-            <i className="fa-brands fa-facebook-f"></i> SignIn with Facebook
-          </Link>
+          <Button
+            className="facebook-login oauth-button link"
+            onClick={handleFacebookLogin}><i className="fa-brands fa-facebook-f"></i> SignIn with Facebook</Button>
         </div>
 
         <div className="signup-redirect">

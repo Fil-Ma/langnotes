@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate, Link } from "react-router-dom";
 
+import Button from "../../components/button/Button";
 import { registerUser } from '../../store/login/auth/auth.actions';
 
 export default function SignUpForm() {
@@ -17,7 +18,6 @@ export default function SignUpForm() {
 
   // handle registration
   const handleSignup = async (e) => {
-    console.log("Signing up...");
 
     if (confirmPassword !== password) {
       throw new Error("The passwords do not match");
@@ -27,12 +27,19 @@ export default function SignUpForm() {
       e.preventDefault();
       await dispatch(registerUser({ email, password }));
 
-      console.log("Success! User registered");
       navigate("/login");
     } catch(err) {
       console.log(err);
     }
   };
+
+  const handleGoogleSignup = async (e) => {
+    console.log("google")
+  }
+
+  const handleFacebookSignup = async (e) => {
+    console.log("facebook")
+  }
 
   // check if confirm password corresponds
   useEffect(() => {
@@ -103,13 +110,14 @@ export default function SignUpForm() {
         <div className="oauth-signup">
           <p>Or Signup with:</p>
 
-          <Link to="/api/auth/google" className="google-signup oauth-button link">
-            <i className="fa-brands fa-google"></i> SignIn with Google
-          </Link>
+          <Button
+            className="google-signup oauth-button link"
+            onClick={handleGoogleSignup}><i className="fa-brands fa-google"></i> SignIn with Google</Button>
 
-          <Link to="/api/auth/facebook" className="facebook-signup oauth-button link">
-            <i className="fa-brands fa-facebook-f"></i> SignIn with Facebook
-          </Link>
+          <Button
+            className="facebook-signup oauth-button link"
+            onClick={handleFacebookSignup}><i className="fa-brands fa-facebook-f"></i> SignIn with Facebook</Button>
+
         </div>
 
       </div>

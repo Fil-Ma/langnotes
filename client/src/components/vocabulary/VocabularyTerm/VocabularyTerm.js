@@ -18,11 +18,11 @@ export default function VocabularyTerm({
       <div className="vocabulary-tools">
         <div className="term-edit-icon-container" onClick={(e) => handleEdit(termId, e)} >
           <i className="fa-solid fa-pencil fa-sm"></i>
-          <div className="hover-text">Edit Term</div>
+          <div className="term-hover-text">Edit Term</div>
         </div>
         <div className="term-delete-icon-container" onClick={(e) => handleDelete(termId, e)}>
           <i className="fa-solid fa-trash"></i>
-          <div className="hover-text">Delete Term</div>
+          <div className="term-hover-text">Delete Term</div>
         </div>
       </div>
 

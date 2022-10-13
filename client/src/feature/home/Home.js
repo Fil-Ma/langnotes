@@ -6,15 +6,15 @@ export default function Home() {
   return (
     <main className="home-main">
       <section className="starter-container">
-        <div className="starter" >
+        <div className="starter white-background" >
           <h1>Get started with LangNotes</h1>
           <p>Quickly and easily get started with Langnotes application, the best tools to help you learn any language.<br />
           Register now and start your experience.</p>
-          <Link to="signup" className="starter-button link orange-background white-text">Join Now</Link>
+          <Link to="signup" className="starter-button orange-background link white-text">Join Now</Link>
         </div>
       </section>
 
-      <section className="features">
+      <section className="features white-background">
         <div className="features-title">
           <h1>Features</h1>
           <hr />

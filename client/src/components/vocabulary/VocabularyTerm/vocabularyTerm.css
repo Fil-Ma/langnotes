@@ -33,10 +33,10 @@
   position: relative;
 }
 
-.hover-text {
+.term-hover-text {
   display: none;
   position: absolute;
-  bottom: 110%;
+  bottom: 120%;
   right: 50%;
   transform: translateX(50%);
   background-color: gray;
@@ -46,8 +46,20 @@
   padding: 0.2rem 0.4rem;
 }
 
-.term-edit-icon-container:hover .hover-text,
-.term-delete-icon-container:hover .hover-text {
+.term-hover-text:before {
+  content: "";
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  border-style: solid;
+  border-width: 5px;
+  border-color: transparent;
+  border-top-color: #747474;
+}
+
+.term-edit-icon-container:hover .term-hover-text,
+.term-delete-icon-container:hover .term-hover-text {
   display: block;
 }
 

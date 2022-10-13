@@ -1,5 +1,5 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { isLoggedIn, login, register, logout } from "../../../api/auth";
+import { isLoggedIn, login, register, logout, googleLoginApi } from "../../../api/auth";
 
 export const checkLoginStatus = createAsyncThunk(
   'auth/checkLogin',
@@ -39,6 +39,21 @@ export const loginUser = createAsyncThunk(
     }
   }
 );
+
+export const googleLogin = createAsyncThunk(
+  'auth/googleLogin',
+  async () => {
+    try {
+      const response = await googleLoginApi();
+      return {
+        user: response.user,
+        isAuthenticated: true
+      }
+    } catch(err) {
+      throw err;
+    }
+  }
+)
 
 export const registerUser = createAsyncThunk(
   'auth/registerUser',

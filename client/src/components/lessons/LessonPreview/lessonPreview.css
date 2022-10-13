@@ -34,25 +34,41 @@
   display: inline-flex;
 }
 
+.lesson-description p {
+  margin-top: 0;
+}
+
 .edit-icon-container, .delete-icon-container {
   position: relative;
   padding: 0 1rem;
 }
 
-.hover-text {
+.lesson-hover-text {
   display: none;
   position: absolute;
-  bottom: 110%;
+  bottom: 120%;
   right: 50%;
   transform: translateX(50%);
-  background-color: gray;
+  background-color: #747474;
   font-size: 0.8rem;
   color: #fff;
   white-space: nowrap;
   padding: 0.2rem 0.4rem;
 }
 
-.edit-icon-container:hover .hover-text,
-.delete-icon-container:hover .hover-text {
+.lesson-hover-text:before {
+  position: absolute;
+  content: "";
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  border-style: solid;
+  border-width: 5px;
+  border-color: transparent;
+  border-top-color: #747474;
+}
+
+.edit-icon-container:hover .lesson-hover-text,
+.delete-icon-container:hover .lesson-hover-text {
   display: block;
 }
