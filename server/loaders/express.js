@@ -8,7 +8,10 @@ const { SESSION_SECRET } = require("../config");
 module.exports = (app) => {
 
   // Enable CORS
-  app.use(cors());
+  app.use(cors({
+    origin: "https://accounts.google.com/o/oauth2/v2/auth",
+    optionsSuccessStatus: 200
+  }));
 
   // enable helmet
   app.use(helmet());

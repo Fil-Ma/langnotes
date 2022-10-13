@@ -49,7 +49,11 @@ module.exports = (app) => {
     },
     async (accessToken, refreshToken, profile, done) => {
       try {
-        const user = await AuthServiceInstance.googleLogin(profile);
+        const user = await AuthServiceInstance.googleLogin({
+          id: profile.id,
+          displayName: profile.displayName,
+          email: profile.emails[0].value
+        });
         return done(null, user);
       } catch(err) {
         return done(err);

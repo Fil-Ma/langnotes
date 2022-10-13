@@ -59,7 +59,7 @@ module.exports = class AuthService {
 
   // Google login function
   async googleLogin(profile) {
-    const { id, displayName, emails } = profile;
+    const { id, displayName, email } = profile;
 
     try {
       const user = await UserQueriesInstance.findOneByGoogleId(id);
@@ -69,7 +69,7 @@ module.exports = class AuthService {
           google: {
             id,
             displayName,
-            email: emails[0].value
+            email
           }
         })
       }

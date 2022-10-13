@@ -86,9 +86,7 @@ module.exports = (app, passport) => {
   router.get('/google/callback',
     passport.authenticate('google', { failureRedirect: 'http:localhost:3000/login' }),
     async (req, res, next) => {
-      res.send({
-        user: req.user
-      })
+      res.send();
     }
   );
 
