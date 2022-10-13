@@ -21,7 +21,7 @@ export default function Modal({
           <Button
             onClick={handleClose}
             className="close-window-new-lessson white-background">
-              <i className="fa-regular fa-x"></i>
+              <i className="fa-regular fa-x fa-xl"></i>
           </Button>
           { children }
       </div>

@@ -30,7 +30,6 @@ export default function Header({ isAuthenticated }) {
 
   // manages logout
   const logout = async (e) => {
-    console.log("Logging out...");
     try {
       e.preventDefault();
       await dispatch(logoutUser());

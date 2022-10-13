@@ -35,3 +35,7 @@ nav, .nav-notebook-container {
 .add-sign .fa-plus {
   margin-left: 0.4rem;
 }
+
+.add-sign:hover .fa-plus {
+  color: #B46C00;
+}

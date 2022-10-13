@@ -4,7 +4,7 @@
 
 .modal-container {
   position: fixed;
-  background-color: rgba(0, 0, 0, 0.3);
+  background-color: rgba(0, 0, 0, 0.4);
   left: 0;
   top: 0;
   width: 100%;
@@ -25,7 +25,6 @@
 */
 
 .modal-content {
-  border: 1px solid #000;
   border-radius: 0.3rem;
   margin: 1rem auto;
   padding: 1rem 2rem;
@@ -46,12 +45,10 @@
   width: 1.5rem;
   padding: 0.2rem 0;
   right: 1rem;
-  border: 0px;
   cursor: pointer;
+  border: none;
 }
 
 .close-window-new-lessson:hover {
   color: red;
-  border: 1px solid red;
-  border-radius: 50%;
 }
