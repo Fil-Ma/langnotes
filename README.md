@@ -33,3 +33,29 @@ You can start the React app on default port (3000) with the following commands:
 `cd client`
 
 `npm start`
+
+## Samples
+
+Here there are available some screenshots of the main functionalities of the application.
+
+#### Homepage
+
+![Homepage - upper](./homepage1.png)
+
+#### Login
+
+![Login page](./login.png)
+
+#### Dashboard
+
+![Empty Dashboard](./.png)
+
+#### Workdesk
+
+![Filled workdesk - notebook 1](./notebook.png)
+
+#### Editing Lesson and Vocabulary
+
+![Edit lesson modal](./editLessonModal.png)
+
+![Edit term modal](./editTermModal.png)
