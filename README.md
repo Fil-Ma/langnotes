@@ -40,22 +40,22 @@ Here there are available some screenshots of the main functionalities of the app
 
 #### Homepage
 
-![Homepage - upper](./homepage1.png)
+![Homepage - upper](./samples/homepage1.png)
 
 #### Login
 
-![Login page](./login.png)
+![Login page](./samples/login.png)
 
 #### Dashboard
 
-![Empty Dashboard](./.png)
+![Empty Dashboard](./samples/.png)
 
 #### Workdesk
 
-![Filled workdesk - notebook 1](./notebook.png)
+![Filled workdesk - notebook 1](./samples/notebook.png)
 
 #### Editing Lesson and Vocabulary
 
-![Edit lesson modal](./editLessonModal.png)
+![Edit lesson modal](./samples/editLessonModal.png)
 
-![Edit term modal](./editTermModal.png)
+![Edit term modal](./samples/editTermModal.png)
