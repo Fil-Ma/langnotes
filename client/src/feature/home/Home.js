@@ -24,7 +24,7 @@ export default function Home() {
           <div className="feature-item top-row first-column">
             <div className="feature-icon">Icon</div>
             <div className="feature-text">
-              <h2>Featured title</h2>
+              <h2>Cloud based</h2>
               <p>Paragraph of text beneath the heading to explain the heading.</p>
             </div>
           </div>
@@ -32,7 +32,7 @@ export default function Home() {
           <div className="feature-item top-row second-column">
             <div className="feature-icon">Icon</div>
             <div className="feature-text">
-              <h2>Featured title</h2>
+              <h2>Interactive learning</h2>
               <p>Paragraph of text beneath the heading to explain the heading.</p>
             </div>
           </div>

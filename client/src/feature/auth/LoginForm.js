@@ -10,10 +10,10 @@ export default function LoginForm() {
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [loginError, setLoginError] = useState(undefined);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const loginError = useSelector((state) => state.login.auth.error);
 
   // manage login when clicked on button
   const handleLogin = async (e) => {
@@ -25,6 +25,9 @@ export default function LoginForm() {
 
     } catch(err) {
       console.log(err);
+      setLoginError(err.message);
+
+      console.log(loginError);
     }
   };
 
@@ -86,7 +89,7 @@ export default function LoginForm() {
               onChange={(e) => setPassword(e.currentTarget.value)}
               required />
           </div>
-          { loginError && <p className="matching-password-error"><i className="fa-solid fa-triangle-exclamation"></i> loginError.message</p> }
+          { loginError && <p className="matching-password-error"><i className="fa-solid fa-triangle-exclamation"></i> loginError</p> }
 
           <div className="submit-container">
             <input type="submit" value="Sign In" />
