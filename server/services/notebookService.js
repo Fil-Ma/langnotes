@@ -1,4 +1,5 @@
 const createError = require("http-errors");
+const he = require("he");
 
 const NotebookQueries = require("../queries/notebook");
 const NotebookQueriesInstance = new NotebookQueries();
@@ -17,10 +18,10 @@ module.exports = class NotebookService {
       return notebooks.map(element => {
         return {
           id: element.id,
-          name: element.name,
-          language: element.language,
+          name: he.decode(element.name),
+          language: he.decode(element.language),
           userId: element.user_id,
-          description: element.description
+          description: he.decode(element.description)
         };
       });
 
@@ -35,11 +36,11 @@ module.exports = class NotebookService {
       const newNotebook = await NotebookQueriesInstance.createNotebook(notebook);
 
       return {
-        id: newNotebook.id,
-        name: newNotebook.name,
-        language: newNotebook.language,
-        userId: newNotebook.user_id,
-        description: newNotebook.description
+        id: element.id,
+        name: he.decode(element.name),
+        language: he.decode(element.language),
+        userId: element.user_id,
+        description: he.decode(element.description)
       };
 
     } catch(err) {
@@ -53,11 +54,11 @@ module.exports = class NotebookService {
       const notebook = await NotebookQueriesInstance.getById(notebookId);
 
       return {
-        id: notebook.id,
-        name: notebook.name,
-        language: notebook.language,
-        userId: notebook.user_id,
-        description: notebook.description
+        id: element.id,
+        name: he.decode(element.name),
+        language: he.decode(element.language),
+        userId: element.user_id,
+        description: he.decode(element.description)
       };
 
     } catch(err) {
@@ -79,11 +80,11 @@ module.exports = class NotebookService {
       });
 
       return {
-        id: notebook.id,
-        name: notebook.name,
-        language: notebook.language,
-        userId: notebook.user_id,
-        description: notebook.description
+        id: element.id,
+        name: he.decode(element.name),
+        language: he.decode(element.language),
+        userId: element.user_id,
+        description: he.decode(element.description)
       };
 
     } catch(err) {

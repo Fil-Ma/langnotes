@@ -1,4 +1,5 @@
 const createError = require("http-errors");
+const he = require("he");
 
 const TermsQueries = require("../queries/terms");
 const TermsQueriesInstance = new TermsQueries();
@@ -14,7 +15,14 @@ module.exports = class TermsService {
         return [];
       }
 
-      return terms;
+      return terms.map(term => {
+        return {
+          vocabularyId: term.vocabulary_id,
+          id: term.id,
+          content: he.decode(term.content),
+          definition: he.decode(term.definition)
+        };
+      });
 
     } catch(err) {
       throw createError(500, err);
@@ -29,8 +37,8 @@ module.exports = class TermsService {
       return {
         vocabularyId: term.vocabulary_id,
         id: term.id,
-        content: term.content,
-        definition: term.definition
+        content: he.decode(term.content),
+        definition: he.decode(term.definition)
       };
 
     } catch(err) {
@@ -40,15 +48,15 @@ module.exports = class TermsService {
 
   // get single term by term id
   async getTermById(termId) {
-    
+
     try {
       const term = await TermsQueriesInstance.getById(termId);
 
       return {
         vocabularyId: term.vocabulary_id,
         id: term.id,
-        content: term.content,
-        definition: term.definition
+        content: he.decode(term.content),
+        definition: he.decode(term.definition)
       };
 
     } catch(err) {
@@ -62,10 +70,10 @@ module.exports = class TermsService {
       const term = await TermsQueriesInstance.update(data);
 
       return {
+        vocabularyId: term.vocabulary_id,
         id: term.id,
-        content: term.content,
-        definition: term.definition,
-        vocabularyId: term.vocabulary_id
+        content: he.decode(term.content),
+        definition: he.decode(term.definition)
       };
 
     } catch(err) {

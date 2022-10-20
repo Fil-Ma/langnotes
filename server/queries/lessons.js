@@ -39,6 +39,7 @@ module.exports = class LessonQueries {
     const id = uuidv4();
 
     try {
+      console.log("adding lesson", data)
       const result = await pool.query('INSERT INTO lessons (id, title, content, description, notebook_id) VALUES ($1, $2, $3, $4, $5) RETURNING *',
         [id, title, content, description, notebookId]
       );

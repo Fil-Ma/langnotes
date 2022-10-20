@@ -1,4 +1,5 @@
 const createError = require("http-errors");
+const he = require("he");
 
 const LessonQueries = require("../queries/lessons");
 const LessonQueriesInstance = new LessonQueries();
@@ -17,9 +18,9 @@ module.exports = class LessonService {
       return lessons.map((lesson) => {
         return {
           id: lesson.id,
-          title: lesson.title,
-          content: lesson.content,
-          description: lesson.description,
+          title: he.decode(lesson.title),
+          content: he.decode(lesson.content),
+          description: he.decode(lesson.description),
           notebookId: lesson.notebook_id
         }
       });
@@ -36,9 +37,9 @@ module.exports = class LessonService {
 
       return {
         id: lesson.id,
-        title: lesson.title,
-        content: lesson.content,
-        description: lesson.description,
+        title: he.decode(lesson.title),
+        content: he.decode(lesson.content),
+        description: he.decode(lesson.description),
         notebookId: lesson.notebook_id
       };
 
@@ -58,9 +59,9 @@ module.exports = class LessonService {
 
       return {
         id: lesson.id,
-        title: lesson.title,
-        content: lesson.content,
-        description: lesson.description,
+        title: he.decode(lesson.title),
+        content: he.decode(lesson.content),
+        description: he.decode(lesson.description),
         notebookId: lesson.notebook_id
       };
 
@@ -76,9 +77,9 @@ module.exports = class LessonService {
 
       return {
         id: lesson.id,
-        title: lesson.title,
-        content: lesson.content,
-        description: lesson.description,
+        title: he.decode(lesson.title),
+        content: he.decode(lesson.content),
+        description: he.decode(lesson.description),
         notebookId: lesson.notebook_id
       };
 

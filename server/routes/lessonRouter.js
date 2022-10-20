@@ -16,7 +16,7 @@ module.exports = (app) => {
     ],
     async (req, res, next) => {
       const { notebookId } = req.params;
-      
+
       try {
         // check validation errors
         const errors = validationResult(req).array();
